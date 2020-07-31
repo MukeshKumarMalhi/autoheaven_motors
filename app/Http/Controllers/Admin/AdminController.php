@@ -11,6 +11,12 @@ use DB;
 use App\User;
 use App\Category;
 use App\Car;
+use App\VehicleSummary;
+use App\PerformanceEconomy;
+use App\Dimension;
+use App\InteriorFeature;
+use App\ExteriorFeature;
+use App\Safety;
 use DateTime;
 
 class AdminController extends Controller
@@ -36,10 +42,23 @@ public function view_cars()
             ->select('categories.category_name', 'cars.*')
             ->orderBy('cars.updated_at', 'desc')
             ->paginate(10);
-            // dd($cars);
 
-    // $cars = Car::orderBy('updated_at','DESC')->paginate(10);
     return view('admins.view_cars', ['categories' => $categories, 'cars' => $cars]);
+}
+
+public function view_car_details(Request $request, $name, $id)
+{
+  $categories = Category::orderBy('category_name','asc')->get();
+  $vehicle_summary = VehicleSummary::where('car_id', '=', $id)->first();
+  $performance_economy = PerformanceEconomy::where('car_id', '=', $id)->first();
+  $dimension = Dimension::where('car_id', '=', $id)->first();
+
+  $car = DB::table('cars')
+          ->leftJoin('categories', 'categories.id', '=', 'cars.category_id')
+          ->select('categories.category_name', 'cars.*')
+          ->where('cars.id', '=', $id)
+          ->first();
+  return view('admins.view_car_details', ['car_details' => $car, 'categories' => $categories, 'vehicle_summary' => $vehicle_summary, 'performance_economy' => $performance_economy, 'dimension' => $dimension]);
 }
 
 public function store_car_data(Request $request)
@@ -103,6 +122,218 @@ public function store_car_data(Request $request)
     );
     $car = Car::create($form_data);
     return response()->json($car, 200);
+  }
+}
+
+public function update_car_details(Request $request)
+{
+  $rules = array(
+    'category_id' => 'required',
+    'model' => 'required',
+    'model_year' => 'required',
+    'colour' => 'required',
+    'price' => 'required',
+    'mileage' => 'required',
+    'number_of_doors' => 'required',
+    'number_of_seats' => 'required',
+    'engine_size' => 'required',
+    'body_style' => 'required',
+    'fuel_type' => 'required',
+    'gearbox_type' => 'required',
+    'description' => 'required'
+  );
+
+  $error = Validator::make($request->all(), $rules);
+  if($error->fails()){
+    return response()->json(['errors' => $error->errors()->all()]);
+  }else{
+    if($request->hasFile('featured_image')){
+      $file=$request->file('featured_image')->store('public');
+      $image=Storage::get($file);
+      Storage::put($file,$image);
+      $image_path=explode('/', $file);
+      $image_path=$image_path[1];
+      $car_image = Car::find($request->edit_fid);
+      $car_image->featured_image = $image_path;
+      $car_image->save();
+    }
+    $price = "";
+    $mileage = "";
+    if($request->price != "" || $request->mileage != ""){
+      $price = str_replace(',', '', $request->price);
+      $mileage = str_replace(',', '', $request->mileage);
+    }
+    $car = Car::find($request->edit_fid);
+    $car->category_id = $request->category_id;
+    $car->model = $request->model;
+    $car->model_year = $request->model_year;
+    $car->colour = $request->colour;
+    $car->price = $price;
+    $car->mileage = $mileage;
+    $car->number_of_doors = $request->number_of_doors;
+    $car->number_of_seats = $request->number_of_seats;
+    $car->engine_size = $request->engine_size;
+    $car->body_style = $request->body_style;
+    $car->fuel_type = $request->fuel_type;
+    $car->gearbox_type = $request->gearbox_type;
+    $car->description = $request->description;
+    $car->car_type = $request->car_type;
+    $car->sale_status = $request->sale_status;
+    $car->status = $request->status;
+    $car->save();
+
+    return response()->json($car, 200);
+  }
+}
+
+public function store_car_vehicle_summary(Request $request)
+{
+  $rules = array(
+    'co2_emissions' => 'required'
+  );
+
+  $error = Validator::make($request->all(), $rules);
+  if($error->fails()){
+    return response()->json(['errors' => $error->errors()->all()]);
+  }else{
+    $id = uniqid();
+    $form_data = array(
+      'id' => $id,
+      'car_id' => $request->car_id,
+      'co2_emissions' => $request->co2_emissions,
+      'insurance_group' => $request->insurance_group,
+      'standard_manufacturers_warranty_miles' => $request->standard_manufacturers_warranty_miles,
+      'standard_manufacturers_warranty_years' => $request->standard_manufacturers_warranty_years,
+      'standard_paintwork_guarantee' => $request->standard_paintwork_guarantee
+    );
+    $vehicle_summary = VehicleSummary::create($form_data);
+    return response()->json($vehicle_summary, 200);
+  }
+}
+
+public function update_car_vehicle_summary(Request $request)
+{
+  $rules = array(
+    'edit_co2_emissions' => 'required'
+  );
+
+  $error = Validator::make($request->all(), $rules);
+  if($error->fails()){
+    return response()->json(['errors' => $error->errors()->all()]);
+  }else{
+    $vehicle_summary = VehicleSummary::find($request->edit_fid);
+    $vehicle_summary->co2_emissions = $request->edit_co2_emissions;
+    $vehicle_summary->insurance_group = $request->edit_insurance_group;
+    $vehicle_summary->standard_manufacturers_warranty_miles = $request->edit_standard_manufacturers_warranty_miles;
+    $vehicle_summary->standard_manufacturers_warranty_years = $request->edit_standard_manufacturers_warranty_years;
+    $vehicle_summary->standard_paintwork_guarantee = $request->edit_standard_paintwork_guarantee;
+    $vehicle_summary->save();
+    return response()->json($vehicle_summary, 200);
+  }
+}
+
+public function store_car_performance_economy(Request $request)
+{
+  $rules = array(
+    'fuel_consumption_urban' => 'required'
+  );
+
+  $error = Validator::make($request->all(), $rules);
+  if($error->fails()){
+    return response()->json(['errors' => $error->errors()->all()]);
+  }else{
+    $id = uniqid();
+    $form_data = array(
+      'id' => $id,
+      'car_id' => $request->car_id,
+      'fuel_consumption_urban' => $request->fuel_consumption_urban,
+      'fuel_consumption_extra_urban' => $request->fuel_consumption_extra_urban,
+      'fuel_consumption_combined' => $request->fuel_consumption_combined,
+      'zero_sixty_mph' => $request->zero_sixty_mph,
+      'top_speed' => $request->top_speed,
+      'cylinders' => $request->cylinders,
+      'valves' => $request->valves,
+      'engine_power' => $request->engine_power,
+      'engine_torque' => $request->engine_torque
+    );
+    $performance_economy = PerformanceEconomy::create($form_data);
+    return response()->json($performance_economy, 200);
+  }
+}
+
+public function update_car_performance_economy(Request $request)
+{
+  $rules = array(
+    'edit_fuel_consumption_urban' => 'required'
+  );
+
+  $error = Validator::make($request->all(), $rules);
+  if($error->fails()){
+    return response()->json(['errors' => $error->errors()->all()]);
+  }else{
+    $performance_economy = PerformanceEconomy::find($request->edit_fid);
+    $performance_economy->fuel_consumption_urban = $request->edit_fuel_consumption_urban;
+    $performance_economy->fuel_consumption_extra_urban = $request->edit_fuel_consumption_extra_urban;
+    $performance_economy->fuel_consumption_combined = $request->edit_fuel_consumption_combined;
+    $performance_economy->zero_sixty_mph = $request->edit_zero_sixty_mph;
+    $performance_economy->top_speed = $request->edit_top_speed;
+    $performance_economy->valves = $request->edit_valves;
+    $performance_economy->engine_power = $request->edit_engine_power;
+    $performance_economy->engine_torque = $request->edit_engine_torque;
+    $performance_economy->save();
+    return response()->json($performance_economy, 200);
+  }
+}
+
+public function store_car_dimensions(Request $request)
+{
+  $rules = array(
+    'height' => 'required'
+  );
+
+  $error = Validator::make($request->all(), $rules);
+  if($error->fails()){
+    return response()->json(['errors' => $error->errors()->all()]);
+  }else{
+    $id = uniqid();
+    $form_data = array(
+      'id' => $id,
+      'car_id' => $request->car_id,
+      'height' => $request->height,
+      'height_inclusive_of_roof_rails' => $request->height_inclusive_of_roof_rails,
+      'length' => $request->length,
+      'wheelbase' => $request->wheelbase,
+      'width' => $request->width,
+      'width_including_mirrors' => $request->width_including_mirrors,
+      'fuel_tank_capacity' => $request->fuel_tank_capacity,
+      'minimum_kerb_weight' => $request->minimum_kerb_weight
+    );
+    $dimension = Dimension::create($form_data);
+    return response()->json($dimension, 200);
+  }
+}
+
+public function update_car_dimensions(Request $request)
+{
+  $rules = array(
+    'edit_height' => 'required'
+  );
+
+  $error = Validator::make($request->all(), $rules);
+  if($error->fails()){
+    return response()->json(['errors' => $error->errors()->all()]);
+  }else{
+    $dimension = Dimension::find($request->edit_fid);
+    $dimension->height = $request->edit_height;
+    $dimension->height_inclusive_of_roof_rails = $request->edit_height_inclusive_of_roof_rails;
+    $dimension->length = $request->edit_length;
+    $dimension->wheelbase = $request->edit_wheelbase;
+    $dimension->width = $request->edit_width;
+    $dimension->width_including_mirrors = $request->edit_width_including_mirrors;
+    $dimension->fuel_tank_capacity = $request->edit_fuel_tank_capacity;
+    $dimension->minimum_kerb_weight = $request->edit_minimum_kerb_weight;
+    $dimension->save();
+    return response()->json($dimension, 200);
   }
 }
 

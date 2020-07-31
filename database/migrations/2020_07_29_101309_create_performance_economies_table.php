@@ -21,12 +21,12 @@ class CreatePerformanceEconomiesTable extends Migration
           $table->string('fuel_consumption_urban')->nullable();
           $table->string('fuel_consumption_extra_urban')->nullable();
           $table->string('fuel_consumption_combined')->nullable();
-          $table->string('0_60_mph')->nullable();
+          $table->string('zero_sixty_mph')->nullable();
           $table->string('top_speed')->nullable();
           $table->integer('cylinders')->nullable();
           $table->integer('valves')->nullable();
-          $table->integer('engine_power')->nullable();
-          $table->integer('engine_torque')->nullable();
+          $table->string('engine_power')->nullable();
+          $table->string('engine_torque')->nullable();
           $table->timestamps();
         });
     }

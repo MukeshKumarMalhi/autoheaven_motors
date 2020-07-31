@@ -20,7 +20,7 @@
         <div id="append_success" style="color: #3c763d; background-color: #dff0d8; border-color: #d6e9c6; border-radius: 5px; padding: 17px 0px 1px 0px; margin-bottom: 30px; display: none;">
           <ul></ul>
         </div>
-        <form method="post" role="form" class="form-horizontal" id="cars_store_form">
+        <form method="post" role="form" class="form-horizontal" id="cars_store_form" enctype="multipart/form-data">
           @csrf
           <div class="row mb-2">
             <div class="col-md-6">
@@ -242,14 +242,14 @@
                              <td>{{ $car->id }}</td>
                              <td>{{ $car->category_name }}</td>
                              <td>{{ $car->model }} {{ $car->model_year }}</td>
-                             <td>£{{ $car->price }}</td>
-                             <td>{{ $car->mileage }} miles</td>
+                             <td>£{{ number_format($car->price) }}</td>
+                             <td>{{ number_format($car->mileage) }} miles</td>
                              <td>{{ $car->fuel_type }}</td>
                              <td>{{ $car->gearbox_type }}</td>
                              <td><?php echo date('d M Y',strtotime($car->created_at)); ?></td>
                              <td><img src="<?php echo asset('storage/'.$car->featured_image); ?>" width="50px" height="50px"/></td>
                              <td class="px-2 text-nowrap">
-                               <a href="{{ url('show_car') }}/{{ $car->id }}" class="btn btn-sm btn-warning" ><i class="fa fa-eye" aria-hidden="true"></i> View Details</a>
+                               <a href="{{ url('admin/view_details') }}/{{ $car->category_name.'_'.$car->model }}/{{ $car->id }}" class="btn btn-sm btn-warning" ><i class="fa fa-eye" aria-hidden="true"></i> View Details</a>
                              </td>
                            </tr>
                          @endforeach

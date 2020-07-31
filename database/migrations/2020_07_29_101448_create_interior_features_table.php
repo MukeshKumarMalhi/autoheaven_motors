@@ -19,6 +19,7 @@ class CreateInteriorFeaturesTable extends Migration
           $table->string('car_id')->nullable();
           $table->foreign('car_id')->references('id')->on('cars')->onDelete('cascade')->onUpdate('cascade');
           $table->string('interior_feature_list')->nullable();
+          $table->timestamps();
         });
     }
 
