@@ -269,6 +269,7 @@
         <div class="append_success" style="color: #3c763d; background-color: #dff0d8; border-color: #d6e9c6; border-radius: 5px; padding: 17px 0px 1px 0px; margin-bottom: 30px; display: none;">
           <ul></ul>
         </div>
+        @if($vehicle_summary)
         <form method="post" role="form" class="form-horizontal" id="car_vehicle_summary_update_form">
           @csrf
           <div class="row mb-2">
@@ -314,6 +315,7 @@
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </form>
+      @endif
     </div>
   </div>
   </div>
@@ -432,6 +434,7 @@
         <div class="append_success" style="color: #3c763d; background-color: #dff0d8; border-color: #d6e9c6; border-radius: 5px; padding: 17px 0px 1px 0px; margin-bottom: 30px; display: none;">
           <ul></ul>
         </div>
+        @if($performance_economy)
         <form method="post" role="form" class="form-horizontal" id="car_vehicle_performance_economy_update_form">
           @csrf
           <div class="row mb-2">
@@ -505,6 +508,7 @@
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </form>
+      @endif
     </div>
   </div>
   </div>
@@ -598,6 +602,279 @@
   </div>
 <!-- add dimensions modal end -->
 
+<!-- add interior features modal -->
+  <div class="modal fade" id="AddInteriorFeatureModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document" style="max-width: 1000px !important;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Interior Features</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="append_errors" style="color: #a94442; background-color: #f2dede; border-color: #ebccd1; border-radius: 5px; padding: 17px 0px 1px 0px; margin-bottom: 30px; display: none;">
+          <ul></ul>
+        </div>
+        <div class="append_success" style="color: #3c763d; background-color: #dff0d8; border-color: #d6e9c6; border-radius: 5px; padding: 17px 0px 1px 0px; margin-bottom: 30px; display: none;">
+          <ul></ul>
+        </div>
+        <form method="post" role="form" class="form-horizontal" id="car_interior_features_store_form">
+          @csrf
+          <div class="row mb-2">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="interior_feature_list" class="text-pink font-weight-bold">Add multiple interior features:</label>
+                <input type="text" name="interior_feature_list" id="interior_feature_list" class="form-control" placeholder="e.g. Adjustable Steering Column/Wheel" required>
+                <input type="hidden" name="car_id" value="{{ $car_details->id }}">
+              </div>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-md-6" id="append_interior_features">
+              <div class="form-group">
+                <label for="height" class="text-pink font-weight-bold">Interior features list:</label>
+              </div>
+              <ul>
+                <?php foreach ($interior_feature as $key => $value): ?>
+                  <li>{{ $value->interior_feature_list }}</li>
+                <?php endforeach; ?>
+              </ul>
+            </div>
+          </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-save" id="add">Save</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  </div>
+  </div>
+<!-- add interior features end -->
+
+<!-- edit interior features modal -->
+  <div class="modal fade" id="EditInteriorFeatureModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document" style="max-width: 1000px !important;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Interior Features</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="edit_append_errors" style="color: #a94442; background-color: #f2dede; border-color: #ebccd1; border-radius: 5px; padding: 17px 0px 1px 0px; margin-bottom: 30px; display: none;">
+          <ul></ul>
+        </div>
+        <div class="edit_append_success" style="color: #3c763d; background-color: #dff0d8; border-color: #d6e9c6; border-radius: 5px; padding: 17px 0px 1px 0px; margin-bottom: 30px; display: none;">
+          <ul></ul>
+        </div>
+        <form method="post" role="form" class="form-horizontal" id="car_interior_features_update_form">
+          @csrf
+          <div class="row mb-2">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="edit_interior_feature_list" class="text-pink font-weight-bold">Edit interior features:</label>
+                <input type="text" name="edit_interior_feature_list" id="edit_interior_feature_list" class="form-control" required>
+                <input type="hidden" name="edit_interior_car_id" id="edit_interior_car_id">
+                <input type="hidden" name="edit_interior_fid" id="edit_interior_fid">
+              </div>
+            </div>
+          </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-save" id="add">Update</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  </div>
+  </div>
+<!-- edit interior features end -->
+
+<!-- add exterior features modal -->
+  <div class="modal fade" id="AddExteriorFeatureModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document" style="max-width: 1000px !important;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Exterior Features</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="append_errors" style="color: #a94442; background-color: #f2dede; border-color: #ebccd1; border-radius: 5px; padding: 17px 0px 1px 0px; margin-bottom: 30px; display: none;">
+          <ul></ul>
+        </div>
+        <div class="append_success" style="color: #3c763d; background-color: #dff0d8; border-color: #d6e9c6; border-radius: 5px; padding: 17px 0px 1px 0px; margin-bottom: 30px; display: none;">
+          <ul></ul>
+        </div>
+        <form method="post" role="form" class="form-horizontal" id="car_exterior_features_store_form">
+          @csrf
+          <div class="row mb-2">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="exterior_feature_list" class="text-pink font-weight-bold">Add multiple exterior features:</label>
+                <input type="text" name="exterior_feature_list" id="exterior_feature_list" class="form-control" placeholder="e.g. Alloy Wheels (15in)" required>
+                <input type="hidden" name="car_id" value="{{ $car_details->id }}">
+              </div>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-md-6" id="append_exterior_features">
+              <div class="form-group">
+                <label for="" class="text-pink font-weight-bold">Exterior features list:</label>
+              </div>
+              <ul>
+                <?php foreach ($exterior_feature as $key => $value): ?>
+                  <li>{{ $value->exterior_feature_list }}</li>
+                <?php endforeach; ?>
+              </ul>
+            </div>
+          </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-save" id="add">Save</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  </div>
+  </div>
+<!-- add exterior features modal end -->
+
+<!-- edit exterior features modal -->
+  <div class="modal fade" id="EditExteriorFeatureModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document" style="max-width: 1000px !important;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Exterior Features</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="edit_append_errors" style="color: #a94442; background-color: #f2dede; border-color: #ebccd1; border-radius: 5px; padding: 17px 0px 1px 0px; margin-bottom: 30px; display: none;">
+          <ul></ul>
+        </div>
+        <div class="edit_append_success" style="color: #3c763d; background-color: #dff0d8; border-color: #d6e9c6; border-radius: 5px; padding: 17px 0px 1px 0px; margin-bottom: 30px; display: none;">
+          <ul></ul>
+        </div>
+        <form method="post" role="form" class="form-horizontal" id="car_exterior_features_update_form">
+          @csrf
+          <div class="row mb-2">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="edit_exterior_feature_list" class="text-pink font-weight-bold">Edit exterior features:</label>
+                <input type="text" name="edit_exterior_feature_list" id="edit_exterior_feature_list" class="form-control" required>
+                <input type="hidden" name="edit_exterior_car_id" id="edit_exterior_car_id">
+                <input type="hidden" name="edit_exterior_fid" id="edit_exterior_fid">
+              </div>
+            </div>
+          </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-save" id="add">Update</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  </div>
+  </div>
+<!-- edit exterior features end -->
+
+<!-- add safety features modal -->
+  <div class="modal fade" id="AddSafetyModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document" style="max-width: 1000px !important;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Safety features</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="append_errors" style="color: #a94442; background-color: #f2dede; border-color: #ebccd1; border-radius: 5px; padding: 17px 0px 1px 0px; margin-bottom: 30px; display: none;">
+          <ul></ul>
+        </div>
+        <div class="append_success" style="color: #3c763d; background-color: #dff0d8; border-color: #d6e9c6; border-radius: 5px; padding: 17px 0px 1px 0px; margin-bottom: 30px; display: none;">
+          <ul></ul>
+        </div>
+        <form method="post" role="form" class="form-horizontal" id="car_safety_store_form">
+          @csrf
+          <div class="row mb-2">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="safety_list" class="text-pink font-weight-bold">Add multiple safety features:</label>
+                <input type="text" name="safety_list" id="safety_list" class="form-control" placeholder="e.g. Air Bag Driver" required>
+                <input type="hidden" name="car_id" value="{{ $car_details->id }}">
+              </div>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-md-6" id="append_safety_features">
+              <div class="form-group">
+                <label for="" class="text-pink font-weight-bold">Safety features list:</label>
+              </div>
+              <ul>
+                <?php foreach ($safety_list as $key => $value): ?>
+                  <li>{{ $value->safety_list }}</li>
+                <?php endforeach; ?>
+              </ul>
+            </div>
+          </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-save" id="add">Save</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  </div>
+  </div>
+<!-- add safety features modal end -->
+
+<!-- edit safety features modal -->
+  <div class="modal fade" id="EditSafetyFeatureModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document" style="max-width: 1000px !important;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Safety Features</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="edit_append_errors" style="color: #a94442; background-color: #f2dede; border-color: #ebccd1; border-radius: 5px; padding: 17px 0px 1px 0px; margin-bottom: 30px; display: none;">
+          <ul></ul>
+        </div>
+        <div class="edit_append_success" style="color: #3c763d; background-color: #dff0d8; border-color: #d6e9c6; border-radius: 5px; padding: 17px 0px 1px 0px; margin-bottom: 30px; display: none;">
+          <ul></ul>
+        </div>
+        <form method="post" role="form" class="form-horizontal" id="car_safety_features_update_form">
+          @csrf
+          <div class="row mb-2">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="edit_safety_list" class="text-pink font-weight-bold">Edit safety features:</label>
+                <input type="text" name="edit_safety_list" id="edit_safety_list" class="form-control" required>
+                <input type="hidden" name="edit_safety_car_id" id="edit_safety_car_id">
+                <input type="hidden" name="edit_safety_fid" id="edit_safety_fid">
+              </div>
+            </div>
+          </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-save" id="add">Update</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  </div>
+  </div>
+<!-- edit safety features end -->
+
 <!-- edit dimensions modal -->
   <div class="modal fade" id="EditDimensionModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document" style="max-width: 1000px !important;">
@@ -615,6 +892,7 @@
         <div class="append_success" style="color: #3c763d; background-color: #dff0d8; border-color: #d6e9c6; border-radius: 5px; padding: 17px 0px 1px 0px; margin-bottom: 30px; display: none;">
           <ul></ul>
         </div>
+        @if($dimension)
         <form method="post" role="form" class="form-horizontal" id="car_dimensions_update_form">
           @csrf
           <div class="row mb-2">
@@ -680,6 +958,7 @@
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </form>
+      @endif
     </div>
   </div>
   </div>
@@ -1008,71 +1287,59 @@
                       <h5 class="mb-0">Interior Features</h5>
                     </div>
                     <div class="col-sm-6" style="text-align: right;">
-                      <a class="btn btn-default btn-yellow" href="#" data-toggle="modal" data-target="#AddInteriorFeatureModal" data-whatever="@mdo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Interior Features</a>
+                      <a class="btn btn-default btn-yellow" href="#" data-toggle="modal" data-target="#AddInteriorFeatureModal" data-whatever="@mdo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add/Edit Interior Features</a>
                     </div>
-                    <!-- <div class="col-sm-6" style="text-align: right;">
-                    </div> -->
                   </div>
                 </div>
-                <!-- <div class="table-responsive small">
-                    <table class="table table-condensed" id="userTable">
-                        <thead>
-                            <tr>
-                                <th><span>ID</span></th>
-                                <th><span>Company</span></th>
-                                <th><span>Model</span></th>
-                                <th><span>Price</span></th>
-                                <th><span>Mileage</span></th>
-                                <th><span>Fuel type</span></th>
-                                <th><span>Gearbox type</span></th>
-                                <th><span>Created date</span></th>
-                                <th><span>Image</span></th>
-                                <th class="text-center" style="width:110px">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                        </tbody>
-                    </table>
-                </div> -->
-            </div><!-- end card -->
+                @if($interior_feature != null)
+                <div class="row">
+                  <div class="col-md-12 mx-3 mt-3" id="edit_append_interior_features">
+                    <h4>Interior features list:</h4>
+                    <ul>
+                      <?php foreach ($interior_feature as $key => $value): ?>
+                        <li style="cursor: pointer;">
+                          <span id="appned_interior_feature_list_<?php echo $value->id; ?>">{{ $value->interior_feature_list }}</span>
+                          <a href="#" class="edit_interior_modal" data-toggle="modal" data-target="#EditInteriorFeatureModal" data-whatever="@mdo" data-id="{{ $value->id }}" data-car_id="{{ $value->car_id }}" data-interior_feature_list="{{ $value->interior_feature_list }}" style="color: #0087CB;"><i class="fa fa-pencil"></i> Edit</a>
+                          <!-- <a href="#" class="delete_interior_modal" data-toggle="modal" data-target="#DeleteInteriorFeatureModal" data-whatever="@mdo" data-id="{{ $value->id }}" data-car_id="{{ $value->car_id }}" data-interior_feature_list="{{ $value->interior_feature_list }}" style="color: red;"><i class="fa fa-times"></i> Delete</a> -->
+                        </li>
+                      <?php endforeach; ?>
+                    </ul>
+                  </div>
+                </div>
+                @endif
+            </div>
+            <!-- end card -->
           </div>
           <div class="col-sm-6">
             <div class="card mb-4">
                 <div class="card-header bg-dark text-light">
                   <div class="row">
                     <div class="col-sm-6">
-                      <h5 class="mb-0">Safety</h5>
+                      <h5 class="mb-0">Safety List: </h5>
                     </div>
                     <div class="col-sm-6" style="text-align: right;">
-                      <a class="btn btn-default btn-yellow" href="#" data-toggle="modal" data-target="#AddSafetyModal" data-whatever="@mdo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Safety</a>
+                      <a class="btn btn-default btn-yellow" href="#" data-toggle="modal" data-target="#AddSafetyModal" data-whatever="@mdo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add/Edit Safety Features</a>
                     </div>
-                    <!-- <div class="col-sm-6" style="text-align: right;">
-                    </div> -->
                   </div>
                 </div>
-                <!-- <div class="table-responsive small">
-                    <table class="table table-condensed" id="userTable">
-                        <thead>
-                            <tr>
-                                <th><span>ID</span></th>
-                                <th><span>Company</span></th>
-                                <th><span>Model</span></th>
-                                <th><span>Price</span></th>
-                                <th><span>Mileage</span></th>
-                                <th><span>Fuel type</span></th>
-                                <th><span>Gearbox type</span></th>
-                                <th><span>Created date</span></th>
-                                <th><span>Image</span></th>
-                                <th class="text-center" style="width:110px">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                        </tbody>
-                    </table>
-                </div> -->
-            </div><!-- end card -->
+                @if($safety_list != null)
+                <div class="row">
+                  <div class="col-md-12 mx-3 mt-3" id="edit_append_safety_features">
+                    <h4>Safety list:</h4>
+                    <ul>
+                      <?php foreach ($safety_list as $key => $value): ?>
+                        <li style="cursor: pointer;">
+                          <span id="appned_safety_feature_list_<?php echo $value->id; ?>">{{ $value->safety_list }}</span>
+                          <a href="#" class="edit_safety_modal" data-toggle="modal" data-target="#EditSafetyFeatureModal" data-whatever="@mdo" data-id="{{ $value->id }}" data-car_id="{{ $value->car_id }}" data-safety_list="{{ $value->safety_list }}" style="color: #0087CB;"><i class="fa fa-pencil"></i> Edit</a>
+                          <!-- <a href="#" class="delete_safety_modal" data-toggle="modal" data-target="#DeleteSafetyFeatureModal" data-whatever="@mdo" data-id="{{ $value->id }}" data-car_id="{{ $value->car_id }}" data-safety_list="{{ $value->safety_list }}" style="color: red;"><i class="fa fa-times"></i> Delete</a> -->
+                        </li>
+                      <?php endforeach; ?>
+                    </ul>
+                  </div>
+                </div>
+                @endif
+            </div>
+            <!-- end card -->
           </div>
           <div class="col-sm-6">
             <div class="card mb-4">
@@ -1082,42 +1349,30 @@
                       <h5 class="mb-0">Exterior Features</h5>
                     </div>
                     <div class="col-sm-6" style="text-align: right;">
-                      <a class="btn btn-default btn-yellow" href="#" data-toggle="modal" data-target="#AddExteriorFeatureModal" data-whatever="@mdo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Exterior Features</a>
+                      <a class="btn btn-default btn-yellow" href="#" data-toggle="modal" data-target="#AddExteriorFeatureModal" data-whatever="@mdo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add/Edit Exterior Features</a>
                     </div>
-                    <!-- <div class="col-sm-6" style="text-align: right;">
-                    </div> -->
                   </div>
                 </div>
-                <!-- <div class="table-responsive small">
-                    <table class="table table-condensed" id="userTable">
-                        <thead>
-                            <tr>
-                                <th><span>ID</span></th>
-                                <th><span>Company</span></th>
-                                <th><span>Model</span></th>
-                                <th><span>Price</span></th>
-                                <th><span>Mileage</span></th>
-                                <th><span>Fuel type</span></th>
-                                <th><span>Gearbox type</span></th>
-                                <th><span>Created date</span></th>
-                                <th><span>Image</span></th>
-                                <th class="text-center" style="width:110px">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                        </tbody>
-                    </table>
-                </div> -->
-            </div><!-- end card -->
+                @if($exterior_feature != null)
+                <div class="row">
+                  <div class="col-md-12 mx-3 mt-3" id="edit_append_exterior_features">
+                    <h4>Exterior features list:</h4>
+                    <ul>
+                      <?php foreach ($exterior_feature as $key => $value): ?>
+                        <li style="cursor: pointer;">
+                          <span id="appned_exterior_feature_list_<?php echo $value->id; ?>">{{ $value->exterior_feature_list }}</span>
+                          <a href="#" class="edit_exterior_modal" data-toggle="modal" data-target="#EditExteriorFeatureModal" data-whatever="@mdo" data-id="{{ $value->id }}" data-car_id="{{ $value->car_id }}" data-exterior_feature_list="{{ $value->exterior_feature_list }}" style="color: #0087CB;"><i class="fa fa-pencil"></i> Edit</a>
+                          <!-- <a href="#" class="delete_exterior_modal" data-toggle="modal" data-target="#DeleteExteriorFeatureModal" data-whatever="@mdo" data-id="{{ $value->id }}" data-car_id="{{ $value->car_id }}" data-exterior_feature_list="{{ $value->exterior_feature_list }}" style="color: red;"><i class="fa fa-times"></i> Delete</a> -->
+                        </li>
+                      <?php endforeach; ?>
+                    </ul>
+                  </div>
+                </div>
+                @endif
+            </div>
+            <!-- end card -->
           </div>
       </div>
-      <!--
-      <div style="margin-top: 10px;margin-left: 440px;">
-         <ul class="pagination-for-businesses justify-content-center">
-
-         </ul>
-      </div> -->
     </div>
 </div>
 
@@ -1158,6 +1413,45 @@ function isNumber(evt){
   }
   return true;
 }
+
+// function safety_data(id) {
+//   var safety_value = $('#edit_safety_list_'+id).val();
+//
+//   var fo_d = new FormData();
+//   fo_d.append( 'safety_id', id );
+//   fo_d.append( 'safety_list', safety_value );
+//   $.ajax({
+//     url:"{{ url('admin/update_car_safety_features_details') }}",
+//     method:"POST",
+//     data:fo_d,
+//     dataType:"JSON",
+//     contentType:false,
+//     cache:false,
+//     processData:false,
+//     success:function(data){
+//       $('.append_errors ul').text('');
+//       $('.append_success ul').text('');
+//       if(data.errors)
+//       {
+//         $.each(data.errors, function(i, error){
+//           $('.append_errors').show();
+//           $('.append_errors ul').append("<li>" + data.errors[i] + "</li>");
+//         });
+//       }else {
+//         $('#appned_safety_list_value_'+id).text('');
+//         $('#appned_safety_list_value_'+id).append(data.safety_list+' <span class="btn-edit"><i class="fa fa-pencil"></i></span>');
+//         $('#appned_safety_list_form_'+id).hide();
+//         $('#edit_safety_list_'+id).val(data.safety_list);
+//         console.log(data);
+//         // $('.append_errors').hide();
+//         // $('.append_success').show();
+//         // $('.append_success ul').append("<li>Performance economy data updated successfully.</li>");
+//         // setTimeout(function(){ $('.append_success').hide(); },2000);
+//         // location.reload();
+//       }
+//     },
+//   });
+// }
 
 function readURL(input) {
   if (input.files && input.files[0]) {
@@ -1377,6 +1671,243 @@ $('#EditCarDetailsModal').on('shown.bs.modal', function () {
     });
   });
 
+  $('#car_interior_features_store_form').on('submit', function(event){
+    event.preventDefault();
+
+    $.ajax({
+      url:"{{ url('admin/store_car_interior_features_details') }}",
+      method:"POST",
+      data:new FormData(this),
+      dataType:"JSON",
+      contentType:false,
+      cache:false,
+      processData:false,
+      success:function(data){
+        $('.append_errors ul').text('');
+        $('.append_success ul').text('');
+        if(data.errors)
+        {
+          $.each(data.errors, function(i, error){
+            $('.append_errors').show();
+            $('.append_errors ul').append("<li>" + data.errors[i] + "</li>");
+          });
+        }else {
+          $('.append_errors').hide();
+          $('.append_success').show();
+          $('.append_success ul').append("<li>Interior feature data uploaded successfully.</li>");
+          $('#append_interior_features ul').append("<li>" + data.interior_feature_list + "</li>");
+          $('#interior_feature_list').val('');
+          setTimeout(function(){ $('.append_success').hide(); },2000);
+        }
+      },
+    });
+  });
+
+  $(document).on('click', '.edit_interior_modal', function(){
+		$('#edit_interior_fid').val($(this).data('id'));
+		$('#edit_interior_car_id').val($(this).data('car_id'));
+		$('#edit_interior_feature_list').val($(this).data('interior_feature_list'));
+		$('.edit_append_errors').hide();
+		$('.edit_append_success').hide();
+	});
+
+  $('#EditInteriorFeatureModal').on('shown.bs.modal', function () {
+    $('#edit_interior_feature_list').focus();
+  });
+
+  $(document).on('click', '.edit_exterior_modal', function(){
+		$('#edit_exterior_fid').val($(this).data('id'));
+		$('#edit_exterior_car_id').val($(this).data('car_id'));
+		$('#edit_exterior_feature_list').val($(this).data('exterior_feature_list'));
+		$('.edit_append_errors').hide();
+		$('.edit_append_success').hide();
+	});
+
+  $('#EditExteriorFeatureModal').on('shown.bs.modal', function () {
+    $('#edit_exterior_feature_list').focus();
+  });
+
+  $(document).on('click', '.edit_safety_modal', function(){
+		$('#edit_safety_fid').val($(this).data('id'));
+		$('#edit_safety_car_id').val($(this).data('car_id'));
+		$('#edit_safety_list').val($(this).data('safety_list'));
+		$('.edit_append_errors').hide();
+		$('.edit_append_success').hide();
+	});
+
+  $('#EditSafetyFeatureModal').on('shown.bs.modal', function () {
+    $('#edit_safety_list').focus();
+  });
+
+  $('#car_interior_features_update_form').on('submit', function(event){
+    event.preventDefault();
+
+    $.ajax({
+      url:"{{ url('admin/update_car_interior_features_details') }}",
+      method:"POST",
+      data:new FormData(this),
+      dataType:"JSON",
+      contentType:false,
+      cache:false,
+      processData:false,
+      success:function(data){
+        $('.edit_append_errors ul').text('');
+        $('.edit_append_success ul').text('');
+        if(data.errors)
+        {
+          $.each(data.errors, function(i, error){
+            $('.edit_append_errors').show();
+            $('.edit_append_errors ul').append("<li>" + data.errors[i] + "</li>");
+          });
+        }else {
+          $('.edit_append_errors').hide();
+          $('.edit_append_success').show();
+          $('.edit_append_success ul').append("<li>Interior feature data updated successfully.</li>");
+          $('#edit_append_interior_features ul').append("<li>" + data.interior_feature_list + "</li>");
+          setTimeout(function(){ $('.edit_append_success').hide(); },2000);
+          setTimeout(function(){ $('#EditInteriorFeatureModal').modal('hide'); },3000);
+					setTimeout(function(){ $('body').removeClass('modal-open'); },3000);
+					setTimeout(function(){ $('.modal-backdrop').remove(); },3000);
+          location.reload();
+        }
+      },
+    });
+  });
+
+  $('#car_exterior_features_update_form').on('submit', function(event){
+    event.preventDefault();
+
+    $.ajax({
+      url:"{{ url('admin/update_car_exterior_features_details') }}",
+      method:"POST",
+      data:new FormData(this),
+      dataType:"JSON",
+      contentType:false,
+      cache:false,
+      processData:false,
+      success:function(data){
+        $('.edit_append_errors ul').text('');
+        $('.edit_append_success ul').text('');
+        if(data.errors)
+        {
+          $.each(data.errors, function(i, error){
+            $('.edit_append_errors').show();
+            $('.edit_append_errors ul').append("<li>" + data.errors[i] + "</li>");
+          });
+        }else {
+          $('.edit_append_errors').hide();
+          $('.edit_append_success').show();
+          $('.edit_append_success ul').append("<li>Exterior feature data updated successfully.</li>");
+          $('#edit_append_exterior_features ul').append("<li>" + data.exterior_feature_list + "</li>");
+          setTimeout(function(){ $('.edit_append_success').hide(); },2000);
+          setTimeout(function(){ $('#EditExteriorFeatureModal').modal('hide'); },3000);
+					setTimeout(function(){ $('body').removeClass('modal-open'); },3000);
+					setTimeout(function(){ $('.modal-backdrop').remove(); },3000);
+          location.reload();
+        }
+      },
+    });
+  });
+
+  $('#car_safety_features_update_form').on('submit', function(event){
+    event.preventDefault();
+
+    $.ajax({
+      url:"{{ url('admin/update_car_safety_features_details') }}",
+      method:"POST",
+      data:new FormData(this),
+      dataType:"JSON",
+      contentType:false,
+      cache:false,
+      processData:false,
+      success:function(data){
+        $('.edit_append_errors ul').text('');
+        $('.edit_append_success ul').text('');
+        if(data.errors)
+        {
+          $.each(data.errors, function(i, error){
+            $('.edit_append_errors').show();
+            $('.edit_append_errors ul').append("<li>" + data.errors[i] + "</li>");
+          });
+        }else {
+          $('.edit_append_errors').hide();
+          $('.edit_append_success').show();
+          $('.edit_append_success ul').append("<li>Safety feature data updated successfully.</li>");
+          $('#edit_append_safety_features ul').append("<li>" + data.safety_list + "</li>");
+          setTimeout(function(){ $('.edit_append_success').hide(); },2000);
+          setTimeout(function(){ $('#EditSafetyFeatureModal').modal('hide'); },3000);
+					setTimeout(function(){ $('body').removeClass('modal-open'); },3000);
+					setTimeout(function(){ $('.modal-backdrop').remove(); },3000);
+          location.reload();
+        }
+      },
+    });
+  });
+
+  $('#car_exterior_features_store_form').on('submit', function(event){
+    event.preventDefault();
+
+    $.ajax({
+      url:"{{ url('admin/store_car_exterior_features_details') }}",
+      method:"POST",
+      data:new FormData(this),
+      dataType:"JSON",
+      contentType:false,
+      cache:false,
+      processData:false,
+      success:function(data){
+        $('.append_errors ul').text('');
+        $('.append_success ul').text('');
+        if(data.errors)
+        {
+          $.each(data.errors, function(i, error){
+            $('.append_errors').show();
+            $('.append_errors ul').append("<li>" + data.errors[i] + "</li>");
+          });
+        }else {
+          $('.append_errors').hide();
+          $('.append_success').show();
+          $('.append_success ul').append("<li>Exterior feature data uploaded successfully.</li>");
+          $('#append_exterior_features ul').append("<li>" + data.exterior_feature_list + "</li>");
+          $('#exterior_feature_list').val('');
+          setTimeout(function(){ $('.append_success').hide(); },2000);
+        }
+      },
+    });
+  });
+
+  $('#car_safety_store_form').on('submit', function(event){
+    event.preventDefault();
+
+    $.ajax({
+      url:"{{ url('admin/store_car_safety_features_details') }}",
+      method:"POST",
+      data:new FormData(this),
+      dataType:"JSON",
+      contentType:false,
+      cache:false,
+      processData:false,
+      success:function(data){
+        $('.append_errors ul').text('');
+        $('.append_success ul').text('');
+        if(data.errors)
+        {
+          $.each(data.errors, function(i, error){
+            $('.append_errors').show();
+            $('.append_errors ul').append("<li>" + data.errors[i] + "</li>");
+          });
+        }else {
+          $('.append_errors').hide();
+          $('.append_success').show();
+          $('.append_success ul').append("<li>Safety feature data uploaded successfully.</li>");
+          $('#append_safety_features ul').append("<li>" + data.safety_list + "<span class='btn-edit'><i class='fa fa-pencil'></i></span></li>");
+          $('#safety_list').val('');
+          setTimeout(function(){ $('.append_success').hide(); },2000);
+        }
+      },
+    });
+  });
+
   $('#car_dimensions_update_form').on('submit', function(event){
     event.preventDefault();
 
@@ -1408,6 +1939,9 @@ $('#EditCarDetailsModal').on('shown.bs.modal', function () {
     });
   });
 
+  // $('.btn-edit').on('click', function() {
+  //   $(this).parent().parent().find('.safety-show').show();
+  // });
 });
 </script>
 <style media="screen">

@@ -52,14 +52,26 @@ public function view_car_details(Request $request, $name, $id)
   $vehicle_summary = VehicleSummary::where('car_id', '=', $id)->first();
   $performance_economy = PerformanceEconomy::where('car_id', '=', $id)->first();
   $dimension = Dimension::where('car_id', '=', $id)->first();
+  $interior_feature = InteriorFeature::where('car_id', '=', $id)->orderBy('updated_at','desc')->get();
+  $exterior_feature = ExteriorFeature::where('car_id', '=', $id)->orderBy('updated_at','desc')->get();
+  $safety_list = Safety::where('car_id', '=', $id)->orderBy('updated_at','desc')->get();
 
   $car = DB::table('cars')
           ->leftJoin('categories', 'categories.id', '=', 'cars.category_id')
           ->select('categories.category_name', 'cars.*')
           ->where('cars.id', '=', $id)
           ->first();
-  return view('admins.view_car_details', ['car_details' => $car, 'categories' => $categories, 'vehicle_summary' => $vehicle_summary, 'performance_economy' => $performance_economy, 'dimension' => $dimension]);
-}
+  return view('admins.view_car_details', [
+      'car_details' => $car,
+      'categories' => $categories,
+      'vehicle_summary' => $vehicle_summary,
+      'performance_economy' => $performance_economy,
+      'dimension' => $dimension,
+      'interior_feature' => $interior_feature,
+      'exterior_feature' => $exterior_feature,
+      'safety_list' => $safety_list
+    ]);
+  }
 
 public function store_car_data(Request $request)
 {
@@ -313,6 +325,7 @@ public function store_car_dimensions(Request $request)
   }
 }
 
+
 public function update_car_dimensions(Request $request)
 {
   $rules = array(
@@ -334,6 +347,123 @@ public function update_car_dimensions(Request $request)
     $dimension->minimum_kerb_weight = $request->edit_minimum_kerb_weight;
     $dimension->save();
     return response()->json($dimension, 200);
+  }
+}
+
+public function store_car_interior_features(Request $request)
+{
+  $rules = array(
+    'interior_feature_list' => 'required'
+  );
+
+  $error = Validator::make($request->all(), $rules);
+  if($error->fails()){
+    return response()->json(['errors' => $error->errors()->all()]);
+  }else{
+    $id = uniqid();
+    $form_data = array(
+      'id' => $id,
+      'car_id' => $request->car_id,
+      'interior_feature_list' => $request->interior_feature_list
+    );
+    $interior_feature = InteriorFeature::create($form_data);
+    return response()->json($interior_feature, 200);
+  }
+}
+
+public function store_car_exterior_features(Request $request)
+{
+  $rules = array(
+    'exterior_feature_list' => 'required'
+  );
+
+  $error = Validator::make($request->all(), $rules);
+  if($error->fails()){
+    return response()->json(['errors' => $error->errors()->all()]);
+  }else{
+    $id = uniqid();
+    $form_data = array(
+      'id' => $id,
+      'car_id' => $request->car_id,
+      'exterior_feature_list' => $request->exterior_feature_list
+    );
+    $exterior_feature = ExteriorFeature::create($form_data);
+    return response()->json($exterior_feature, 200);
+  }
+}
+
+public function store_car_safety_features(Request $request)
+{
+  $rules = array(
+    'safety_list' => 'required'
+  );
+
+  $error = Validator::make($request->all(), $rules);
+  if($error->fails()){
+    return response()->json(['errors' => $error->errors()->all()]);
+  }else{
+    $id = uniqid();
+    $form_data = array(
+      'id' => $id,
+      'car_id' => $request->car_id,
+      'safety_list' => $request->safety_list
+    );
+    $safety_list = Safety::create($form_data);
+    return response()->json($safety_list, 200);
+  }
+}
+
+public function update_car_interior_features(Request $request)
+{
+  $rules = array(
+    'edit_interior_feature_list' => 'required'
+  );
+
+  $error = Validator::make($request->all(), $rules);
+  if($error->fails()){
+    return response()->json(['errors' => $error->errors()->all()]);
+  }else{
+    $interior_feature = InteriorFeature::find($request->edit_interior_fid);
+    $interior_feature->interior_feature_list = $request->edit_interior_feature_list;
+    $interior_feature->save();
+
+    return response()->json($interior_feature, 200);
+  }
+}
+
+public function update_car_exterior_features(Request $request)
+{
+  $rules = array(
+    'edit_exterior_feature_list' => 'required'
+  );
+
+  $error = Validator::make($request->all(), $rules);
+  if($error->fails()){
+    return response()->json(['errors' => $error->errors()->all()]);
+  }else{
+    $exterior_feature = ExteriorFeature::find($request->edit_exterior_fid);
+    $exterior_feature->exterior_feature_list = $request->edit_exterior_feature_list;
+    $exterior_feature->save();
+
+    return response()->json($exterior_feature, 200);
+  }
+}
+
+public function update_car_safety_features(Request $request)
+{
+  $rules = array(
+    'edit_safety_list' => 'required'
+  );
+
+  $error = Validator::make($request->all(), $rules);
+  if($error->fails()){
+    return response()->json(['errors' => $error->errors()->all()]);
+  }else{
+    $safety_list = Safety::find($request->edit_safety_fid);
+    $safety_list->safety_list = $request->edit_safety_list;
+    $safety_list->save();
+
+    return response()->json($safety_list, 200);
   }
 }
 

@@ -29,6 +29,12 @@ Route::post('admin/store_car_performance_economy_details', 'Admin\AdminControlle
 Route::post('admin/update_car_performance_economy_details', 'Admin\AdminController@update_car_performance_economy');
 Route::post('admin/store_car_dimensions_details', 'Admin\AdminController@store_car_dimensions');
 Route::post('admin/update_car_dimensions_details', 'Admin\AdminController@update_car_dimensions');
+Route::post('admin/store_car_interior_features_details', 'Admin\AdminController@store_car_interior_features');
+Route::post('admin/update_car_interior_features_details', 'Admin\AdminController@update_car_interior_features');
+Route::post('admin/store_car_exterior_features_details', 'Admin\AdminController@store_car_exterior_features');
+Route::post('admin/update_car_exterior_features_details', 'Admin\AdminController@update_car_exterior_features');
+Route::post('admin/store_car_safety_features_details', 'Admin\AdminController@store_car_safety_features');
+Route::post('admin/update_car_safety_features_details', 'Admin\AdminController@update_car_safety_features');
 
 //Categories
 
