@@ -70,7 +70,7 @@
             </div>
             <div class="content">
                 <div class="title m-b-md">
-                    Autoheaven Motors UK
+                    Autohaven Motors UK
                 </div>
             </div>
         </div>

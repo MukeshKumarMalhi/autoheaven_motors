@@ -8,7 +8,7 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta content="telephone=no" name="format-detection">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>Autoheaven Motors | Admin Login</title>
+      <title>Autohaven Motors | Admin Login</title>
 
       <!-- Latest compiled and minified CSS -->
       <link rel="shortcut icon" href="{{ asset('admin_asset/images/fav-icon-32.ico') }}" type="image/x-icon" />
