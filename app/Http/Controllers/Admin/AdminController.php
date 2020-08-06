@@ -11,6 +11,7 @@ use DB;
 use App\User;
 use App\Category;
 use App\Car;
+use App\CarImage;
 use App\VehicleSummary;
 use App\PerformanceEconomy;
 use App\Dimension;
@@ -32,6 +33,12 @@ class AdminController extends Controller
 public function admin_dashboard()
 {
     return view('admins.dashboard');
+}
+
+public function upload_car_images($id)
+{
+    $images = CarImage::where('car_id', '=', $id)->orderBy('updated_at', 'desc')->get();
+    return view('admins.car_images', ['id' => $id, 'images' => $images]);
 }
 
 public function view_cars()
@@ -61,6 +68,7 @@ public function view_car_details(Request $request, $name, $id)
           ->select('categories.category_name', 'cars.*')
           ->where('cars.id', '=', $id)
           ->first();
+
   return view('admins.view_car_details', [
       'car_details' => $car,
       'categories' => $categories,
@@ -541,6 +549,48 @@ public function delete_category(Request $request)
 {
   $category = Category::find($request->id)->delete();
   return response()->json("Category Deleted Succssfully", 200);
+}
+
+public function store_car_images(Request $request)
+{
+  $rules = array(
+    'images' => 'required'
+  );
+  $error = Validator::make($request->all(), $rules);
+  if($error->fails()){
+    return response()->json(['errors' => $error->errors()->all()]);
+  }else{
+    if($request->has('images')){
+      $files = $request->file('images');
+      foreach ($files as $file) {
+        $name=$file->getClientOriginalName();
+        $file1=$file->store('public');
+        $image=Storage::get($file1);
+        Storage::put($file1,$image);
+        $image_path=explode('/', $file1);
+        $image_path=$image_path[1];
+        $type=$file->getClientOriginalExtension();
+        $size=$file->getSize();
+        $id = uniqid();
+
+        $image = new CarImage();
+        $image->id = $id;
+        $image->car_id = $request->car_id;
+        $image->image_url = $image_path;
+        $image->image_name = $name;
+        $image->image_type = $type;
+        $image->image_size = $size;
+        $image->save();
+      }
+    }
+    return response()->json(['success' => 'Images Uploaded Successfully'],200);
+  }
+}
+
+public function delete_car_image(Request $request)
+{
+  $CarImage = CarImage::find($request->id)->delete();
+  return response()->json("Image Deleted Succssfully", 200);
 }
 
 //////////////// dashboard end ///////////////////

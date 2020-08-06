@@ -20,6 +20,8 @@ Route::get('/logout', 'Auth\LoginController@logout');
 Auth::routes();
 Route::get('admin/dashboard', 'Admin\AdminController@admin_dashboard');
 Route::get('admin/view_cars', 'Admin\AdminController@view_cars');
+Route::get('admin/upload_car_images/{id}', 'Admin\AdminController@upload_car_images');
+Route::post('admin/delete_car_image', 'Admin\AdminController@delete_car_image');
 Route::post('admin/store_car_data', 'Admin\AdminController@store_car_data');
 Route::get('admin/view_details/{name}/{id}', 'Admin\AdminController@view_car_details');
 Route::post('admin/update_car_details', 'Admin\AdminController@update_car_details');
@@ -35,6 +37,7 @@ Route::post('admin/store_car_exterior_features_details', 'Admin\AdminController@
 Route::post('admin/update_car_exterior_features_details', 'Admin\AdminController@update_car_exterior_features');
 Route::post('admin/store_car_safety_features_details', 'Admin\AdminController@store_car_safety_features');
 Route::post('admin/update_car_safety_features_details', 'Admin\AdminController@update_car_safety_features');
+Route::post('admin/store_car_images', 'Admin\AdminController@store_car_images');
 
 //Categories
 

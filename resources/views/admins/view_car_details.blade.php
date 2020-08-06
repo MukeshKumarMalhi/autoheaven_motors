@@ -998,6 +998,7 @@
               </div>
               <div class="col-sm-6" style="text-align: right;">
                 <a class="btn btn-default btn-yellow" href="#" data-toggle="modal" data-target="#EditCarDetailsModal" data-whatever="@mdo"><i class="fa fa-pencil" aria-hidden="true"></i> Edit Car Details</a>
+                <a class="btn btn-default btn-yellow" href="{{ url('admin/upload_car_images') }}/{{ $car_details->id }}" ><i class="fa fa-cloud-upload" aria-hidden="true"></i> Upload Car Images</a>
               </div>
             </div>
           </div>
@@ -1287,7 +1288,7 @@
                       <h5 class="mb-0">Interior Features</h5>
                     </div>
                     <div class="col-sm-6" style="text-align: right;">
-                      <a class="btn btn-default btn-yellow" href="#" data-toggle="modal" data-target="#AddInteriorFeatureModal" data-whatever="@mdo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add/Edit Interior Features</a>
+                      <a class="btn btn-default btn-yellow" href="#" data-toggle="modal" data-target="#AddInteriorFeatureModal" data-whatever="@mdo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Interior Features</a>
                     </div>
                   </div>
                 </div>
@@ -1318,7 +1319,7 @@
                       <h5 class="mb-0">Safety List: </h5>
                     </div>
                     <div class="col-sm-6" style="text-align: right;">
-                      <a class="btn btn-default btn-yellow" href="#" data-toggle="modal" data-target="#AddSafetyModal" data-whatever="@mdo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add/Edit Safety Features</a>
+                      <a class="btn btn-default btn-yellow" href="#" data-toggle="modal" data-target="#AddSafetyModal" data-whatever="@mdo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Safety Features</a>
                     </div>
                   </div>
                 </div>
@@ -1349,7 +1350,7 @@
                       <h5 class="mb-0">Exterior Features</h5>
                     </div>
                     <div class="col-sm-6" style="text-align: right;">
-                      <a class="btn btn-default btn-yellow" href="#" data-toggle="modal" data-target="#AddExteriorFeatureModal" data-whatever="@mdo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add/Edit Exterior Features</a>
+                      <a class="btn btn-default btn-yellow" href="#" data-toggle="modal" data-target="#AddExteriorFeatureModal" data-whatever="@mdo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Exterior Features</a>
                     </div>
                   </div>
                 </div>
@@ -1695,7 +1696,8 @@ $('#EditCarDetailsModal').on('shown.bs.modal', function () {
           $('.append_errors').hide();
           $('.append_success').show();
           $('.append_success ul').append("<li>Interior feature data uploaded successfully.</li>");
-          $('#append_interior_features ul').append("<li>" + data.interior_feature_list + "</li>");
+          $('#append_interior_features ul').prepend("<li>" + data.interior_feature_list + "</li>");
+          $('#edit_append_interior_features ul').prepend("<li>"+"<span id='appned_interior_feature_list_"+data.id+"'>"+data.interior_feature_list+"</span><a href='#' class='edit_interior_modal' data-toggle='modal' data-target='#EditInteriorFeatureModal' data-whatever='@mdo' data-id='"+data.id+"' data-car_id='"+data.car_id+"' data-interior_feature_list='"+data.interior_feature_list+"' style='color: #0087CB;'> <i class='fa fa-pencil'></i> Edit</a>"+"</li>");
           $('#interior_feature_list').val('');
           setTimeout(function(){ $('.append_success').hide(); },2000);
         }
@@ -1763,7 +1765,7 @@ $('#EditCarDetailsModal').on('shown.bs.modal', function () {
           $('.edit_append_errors').hide();
           $('.edit_append_success').show();
           $('.edit_append_success ul').append("<li>Interior feature data updated successfully.</li>");
-          $('#edit_append_interior_features ul').append("<li>" + data.interior_feature_list + "</li>");
+          $('#edit_append_interior_features ul').prepend("<li>" + data.interior_feature_list + "</li>");
           setTimeout(function(){ $('.edit_append_success').hide(); },2000);
           setTimeout(function(){ $('#EditInteriorFeatureModal').modal('hide'); },3000);
 					setTimeout(function(){ $('body').removeClass('modal-open'); },3000);
@@ -1798,7 +1800,7 @@ $('#EditCarDetailsModal').on('shown.bs.modal', function () {
           $('.edit_append_errors').hide();
           $('.edit_append_success').show();
           $('.edit_append_success ul').append("<li>Exterior feature data updated successfully.</li>");
-          $('#edit_append_exterior_features ul').append("<li>" + data.exterior_feature_list + "</li>");
+          $('#edit_append_exterior_features ul').prepend("<li>" + data.exterior_feature_list + "</li>");
           setTimeout(function(){ $('.edit_append_success').hide(); },2000);
           setTimeout(function(){ $('#EditExteriorFeatureModal').modal('hide'); },3000);
 					setTimeout(function(){ $('body').removeClass('modal-open'); },3000);
@@ -1833,7 +1835,7 @@ $('#EditCarDetailsModal').on('shown.bs.modal', function () {
           $('.edit_append_errors').hide();
           $('.edit_append_success').show();
           $('.edit_append_success ul').append("<li>Safety feature data updated successfully.</li>");
-          $('#edit_append_safety_features ul').append("<li>" + data.safety_list + "</li>");
+          $('#edit_append_safety_features ul').prepend("<li>" + data.safety_list + "</li>");
           setTimeout(function(){ $('.edit_append_success').hide(); },2000);
           setTimeout(function(){ $('#EditSafetyFeatureModal').modal('hide'); },3000);
 					setTimeout(function(){ $('body').removeClass('modal-open'); },3000);
@@ -1868,7 +1870,8 @@ $('#EditCarDetailsModal').on('shown.bs.modal', function () {
           $('.append_errors').hide();
           $('.append_success').show();
           $('.append_success ul').append("<li>Exterior feature data uploaded successfully.</li>");
-          $('#append_exterior_features ul').append("<li>" + data.exterior_feature_list + "</li>");
+          $('#append_exterior_features ul').prepend("<li>" + data.exterior_feature_list + "</li>");
+          $('#edit_append_exterior_features ul').prepend("<li>"+"<span id='appned_exterior_feature_list_"+data.id+"'>"+data.exterior_feature_list+"</span><a href='#' class='edit_exterior_modal' data-toggle='modal' data-target='#EditExteriorFeatureModal' data-whatever='@mdo' data-id='"+data.id+"' data-car_id='"+data.car_id+"' data-exterior_feature_list='"+data.exterior_feature_list+"' style='color: #0087CB;'> <i class='fa fa-pencil'></i> Edit</a>"+"</li>");
           $('#exterior_feature_list').val('');
           setTimeout(function(){ $('.append_success').hide(); },2000);
         }
@@ -1900,7 +1903,8 @@ $('#EditCarDetailsModal').on('shown.bs.modal', function () {
           $('.append_errors').hide();
           $('.append_success').show();
           $('.append_success ul').append("<li>Safety feature data uploaded successfully.</li>");
-          $('#append_safety_features ul').append("<li>" + data.safety_list + "<span class='btn-edit'><i class='fa fa-pencil'></i></span></li>");
+          $('#append_safety_features ul').prepend("<li>" + data.safety_list + "</li>");
+          $('#edit_append_safety_features ul').prepend("<li>"+"<span id='appned_safety_feature_list_"+data.id+"'>"+data.safety_list+"</span><a href='#' class='edit_safety_modal' data-toggle='modal' data-target='#EditSafetyFeatureModal' data-whatever='@mdo' data-id='"+data.id+"' data-car_id='"+data.car_id+"' data-safety_list='"+data.safety_list+"' style='color: #0087CB;'> <i class='fa fa-pencil'></i> Edit</a>"+"</li>");
           $('#safety_list').val('');
           setTimeout(function(){ $('.append_success').hide(); },2000);
         }

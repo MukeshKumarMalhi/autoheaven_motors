@@ -5,5 +5,6 @@
         <li class="active"><a href="{{ url('admin/dashboard') }}"><i class="fa-li fas fa-circle text-light"></i>Dashboard</a></li>
         <li class="active"><a href="{{ url('admin/view_categories') }}"><i class="fa-li fas fa-circle text-light"></i>Categories</a></li>
         <li class="active"><a href="{{ url('admin/view_cars') }}"><i class="fa-li fas fa-circle text-light"></i>Cars</a></li>
+        <!-- <li class="active"><a href="{{ url('admin/view_car_images') }}"><i class="fa-li fas fa-circle text-light"></i>Car Images</a></li> -->
     </ul>
 </div>
