@@ -21,6 +21,6 @@ class VehicleSummary extends Model
    * @var array
    */
   protected $fillable = [
-      'id', 'car_id', 'co2_emissions', 'insurance_group', 'standard_manufacturers_warranty_miles', 'standard_manufacturers_warranty_years', 'standard_paintwork_guarantee'
+      'id', 'car_id', 'engine_size_cc', 'co2_emissions', 'insurance_group', 'standard_manufacturers_warranty_miles', 'standard_manufacturers_warranty_years', 'standard_paintwork_guarantee'
   ];
 }

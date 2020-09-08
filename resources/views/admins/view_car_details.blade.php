@@ -1,5 +1,5 @@
 @extends('layouts.a_app')
-
+@section('title','Car Details')
 @section('content')
 
 <!-- Page Content -->
@@ -207,33 +207,39 @@
           <div class="row mb-2">
             <div class="col-md-6">
               <div class="form-group">
+                <label for="engine_size_cc" class="text-pink font-weight-bold">Engine size (cc):</label>
+                <input type="text" name="engine_size_cc" id="engine_size_cc" class="form-control" onkeypress="return isNumber(event)" placeholder="e.g. 1900 cc">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
                 <label for="co2_emissions" class="text-pink font-weight-bold">CO2 Emissions :</label>
                 <input type="text" name="co2_emissions" id="co2_emissions" class="form-control" placeholder="e.g. 135 g/km" required>
                 <input type="hidden" name="car_id" value="{{ $car_details->id }}">
               </div>
             </div>
+          </div>
+          <div class="row mb-2">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="insurance_group" class="text-pink font-weight-bold">Insurance Group :</label>
                 <input type="text" name="insurance_group" id="insurance_group" class="form-control" placeholder="e.g. 23E">
               </div>
             </div>
-          </div>
-          <div class="row mb-2">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="standard_manufacturers_warranty_miles" class="text-pink font-weight-bold">Standard manufacturer's warranty (miles) :</label>
                 <input type="text" name="standard_manufacturers_warranty_miles" id="standard_manufacturers_warranty_miles" class="form-control" placeholder="e.g. 90,000 miles">
               </div>
             </div>
+          </div>
+          <div class="row mb-2">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="standard_manufacturers_warranty_years" class="text-pink font-weight-bold">Standard manufacturer's warranty (years) :</label>
                 <input type="text" name="standard_manufacturers_warranty_years" id="standard_manufacturers_warranty_years" class="form-control" placeholder="e.g. 3 years">
               </div>
             </div>
-          </div>
-          <div class="row mb-2">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="standard_paintwork_guarantee" class="text-pink font-weight-bold">Standard paintwork guarantee (years):</label>
@@ -275,34 +281,40 @@
           <div class="row mb-2">
             <div class="col-md-6">
               <div class="form-group">
+                <label for="edit_insurance_group" class="text-pink font-weight-bold">Engine size (cc) :</label>
+                <input type="text" name="edit_engine_size_cc" id="edit_engine_size_cc" onkeypress="return isNumber(event)" class="form-control" placeholder="e.g. 1900 cc" value="{{ $vehicle_summary->engine_size_cc }}">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
                 <label for="edit_co2_emissions" class="text-pink font-weight-bold">CO2 Emissions :</label>
                 <input type="text" name="edit_co2_emissions" id="edit_co2_emissions" class="form-control" placeholder="e.g. 135 g/km" value="{{ $vehicle_summary->co2_emissions }}" required>
                 <input type="hidden" name="car_id" value="{{ $car_details->id }}">
                 <input type="hidden" name="edit_fid" value="{{ $vehicle_summary->id }}">
               </div>
             </div>
+          </div>
+          <div class="row mb-2">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="edit_insurance_group" class="text-pink font-weight-bold">Insurance Group :</label>
                 <input type="text" name="edit_insurance_group" id="edit_insurance_group" class="form-control" placeholder="e.g. 23E" value="{{ $vehicle_summary->insurance_group }}">
               </div>
             </div>
-          </div>
-          <div class="row mb-2">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="edit_standard_manufacturers_warranty_miles" class="text-pink font-weight-bold">Standard manufacturer's warranty (miles) :</label>
                 <input type="text" name="edit_standard_manufacturers_warranty_miles" id="edit_standard_manufacturers_warranty_miles" class="form-control" placeholder="e.g. 90,000 miles" value="{{ $vehicle_summary->standard_manufacturers_warranty_miles }}">
               </div>
             </div>
+          </div>
+          <div class="row mb-2">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="edit_standard_manufacturers_warranty_years" class="text-pink font-weight-bold">Standard manufacturer's warranty (years) :</label>
                 <input type="text" name="edit_standard_manufacturers_warranty_years" id="edit_standard_manufacturers_warranty_years" class="form-control" placeholder="e.g. 3 years" value="{{ $vehicle_summary->standard_manufacturers_warranty_years }}">
               </div>
             </div>
-          </div>
-          <div class="row mb-2">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="edit_standard_paintwork_guarantee" class="text-pink font-weight-bold">Standard paintwork guarantee (years):</label>
@@ -964,27 +976,101 @@
   </div>
   </div>
 <!-- add performance economy modal end -->
-  <!-- delete location modal -->
-  <div class="modal fade" style="margin-left: -250px; margin-top: 20px;" id="DeleteCarModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content" style="width:200%;">
-        <div class="modal-body">
-          <div id="delete_append_success" style="color: #3c763d; background-color: #dff0d8; border-color: #d6e9c6; border-radius: 5px; padding: 17px 0px 1px 0px; margin-bottom: 30px; display: none;">
-            <ul></ul>
-          </div>
-          <div class="deletecontent">
-            Are you sure want to delete <span class="title" style="font-size: 18px; font-weight: 500;"></span>?
-            <span class="id" style="display: none;"></span>
-          </div>
+<!-- add car video modal -->
+<div class="modal fade" id="AddCarVideoModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document" style="max-width:800px !important;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Upload video clip</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="append_success" style="color: #3c763d; background-color: #dff0d8; border-color: #d6e9c6; border-radius: 5px; padding: 17px 0px 1px 0px; margin-bottom: 30px; display: none;">
+          <ul></ul>
         </div>
+        <div class="append_errors" style="color: #a94442; background-color: #f2dede; border-color: #ebccd1; border-radius: 5px; padding: 17px 0px 1px 0px; margin-bottom: 30px; display: none;">
+          <ul></ul>
+        </div>
+        <form method="post" role="form" class="form-horizontal car_video_store_form">
+          @csrf
+          <div class="row mb-2">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="featured_image" class="text-pink font-weight-bold">Attach file:</label>
+                <input type="file" name="images" accept="video/mp4" class="form-control file_multi_video"/>
+                <input type="hidden" name="car_id" value="{{ $car_details->id }}">
+              </div>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-md-12 video_preview" style="display: none;">
+              <video width="100%" controls>
+                <source src="" class="video_here">
+                  Your browser does not support HTML5 video.
+              </video>
+            </div>
+          </div>
         <div class="modal-footer">
-          <button type="button" class="delete btn btn-danger">Delete</button>
+          <button type="submit" class="btn btn-save">Submit</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
+      </form>
       </div>
     </div>
   </div>
-  <!-- edit location modal end -->
+</div>
+<!-- add car video end -->
+
+<!-- view car video modal -->
+<div class="modal fade" id="ViewCarVideoModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document" style="max-width:800px !important;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">View video clip</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="append_success" style="color: #3c763d; background-color: #dff0d8; border-color: #d6e9c6; border-radius: 5px; padding: 17px 0px 1px 0px; margin-bottom: 30px; display: none;">
+          <ul></ul>
+        </div>
+        <div class="append_errors" style="color: #a94442; background-color: #f2dede; border-color: #ebccd1; border-radius: 5px; padding: 17px 0px 1px 0px; margin-bottom: 30px; display: none;">
+          <ul></ul>
+        </div>
+        <form method="post" role="form" class="form-horizontal car_video_store_form">
+          @csrf
+          <div class="row mb-2">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="featured_image" class="text-pink font-weight-bold">Attach new file:</label>
+                <input type="file" name="images" accept="video/mp4" class="form-control new_file_multi_video"/>
+                <input type="hidden" name="car_id" value="{{ $car_details->id }}">
+              </div>
+            </div>
+          </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-save">Submit</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </form>
+      <div class="row mb-2">
+        <div class="col-md-12 new_video_preview">
+          <video width="100%" controls>
+            @if($car_video != null)
+            <source src="<?php echo asset('storage/'.$car_video->image_url); ?>" class="new_video_here">
+            @endif
+              Your browser does not support HTML5 video.
+          </video>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- view car video end -->
 
 <div id="page-content-wrapper">
 
@@ -998,7 +1084,12 @@
               </div>
               <div class="col-sm-6" style="text-align: right;">
                 <a class="btn btn-default btn-yellow" href="#" data-toggle="modal" data-target="#EditCarDetailsModal" data-whatever="@mdo"><i class="fa fa-pencil" aria-hidden="true"></i> Edit Car Details</a>
-                <a class="btn btn-default btn-yellow" href="{{ url('admin/upload_car_images') }}/{{ $car_details->id }}" ><i class="fa fa-cloud-upload" aria-hidden="true"></i> Upload Car Images</a>
+                <a class="btn btn-default btn-yellow" href="{{ url('admin/upload_car_images') }}/{{ $car_details->id }}" ><i class="far fa-image" aria-hidden="true" style="font-size: 18px;"></i> Upload Car Images</a>
+                @if($car_video == null)
+                <a class="btn btn-default btn-yellow" href="#" data-toggle="modal" data-target="#AddCarVideoModal" data-whatever="@mdo"><i class="far fa-play-circle" aria-hidden="true" style="font-size: 18px;"></i> Upload Car Video</a>
+                @else
+                <a class="btn btn-default btn-yellow" href="#" data-toggle="modal" data-target="#ViewCarVideoModal" data-whatever="@mdo"><i class="far fa-play-circle" aria-hidden="true" style="font-size: 18px;"></i> View Car Video</a>
+                @endif
               </div>
             </div>
           </div>
@@ -1126,6 +1217,10 @@
                   <div class="table-responsive">
                     <table class="table table-condensed" id="userTable">
                       <tbody>
+                        <tr>
+                          <th><span>CO2 Emissions</span></th>
+                          <td><span>{{ $vehicle_summary->engine_size_cc }}</span></td>
+                        </tr>
                         <tr>
                           <th><span>CO2 Emissions</span></th>
                           <td><span>{{ $vehicle_summary->co2_emissions }}</span></td>
@@ -1943,6 +2038,55 @@ $('#EditCarDetailsModal').on('shown.bs.modal', function () {
     });
   });
 
+  $('.car_video_store_form').on('submit', function(event){
+    event.preventDefault();
+
+    $.ajax({
+      url:"{{ url('admin/store_car_video_file') }}",
+      method:"POST",
+      data:new FormData(this),
+      dataType:"JSON",
+      contentType:false,
+      cache:false,
+      processData:false,
+      success:function(data){
+        $('.append_errors ul').text('');
+        $('.append_success ul').text('');
+        if(data.errors)
+        {
+          $.each(data.errors, function(i, error){
+            $('.append_errors').show();
+            if(data.errors[i] == "The images must be a file of type: mp4."){
+              $('.append_errors ul').append("<li>The video must be a file of type: mp4.</li>");
+            }else {
+              $('.append_errors ul').append("<li>" + data.errors[i] + "</li>");
+            }
+          });
+        }else {
+          $('.append_errors').hide();
+          $('.append_success').show();
+          $('.append_success ul').append("<li>"+data.success+"</li>");
+          setTimeout(function(){ $('.append_success').hide(); },2000);
+          location.reload();
+        }
+      },
+    });
+  });
+
+  $(document).on("change", ".file_multi_video", function(evt) {
+    $('.video_preview').show();
+    var $source = $('.video_here');
+    $source[0].src = URL.createObjectURL(this.files[0]);
+    console.log($source.parent()[0].load());
+  });
+
+  $(document).on("change", ".new_file_multi_video", function(evt) {
+    $('.new_video_preview').show();
+    var $source = $('.new_video_here');
+    $source[0].src = URL.createObjectURL(this.files[0]);
+    $source.parent()[0].load();
+  });
+
   // $('.btn-edit').on('click', function() {
   //   $(this).parent().parent().find('.safety-show').show();
   // });
@@ -1951,6 +2095,167 @@ $('#EditCarDetailsModal').on('shown.bs.modal', function () {
 <style media="screen">
 .close{
 font-size: 1.4rem;
+}
+
+#media-list li img {
+    width: 100px;
+    height: 100px
+}
+
+#media-list li {
+    height: 102px
+}
+
+#media-list li video {
+    width: 100px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%)
+}
+
+div#hint_brand .modal-dialog {
+    top: 110px;
+    width: 567px;
+    max-width: 100%
+}
+
+li.myupload span {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    display: block;
+    background: #fff
+}
+
+li.myupload span input {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0
+}
+
+li.myupload span i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ccc;
+    font-size: 54px
+}
+
+#media-list li {
+    float: left;
+    border: 1px solid #ccc;
+    background: #ccc;
+    position: relative;
+    margin: 0 5px 5px 0;
+    width: 102px
+}
+
+#media-list li:last-child {
+    margin-right: 0
+}
+
+.post-thumb {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.4);
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: none
+}
+
+#media-list li:hover .post-thumb {
+    display: block
+}
+
+a.remove-pic {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 12px;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    display: block;
+    height: 25px;
+    width: 25px;
+    text-align: center;
+    padding: 3px 0
+}
+
+.inner-post-thumb {
+    position: relative
+}
+
+.user-post-text-wrap {
+    position: relative
+}
+
+.user-pic-post {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 0;
+    left: 0
+}
+
+.user-pic-post img {
+    width: 100%
+}
+
+.user-txt-post {
+    padding: 0 0 0 65px
+}
+
+textarea.form-control.upostTextarea {
+    border: 0;
+    box-shadow: none;
+    height: 85px;
+    resize: none
+}
+
+.user-post-text-wrap {
+    border-bottom: 1px solid #ccc;
+    margin: 0 0 15px
+}
+
+.user-post-btn-wrap {
+    margin: 25px 0 0
+}
+
+ul.btn-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0
+}
+
+ul.btn-nav li {
+    position: relative;
+    float: left;
+    margin: 0 10px 0 0
+}
+
+ul.btn-nav li span input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 9;
+    opacity: 0;
+    filter: alpha(opacity=100)
+}
+
+ul#media-list {
+    list-style: none;
+    padding: 0;
+    margin: 0
 }
 </style>
 

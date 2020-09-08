@@ -142,7 +142,6 @@
 
         $('form').on('submit', function (event) {
 
-            // Stop propagation
             event.preventDefault();
             event.stopPropagation();
 

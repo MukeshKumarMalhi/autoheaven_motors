@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Storage;
 use DB;
 use App\User;
 use App\Category;
+use App\Review;
+use App\Contact;
+use App\Finance;
+use App\CarEnquiry;
+use App\PartExchange;
+use App\SellYourVehicle;
 use App\Car;
 use App\CarImage;
 use App\VehicleSummary;
@@ -49,6 +55,10 @@ public function view_cars()
             ->select('categories.category_name', 'cars.*')
             ->orderBy('cars.updated_at', 'desc')
             ->paginate(10);
+    if (request()->ajax()) {
+      $view = view('admins.cars_listing', ['cars' => $cars]);
+      return Response()->json(['status' => 'ok', 'listing' => $view->render()]);
+    }
 
     return view('admins.view_cars', ['categories' => $categories, 'cars' => $cars]);
 }
@@ -62,6 +72,7 @@ public function view_car_details(Request $request, $name, $id)
   $interior_feature = InteriorFeature::where('car_id', '=', $id)->orderBy('updated_at','desc')->get();
   $exterior_feature = ExteriorFeature::where('car_id', '=', $id)->orderBy('updated_at','desc')->get();
   $safety_list = Safety::where('car_id', '=', $id)->orderBy('updated_at','desc')->get();
+  $car_video = CarImage::where('car_id', '=', $id)->where('image_type', '=', 'mp4')->orWhere('image_type', '=', 'avi')->latest()->first();
 
   $car = DB::table('cars')
           ->leftJoin('categories', 'categories.id', '=', 'cars.category_id')
@@ -77,7 +88,8 @@ public function view_car_details(Request $request, $name, $id)
       'dimension' => $dimension,
       'interior_feature' => $interior_feature,
       'exterior_feature' => $exterior_feature,
-      'safety_list' => $safety_list
+      'safety_list' => $safety_list,
+      'car_video' => $car_video
     ]);
   }
 
@@ -220,6 +232,7 @@ public function store_car_vehicle_summary(Request $request)
     $form_data = array(
       'id' => $id,
       'car_id' => $request->car_id,
+      'engine_size_cc' => $request->engine_size_cc,
       'co2_emissions' => $request->co2_emissions,
       'insurance_group' => $request->insurance_group,
       'standard_manufacturers_warranty_miles' => $request->standard_manufacturers_warranty_miles,
@@ -243,6 +256,7 @@ public function update_car_vehicle_summary(Request $request)
   }else{
     $vehicle_summary = VehicleSummary::find($request->edit_fid);
     $vehicle_summary->co2_emissions = $request->edit_co2_emissions;
+    $vehicle_summary->engine_size_cc = $request->edit_engine_size_cc;
     $vehicle_summary->insurance_group = $request->edit_insurance_group;
     $vehicle_summary->standard_manufacturers_warranty_miles = $request->edit_standard_manufacturers_warranty_miles;
     $vehicle_summary->standard_manufacturers_warranty_years = $request->edit_standard_manufacturers_warranty_years;
@@ -583,15 +597,116 @@ public function store_car_images(Request $request)
         $image->save();
       }
     }
-    return response()->json(['success' => 'Images Uploaded Successfully'],200);
+    return response()->json(['success' => 'Files Uploaded Successfully'],200);
+  }
+}
+
+public function store_car_video(Request $request)
+{
+  $rules = array(
+    'images' => 'required|mimes:mp4'
+  );
+  $error = Validator::make($request->all(), $rules);
+  if($error->fails()){
+    return response()->json(['errors' => $error->errors()->all()]);
+  }else{
+    if($request->has('images')){
+      $file = $request->file('images');
+      $name=$file->getClientOriginalName();
+      $file1=$file->store('public');
+      $image=Storage::get($file1);
+      Storage::put($file1,$image);
+      $image_path=explode('/', $file1);
+      $image_path=$image_path[1];
+      $type=$file->getClientOriginalExtension();
+      $size=$file->getSize();
+      $id = uniqid();
+
+      $image = new CarImage();
+      $image->id = $id;
+      $image->car_id = $request->car_id;
+      $image->image_url = $image_path;
+      $image->image_name = $name;
+      $image->image_type = $type;
+      $image->image_size = $size;
+      $image->save();
+    }
+    return response()->json(['success' => 'File Uploaded Successfully'],200);
   }
 }
 
 public function delete_car_image(Request $request)
 {
   $CarImage = CarImage::find($request->id)->delete();
-  return response()->json("Image Deleted Succssfully", 200);
+  return response()->json("File Deleted Succssfully", 200);
 }
+
+public function view_cars_reviews()
+{
+  $reviews = Review::orderBy('updated_at','desc')->paginate(10);
+  if (request()->ajax()) {
+    $view = view('admins.reviews_listing', ['reviews' => $reviews]);
+    return Response()->json(['status' => 'ok', 'listing' => $view->render()]);
+  }
+  return view('admins.view_reviews', ['reviews' => $reviews]);
+}
+
+public function view_cars_part_exchanges()
+{
+  $part_exchanges = PartExchange::orderBy('updated_at','desc')->paginate(10);
+  if (request()->ajax()) {
+    $view = view('admins.part_exchanges_listing', ['part_exchanges' => $part_exchanges]);
+    return Response()->json(['status' => 'ok', 'listing' => $view->render()]);
+  }
+  return view('admins.view_part_exchanges', ['part_exchanges' => $part_exchanges]);
+}
+
+public function view_cars_sell_your_vehicles()
+{
+  $sell_your_vehicles = SellYourVehicle::orderBy('updated_at','desc')->paginate(10);
+  if (request()->ajax()) {
+    $view = view('admins.sell_your_car_listing', ['sell_your_vehicles' => $sell_your_vehicles]);
+    return Response()->json(['status' => 'ok', 'listing' => $view->render()]);
+  }
+  return view('admins.view_sell_your_vehicles', ['sell_your_vehicles' => $sell_your_vehicles]);
+}
+
+public function view_cars_finances()
+{
+  $finances = Finance::orderBy('updated_at','desc')->paginate(10);
+  if (request()->ajax()) {
+    $view = view('admins.finances_listing', ['finances' => $finances]);
+    return Response()->json(['status' => 'ok', 'listing' => $view->render()]);
+  }
+  return view('admins.view_finance', ['finances' => $finances]);
+}
+
+public function view_cars_contacts()
+{
+  $contacts = Contact::orderBy('updated_at','desc')->paginate(10);
+  if (request()->ajax()) {
+    $view = view('admins.contacts_listing', ['contacts' => $contacts]);
+    return Response()->json(['status' => 'ok', 'listing' => $view->render()]);
+  }
+  return view('admins.view_contact_us', ['contacts' => $contacts]);
+}
+
+public function view_cars_enquiries()
+{
+  $enquiries = DB::table('car_enquiries')
+              ->leftJoin('cars', 'cars.id', '=', 'car_enquiries.car_id')
+              ->leftJoin('categories', 'categories.id', '=', 'cars.category_id')
+              ->select('car_enquiries.*', 'categories.category_name', 'cars.model', 'cars.mileage', 'cars.model_year')
+              ->orderBy('car_enquiries.updated_at', 'desc')
+              ->paginate(10);
+  if (request()->ajax()) {
+    $view = view('admins.enquiries_listing', ['enquiries' => $enquiries]);
+    return Response()->json(['status' => 'ok', 'listing' => $view->render()]);
+  }
+  return view('admins.view_enquiries', ['enquiries' => $enquiries]);
+}
+
+
 
 //////////////// dashboard end ///////////////////
 }

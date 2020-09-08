@@ -1,7 +1,7 @@
 <!-- heading text nav -->
 <div class="container-fluid text-light ht py-3" style="background: #2c3e50;">
     <nav class="navbar navbar-expand-md small">
-      <a class="navbar-brand" href="#" style="color: #fff; font-size: 24px; font-weight: 600;">Autohaven Motors</a>
+      <a class="navbar-brand" href="{{ url('admin/dashboard') }}" style="color: #fff; font-size: 24px; font-weight: 600;">Autohaven Motors</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
             <ul class="navbar-nav">

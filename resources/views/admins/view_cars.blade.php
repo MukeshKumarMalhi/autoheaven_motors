@@ -1,5 +1,5 @@
 @extends('layouts.a_app')
-
+@section('title','Cars')
 @section('content')
 
 <!-- Page Content -->
@@ -202,7 +202,7 @@
 
 <div id="page-content-wrapper">
 
-    <div class="container-fluid py-3" id="businesses">
+    <div class="container-fluid py-3" id="cars">
       <!-- table-->
       <div class="card">
           <div class="card-header bg-blue text-light">
@@ -266,8 +266,8 @@
           </div>
       </div>
       <div style="margin-top: 10px;margin-left: 440px;">
-         <ul class="pagination-for-businesses justify-content-center">
-
+         <ul class="pagination-for-cars justify-content-center">
+           {{ $cars->links() }}
          </ul>
       </div>
     </div>

@@ -1,267 +1,57 @@
-<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-light nav-hw-top" id="mydiv">
-    <div class="container small">
-        <a class="navbar-brand d-md-block mr-0" href="/" style="color: #000;">myBigAsianWeeding</a>
-
-        @if(!Auth::check())
-           <ul class="nav mx-auto mr-sm-0">
-            <li class="pl-lg-1 pr-lg-1"><a href="/business_login" class="btn btn-default">Business login</a></li>
-            <li class="pl-lg-1 pr-lg-1"><a href="/login" class="btn btn-default">Login</a></li>
-            <li class="pl-lg-1 pr-lg-1"><a href="{{ url('/signup') }}" class="btn btn-default">Signup</a></li>
-        </ul>
-        @endif
-
-        @if(Auth::check())
-           <ul class="nav mx-auto mr-sm-0">
-            <li class="pl-lg-1 pr-lg-1">
-              <a class="dropdown-item small" href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fal fa-sign-out-alt"></i> Logout</a>
-                <form id="logout-form" style="display: none;" action="{{ url('/logout') }}" method="POST">
-                  @csrf
-                </form>
-            </li>
-        </ul>
-        @endif
-
-    </div>
-</nav> -->
-
 <!-- Header -->
-<header class="fixed-top-not">
-    <div class="bg-lightgrey small">
-        <div class="container-fluid clearfix py-1 text-center text-md-right text-purple">
-            <strong>0255</strong> WEDDING SUPPLIERS
-            <a href="#libs-your-business" class="btn btn-sm btn-dark py-1 mx-2 rounded">Add Busigness</a>
-            <a href="#business-login" class="link-purple">Business Login</a>
+<div class="bg-dark text-light clearfix cm-header-top">
+    <div class="container">
+        <div class="text-sm-right bg-danger cm-nav-top float-sm-right">
+            <p class="m-0 py-2 position-r">support@autohaven.com | Mon to Fri : 9:00am to 6:00pm | Fairview Ave, El Monte, CA 91732</p>
         </div>
     </div>
-    <nav class="navbar navbar-expand-lg bg-light text-left">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="{{ url('/') }}"><img src="{{ asset('web_asset/images/my-big-asian-wedding-logo2.png') }}" class="img-fluid"></a>
-            <button class="navbar-toggler bg-purple text-light rounded-0" type="button" data-toggle="bs-collapse" data-target="#collapsibleNavbar"><i class="fal fa-bars"></i></button>
+</div>
+<header class="fixed-top-not">
+    <nav class="navbar navbar-expand-lg navbar-dark text-left bg-dark"> <!-- navbar-dark bg-dark -->
+        <div class="container">
+            <a class="navbar-brand" href="{{ url('/') }}" style=""><img src="{{ asset('web_asset/images/main-logo.png') }}" class="img-fluid"></a>
+            <button class="navbar-toggler bg-danger text-light rounded-0" type="button" data-toggle="bs-collapse" data-target="#collapsibleNavbar"><i class="fal fa-bars"></i></button>
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                <ul class="nav bs-menu link-purple navbar-nav ml-lg-auto justify-content-lg-end">
-                    <li class="nav-item dropdown dropdown-hover">
-                        <span class="dropdown-icon-right dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ></span>
-                        <a class="nav-link" href="wedding_venues.html">Wedding Venues</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="wedding-venues/ballrooms/">Ballrooms</a></li>
-                            <li><a class="dropdown-item" href="wedding-venues/barns/">Barns</a></li>
-                            <li><a class="dropdown-item" href="wedding-venues/castles/">Castles</a></li>
-                            <li><a class="dropdown-item" href="wedding-venues/church/">Church</a></li>
-                            <li><a class="dropdown-item" href="wedding-venues/halls/">Halls</a></li>
-                            <li><a class="dropdown-item" href="wedding-venues/marquee/">Marquee</a></li>
-                            <li><a class="dropdown-item" href="wedding-venues/resorts/">Resorts</a></li>
-                            <li><a class="dropdown-item" href="wedding-venues/tents/">Tents</a></li>
-                        </ul>
+                <ul class="nav bs-menu navbar-nav mx-lg-auto justify-content-lg-center">
+                    <li class="cm-nav-phone text-light">
+                        <div class="media">
+                        <div class="pr-2">
+                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px" width="51px" height="52px" viewBox="0 0 51 52" enable-background="new 0 0 51 52" xml:space="preserve"><defs></defs> <g> <defs> <path id="SVGID_1_" d="M1,26c0-1.6,0.2-3.3,0.5-4.9c0.3-1.6,0.8-3.2,1.4-4.7c0.6-1.5,1.4-3,2.3-4.3s1.9-2.6,3-3.8s2.4-2.2,3.7-3.1 c1.3-0.9,2.7-1.7,4.2-2.3c1.5-0.6,3-1.1,4.6-1.4S23.9,1,25.5,1c1.6,0,3.2,0.2,4.8,0.5s3.1,0.8,4.6,1.4c1.5,0.6,2.9,1.4,4.2,2.3 c1.3,0.9,2.6,1.9,3.7,3.1s2.2,2.4,3,3.8s1.6,2.8,2.3,4.3s1.1,3.1,1.4,4.7c0.3,1.6,0.5,3.2,0.5,4.9c0,1.6-0.2,3.3-0.5,4.9 c-0.3,1.6-0.8,3.2-1.4,4.7s-1.4,3-2.3,4.3s-1.9,2.6-3,3.8s-2.4,2.2-3.7,3.1s-2.7,1.7-4.2,2.3c-1.5,0.6-3,1.1-4.6,1.4 S27.1,51,25.5,51c-1.6,0-3.2-0.2-4.8-0.5s-3.1-0.8-4.6-1.4c-1.5-0.6-2.9-1.4-4.2-2.3s-2.6-1.9-3.7-3.1s-2.2-2.4-3-3.8 s-1.6-2.8-2.3-4.3c-0.6-1.5-1.1-3.1-1.4-4.7C1.2,29.3,1,27.6,1,26z"/> </defs> <clipPath id="SVGID_2_"> <use xlink:href="#SVGID_1_" overflow="visible"/> </clipPath> <path clip-path="url(#SVGID_2_)" fill="none" stroke="#D90000" stroke-width="2" d="M25.5,1c0.8,0,1.6,0,2.4,0.1 c0.8,0.1,1.6,0.2,2.4,0.4s1.6,0.4,2.3,0.6c0.8,0.2,1.5,0.5,2.3,0.8c0.7,0.3,1.5,0.7,2.2,1c0.7,0.4,1.4,0.8,2.1,1.3 c0.7,0.5,1.3,0.9,1.9,1.5c0.6,0.5,1.2,1.1,1.8,1.6s1.1,1.2,1.6,1.8c0.5,0.6,1,1.3,1.4,2c0.4,0.7,0.9,1.4,1.2,2.1 c0.4,0.7,0.7,1.5,1,2.2c0.3,0.8,0.6,1.5,0.8,2.3c0.2,0.8,0.4,1.6,0.6,2.4c0.2,0.8,0.3,1.6,0.4,2.4C50,24.4,50,25.2,50,26 s0,1.6-0.1,2.5c-0.1,0.8-0.2,1.6-0.4,2.4c-0.2,0.8-0.4,1.6-0.6,2.4c-0.2,0.8-0.5,1.6-0.8,2.3c-0.3,0.8-0.6,1.5-1,2.2 c-0.4,0.7-0.8,1.4-1.2,2.1c-0.4,0.7-0.9,1.3-1.4,2c-0.5,0.6-1,1.2-1.6,1.8s-1.2,1.1-1.8,1.6c-0.6,0.5-1.3,1-1.9,1.5 c-0.7,0.5-1.4,0.9-2.1,1.3c-0.7,0.4-1.4,0.7-2.2,1c-0.7,0.3-1.5,0.6-2.3,0.8c-0.8,0.2-1.5,0.4-2.3,0.6s-1.6,0.3-2.4,0.4 C27.1,51,26.3,51,25.5,51s-1.6,0-2.4-0.1c-0.8-0.1-1.6-0.2-2.4-0.4s-1.6-0.4-2.3-0.6c-0.8-0.2-1.5-0.5-2.3-0.8 c-0.7-0.3-1.5-0.7-2.2-1c-0.7-0.4-1.4-0.8-2.1-1.3c-0.7-0.5-1.3-0.9-1.9-1.5s-1.2-1.1-1.8-1.6s-1.1-1.2-1.6-1.8s-1-1.3-1.4-2 s-0.9-1.4-1.2-2.1c-0.4-0.7-0.7-1.5-1-2.2c-0.3-0.8-0.6-1.5-0.8-2.3c-0.2-0.8-0.4-1.6-0.6-2.4c-0.2-0.8-0.3-1.6-0.4-2.4 C1,27.6,1,26.8,1,26s0-1.6,0.1-2.5c0.1-0.8,0.2-1.6,0.4-2.4c0.2-0.8,0.4-1.6,0.6-2.4c0.2-0.8,0.5-1.6,0.8-2.3 c0.3-0.8,0.6-1.5,1-2.2c0.4-0.7,0.8-1.4,1.2-2.1s0.9-1.3,1.4-2s1-1.2,1.6-1.8S9.3,7.2,10,6.7s1.3-1,1.9-1.5C12.6,4.8,13.2,4.3,14,4 c0.7-0.4,1.4-0.7,2.2-1c0.7-0.3,1.5-0.6,2.3-0.8c0.8-0.2,1.5-0.4,2.3-0.6s1.6-0.3,2.4-0.4C23.9,1,24.7,1,25.5,1z"/> </g> <path fill="#FFFFFF" d="M35.2,15.8l-4.5-1c-0.5-0.1-1,0.1-1.2,0.6l-2.1,4.8c-0.2,0.4-0.1,0.9,0.3,1.2l2.6,2.1 c-1.5,3.3-4.2,6-7.6,7.6l-2.1-2.6c-0.3-0.4-0.8-0.5-1.2-0.3l-4.8,2.1c-0.5,0.2-0.7,0.7-0.6,1.2l1,4.5c0.1,0.5,0.5,0.8,1,0.8 c11,0,19.9-8.9,19.9-19.9C36,16.3,35.7,15.9,35.2,15.8z"/> </svg>
+                        </div>
+                        <div class="media-body">
+                            <h6 class="font-weight-bold text-light">Call Us Today!</h6>
+                            <a class="font-weight-bold text-light" href="index.html">+1 755 302 8549</a>
+                        </div>
                     </li>
-                    <li class="nav-item dropdown dropdown-hover">
-                        <span class="dropdown-icon-right dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></span>
-                        <a class="nav-link" href="wedding_suppliers.html">Wedding Suppliers</a>
-                        <ul class="dropdown-menu small list-unstyled">
-                            <li class="dropdown-submenu">
-                                <span class="dropdown-icon-right dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ></span>
-                                <a href="category/accessories/" class="dropdown-item">Accessories</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="category/accessories/eyewear/">Eyewear</a></li>
-                                    <li><a class="dropdown-item" href="category/accessories/hair-pieces/">Hair-Pieces</a></li>
-                                    <li><a class="dropdown-item" href="category/accessories/hats-and-fascinators/">Hats and Fascinators</a></li>
-                                    <li><a class="dropdown-item" href="category/accessories/tiaras/">Tiaras</a></li>
-                                    <li><a class="dropdown-item" href="category/accessories/veils/">Veils</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <span class="dropdown-icon-right dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ></span>
-                                <a href="category/accommodation/" class="dropdown-item">Accommodation</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="category/accommodation/bed-and-breakfast/">Bed-and-Breakfast</a></li>
-                                    <li><a class="dropdown-item" href="category/accommodation/hotels/">Hotels</a></li>
-                                    <li><a class="dropdown-item" href="category/accommodation/pubs/">Pubs</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <span class="dropdown-icon-right dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ></span>
-                                <a href="category/beauty-and-spa/" class="dropdown-item">Beauty &amp; Spa</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="category/beauty-and-spa/hair-stylists/">Hair Stylist</a></li>
-                                    <li><a class="dropdown-item" href="category/beauty-and-spa/makeup-artists/">Makeup-Artists</a></li>
-                                    <li><a class="dropdown-item" href="category/beauty-and-spa/men-salons/">Men Salons</a></li>
-                                    <li><a class="dropdown-item" href="category/beauty-and-spa/spas/">Spas</a></li>
-                                    <li><a class="dropdown-item" href="category/beauty-and-spa/women-salons/">Women Salons</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <span class="dropdown-icon-right dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ></span>
-                                <a href="category/bridal-and-womens-wear/" class="dropdown-item">Bridal and Women’s Wear</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="category/bridal-and-womens-wear/bride-dresses/">Bride Dresses</a></li>
-                                    <li><a class="dropdown-item" href="category/bridal-and-womens-wear/bridesmaids-dresses/">Bridesmaids dresses</a></li>
-                                    <li><a class="dropdown-item" href="category/bridal-and-womens-wear/flower-girls-dresses/">Flower Girls Dresses</a></li>
-                                    <li><a class="dropdown-item" href="category/bridal-and-womens-wear/lingerie/">Lingerie</a></li>
-                                    <li><a class="dropdown-item" href="category/bridal-and-womens-wear/shoes/">Shoes</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <span class="dropdown-icon-right dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ></span>
-                                <a href="category/decor/" class="dropdown-item">Decor</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="category/decor/event-styling/">Event Styling</a></li>
-                                    <li><a class="dropdown-item" href="category/decor/furniture/">Furniture</a></li>
-                                    <li><a class="dropdown-item" href="category/decor/lights/">Lights</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="category/dress-cleaning/">Dress Cleaning</a>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <span class="dropdown-icon-right dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ></span>
-                                <a href="category/entertainment/" class="dropdown-item">Entertainment</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="category/entertainment/bands/">Bands</a></li>
-                                    <li><a class="dropdown-item" href="category/entertainment/choreography/">Choreography</a></li>
-                                    <li><a class="dropdown-item" href="category/entertainment/dj-and-music/">DJ-and-Music</a></li>
-                                    <li><a class="dropdown-item" href="category/entertainment/fire-works/">Fire-Work</a></li>
-                                    <li><a class="dropdown-item" href="category/entertainment/jukebox/">Jukebox</a></li>
-                                    <li><a class="dropdown-item" href="category/entertainment/magicians/">Magicians</a></li>
-                                    <li><a class="dropdown-item" href="category/entertainment/photo-booths/">Photo Booths</a></li>
-                                    <li><a class="dropdown-item" href="category/entertainment/wedding-entertainer/">Weddings Entertainers</a></li>
-                                    <li><a class="dropdown-item" href="category/fire-works-entertainment/">Fires Work Entertainment</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <span class="dropdown-icon-right dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></span>
-                                <a href="category/food/" class="dropdown-item">Food</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="category/food/catering/">Catering</a></li>
-                                    <li><a class="dropdown-item" href="category/food/chocolate-fountain/">Chocolate Fountain</a></li>
-                                    <li><a class="dropdown-item" href="category/food/drinks/">Drinks</a></li>
-                                    <li><a class="dropdown-item" href="category/food/wedding-cakes/">Weddings Cakes</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <span class="dropdown-icon-right dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></span>
-                                <a href="category/fragrance/" class="dropdown-item">Fragrance</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="category/fragrance/for-men/">For-Men</a></li>
-                                    <li><a class="dropdown-item" href="category/fragrance/for-women/">For-Women</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <span class="dropdown-icon-right dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></span>
-                                <a href="category/gifts/" class="dropdown-item">Gifts</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="category/gifts/wedding-albums/">Weddings Albums</a></li>
-                                    <li><a class="dropdown-item" href="category/gifts/wedding-favours/">Weddings Favours</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <span class="dropdown-icon-right dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></span>
-                                <a href="category/groom-and-mens-wear/" class="dropdown-item">Groom and men’s wear</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="category/groom-and-mens-wear/best-man-suits/">Best Man Suits</a></li>
-                                    <li><a class="dropdown-item" href="category/groom-and-mens-wear/boutonnieres/">Boutonnieres</a></li>
-                                    <li><a class="dropdown-item" href="category/groom-and-mens-wear/cufflinks/">Cufflinks</a></li>
-                                    <li><a class="dropdown-item" href="category/groom-and-mens-wear/groom-suits/">Groom suits</a></li>
-                                    <li><a class="dropdown-item" href="category/groom-and-mens-wear/page-boys/">Page Boys</a></li>
-                                    <li><a class="dropdown-item" href="category/groom-and-mens-wear/shoes-groom-and-mens-wear/">Shoes</a></li>
-                                    <li><a class="dropdown-item" href="category/groom-and-mens-wear/ties/">Ties</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <span class="dropdown-icon-right dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></span>
-                                <a href="category/jewellery/" class="dropdown-item">Jewellery</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="category/jewellery/crowns/">Crowns</a></li>
-                                    <li><a class="dropdown-item" href="category/jewellery/earrings/">Earrings</a></li>
-                                    <li><a class="dropdown-item" href="category/jewellery/necklaces/">Necklaces</a></li>
-                                    <li><a class="dropdown-item" href="category/jewellery/wedding-rings/">Wedding-Rings</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <span class="dropdown-icon-right dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></span>
-                                <a href="category/miscellaneous/" class="dropdown-item">Miscellaneous</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="category/miscellaneous/priests/">Priests</a></li>
-                                    <li><a class="dropdown-item" href="category/miscellaneous/props-hire/">Props-Hire</a></li>
-                                    <li><a class="dropdown-item" href="category/miscellaneous/wedding-apps/">Weddings Apps</a></li>
-                                    <li><a class="dropdown-item" href="category/miscellaneous/wedding-speech-designers/">Weddings Speech designers</a></li>
-                                    <li><a class="dropdown-item"href="category/miscellaneous/wedding-websites/">Weddings Websites</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="category/photography/">Photography</a>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <span class="dropdown-icon-right dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></span>
-                                <a href="category/travel/" class="dropdown-item">Travel</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="category/travel/destination-weddings/">Destination Weddings</a></li>
-                                        <li><a class="dropdown-item" href="category/travel/honeymoon/">Honeymoon</a></li>
-                                    </ul>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="category/videography/">Videography</a>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <span class="dropdown-icon-right dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></span>
-                                <a href="category/wedding-florists/" class="dropdown-item">Weddings Florists</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="category/wedding-florists/bridal-bouquets/">Bridal Bouquets</a></li>
-                                    </ul>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <span class="dropdown-icon-right dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></span>
-                                <a class="dropdown-item" href="category/wedding-invitations/" class="dropdown-item">Wedding Invitation Cards</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="category/wedding-invitations/e-cards/">E-Cards</a></li>
-                                        <li><a class="dropdown-item" href="category/wedding-invitations/invitation-cards/">Invitations Cards</a></li>
-                                    </ul>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="category/wedding-planners/">Weddings Planners</a>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <span class="dropdown-icon-right dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ></span>
-                                <a class="dropdown-item" href="category/wedding-transport/" class="dropdown-item">Wedding Transport</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="category/wedding-transport/horse-carriages/">Horse Carriages</a></li>
-                                        <li><a class="dropdown-item" href="category/wedding-transport/limousines/">Limousines</a></li>
-                                        <li><a class="dropdown-item" href="category/wedding-transport/vintage-cars/">Vintage Car</a></li>
-                                    </ul>
-                            </li>
-                        </ul>
+                </ul>
+                <ul class="nav bs-menu navbar-nav ml-lg-auto justify-content-lg-end">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ url('/') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="reviews.html">Planning Tools</a>
+                        <a class="nav-link" href="{{ url('/used-cars') }}">Used cars</a>
                     </li>
-                    <li class="nav-item dropdown dropdown-hover">
-                        <span class="dropdown-icon-right dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ></span>
-                        <a class="nav-link" href="events.html">Ideas & Inspiration</a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/inspiration/celebrity-weddings/">Celebrity Weddings</a></li>
-                                <li><a class="dropdown-item" href="/inspiration/guest-blogs/">Guest Blogs</a></li>
-                                <li><a class="dropdown-item" href="/inspiration/latest-trends/">Latest Trends</a></li>
-                                <li><a class="dropdown-item" href="/inspiration/tips-ideas/">Tips &amp; Ideas</a></li>
-                            </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/part-exchange') }}">Part exchange</a>
                     </li>
-                </ul>
-                @if(!Auth::check())
-                  <ul class="nav bs-menu  navbar-nav justify-content-lg-end">
-                      <li class="nav-item ">
-                          <a class="btn btn-dark btn-purple link-light rounded" href="{{ url('/signup') }}">Sign up</a>
-                          <a class="btn btn-dark btn-purple link-light rounded" href="{{ url('/login') }}">Log in</a>
-                      </li>
-                  </ul>
-                @endif
-                @if(Auth::check())
-                   <ul class="nav mx-auto mr-sm-0">
-                    <li class="pl-lg-1 pr-lg-1">
-                      <a class="dropdown-item small" href="{{ url('/logout') }}" ><i class="fal fa-sign-out-alt"></i> Logout</a>
-                      <!-- <a class="dropdown-item small" href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fal fa-sign-out-alt"></i> Logout</a>
-                          <form id="logout-form" style="display: none;" action="{{ url('/logout') }}" method="POST">
-                          @csrf
-                        </form> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/finance') }}">Finance</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/sell-your-car') }}">Sell your car</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/reviews') }}">Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/contact-us') }}">Contact us</a>
                     </li>
                 </ul>
-                @endif
+                <ul class="nav bs-menu navbar-nav justify-content-lg-end">
+                    <li class="nav-item">
+                        <a class="btn btn-danger" href="{{ url('admin/login') }}">Log in</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>

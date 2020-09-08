@@ -6,44 +6,6 @@ $(document).ready(function(){
       }
   });
 
-  $(document).on('click', '.pagination-for-locations a',function(event){
-    event.preventDefault();
-    event.stopPropagation();
-    event.stopImmediatePropagation();
-    var url = $(this).attr('href');
-    $.ajax({
-      url: url,
-      type: 'get',
-      dataType: 'json',
-      success: function(result){
-        if(result.status == 'ok'){
-          $('#locations').html(result.listing);
-        }else {
-          alert("Error when get Pagination");
-        }
-      }
-    });
-  });
-
-  $(document).on('click', '.pagination-for-countries a',function(event){
-    event.preventDefault();
-    event.stopPropagation();
-    event.stopImmediatePropagation();
-    var url = $(this).attr('href');
-    $.ajax({
-      url: url,
-      type: 'get',
-      dataType: 'json',
-      success: function(result){
-        if(result.status == 'ok'){
-          $('#countries').html(result.listing);
-        }else {
-          alert("Error when get Pagination");
-        }
-      }
-    });
-  });
-
   $(document).on('click', '.pagination-for-categories a',function(event){
     event.preventDefault();
     event.stopPropagation();
@@ -63,7 +25,7 @@ $(document).ready(function(){
     });
   });
 
-  $(document).on('click', '.pagination-for-features a',function(event){
+  $(document).on('click', '.pagination-for-cars a',function(event){
     event.preventDefault();
     event.stopPropagation();
     event.stopImmediatePropagation();
@@ -74,7 +36,7 @@ $(document).ready(function(){
       dataType: 'json',
       success: function(result){
         if(result.status == 'ok'){
-          $('#features').html(result.listing);
+          $('#cars').html(result.listing);
         }else {
           alert("Error when get Pagination");
         }
@@ -82,7 +44,7 @@ $(document).ready(function(){
     });
   });
 
-  $(document).on('click', '.pagination-for-businesses a',function(event){
+  $(document).on('click', '.pagination-for-contacts a',function(event){
     event.preventDefault();
     event.stopPropagation();
     event.stopImmediatePropagation();
@@ -93,7 +55,7 @@ $(document).ready(function(){
       dataType: 'json',
       success: function(result){
         if(result.status == 'ok'){
-          $('#businesses').html(result.listing);
+          $('#contacts').html(result.listing);
         }else {
           alert("Error when get Pagination");
         }
@@ -101,4 +63,98 @@ $(document).ready(function(){
     });
   });
 
+  $(document).on('click', '.pagination-for-finances a',function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+    var url = $(this).attr('href');
+    $.ajax({
+      url: url,
+      type: 'get',
+      dataType: 'json',
+      success: function(result){
+        if(result.status == 'ok'){
+          $('#finances').html(result.listing);
+        }else {
+          alert("Error when get Pagination");
+        }
+      }
+    });
+  });
+
+  $(document).on('click', '.pagination-for-enquiries a',function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+    var url = $(this).attr('href');
+    $.ajax({
+      url: url,
+      type: 'get',
+      dataType: 'json',
+      success: function(result){
+        if(result.status == 'ok'){
+          $('#enquiries').html(result.listing);
+        }else {
+          alert("Error when get Pagination");
+        }
+      }
+    });
+  });
+
+  $(document).on('click', '.pagination-for-reviews a',function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+    var url = $(this).attr('href');
+    $.ajax({
+      url: url,
+      type: 'get',
+      dataType: 'json',
+      success: function(result){
+        if(result.status == 'ok'){
+          $('#reviews').html(result.listing);
+        }else {
+          alert("Error when get Pagination");
+        }
+      }
+    });
+  });
+
+  $(document).on('click', '.pagination-for-sell-your-vehicles a',function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+    var url = $(this).attr('href');
+    $.ajax({
+      url: url,
+      type: 'get',
+      dataType: 'json',
+      success: function(result){
+        if(result.status == 'ok'){
+          $('#sell_your_vehicles').html(result.listing);
+        }else {
+          alert("Error when get Pagination");
+        }
+      }
+    });
+  });
+
+  $(document).on('click', '.pagination-for-part-exchanges a',function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+    var url = $(this).attr('href');
+    $.ajax({
+      url: url,
+      type: 'get',
+      dataType: 'json',
+      success: function(result){
+        if(result.status == 'ok'){
+          $('#part_exchanges').html(result.listing);
+        }else {
+          alert("Error when get Pagination");
+        }
+      }
+    });
+  });
 });
