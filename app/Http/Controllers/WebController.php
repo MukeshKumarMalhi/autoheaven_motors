@@ -499,39 +499,49 @@ class WebController extends Controller
     $counter = 0;
     foreach ($cars as $key => $value) {
 
+      // category
       $data['category_name'][] = $value->category_name;
       $array_cn = array_count_values($data['category_name']);
       ksort($array_cn);
       $data['category'] = $array_cn;
+      // category end
 
+      // body style
       $data['body_styles'][] = $value->body_style;
       $array_bs = array_count_values($data['body_styles']);
       ksort($array_bs);
-      // $this->array_insert( $array_bs, 0, array("Body type (all)" => ""));
       $data['body_style'] = $array_bs;
+      // body style end
 
+      // body model
       $data['models'][] = $value->model;
       $array_mo = array_count_values($data['models']);
       ksort($array_mo);
       $data['model'] = $array_mo;
+      // body style end
 
-      $data_min_prices_array = $this->roundDownCounted($value->price, 500, $make, $value->category_name, $model, $value->model, $min_price, $max_price, $value->price, $body_style, $value->body_style, $mileage, $value->mileage, $min_engine_size, $max_engine_size, $value->engine_size, $fuel_type, $value->fuel_type, $gearbox_type, $value->gearbox_type, $max_year, $min_year, $value->model_year, $number_of_doors, $value->number_of_doors);
+      // min prices
+      $data_min_prices_array = $this->roundDownCounted($value->price, 500, $make, $model, $min_price, $max_price, $body_style, $mileage, $min_engine_size, $max_engine_size, $fuel_type, $gearbox_type, $max_year, $min_year, $number_of_doors);
       foreach ($data_min_prices_array as $key => $val) {
         $data['min_prices'][] = $val;
       }
       $array_min_pr = array_count_values($data['min_prices']);
       ksort($array_min_pr);
       $data['min_price'] = $array_min_pr;
+      // min prices end
 
-      $data_max_prices_array = $this->roundUpCounted($value->price, 500, $make, $value->category_name, $model, $value->model, $min_price, $max_price, $value->price, $body_style, $value->body_style, $mileage, $value->mileage, $min_engine_size, $max_engine_size, $value->engine_size, $fuel_type, $value->fuel_type, $gearbox_type, $value->gearbox_type, $max_year, $min_year, $value->model_year, $number_of_doors, $value->number_of_doors);
+      // max prices
+      $data_max_prices_array = $this->roundUpCounted($value->price, 500, $make, $model, $min_price, $max_price, $body_style, $mileage, $min_engine_size, $max_engine_size, $fuel_type, $gearbox_type, $max_year, $min_year, $number_of_doors);
       foreach ($data_max_prices_array as $key => $va) {
         $data['max_prices'][] = $va;
       }
       $array_max_pr = array_count_values($data['max_prices']);
       ksort($array_max_pr);
       $data['max_price'] = $array_max_pr;
+      // max prices end
 
-      $data_mileage_array = $this->roundUpMileageCounted($value->mileage, 5000, $make, $value->category_name, $model, $value->model, $min_price, $max_price, $value->price, $body_style, $value->body_style, $mileage, $value->mileage, $min_engine_size, $max_engine_size, $value->engine_size, $fuel_type, $value->fuel_type, $gearbox_type, $value->gearbox_type, $max_year, $min_year, $value->model_year, $number_of_doors, $value->number_of_doors);
+      // mileage
+      $data_mileage_array = $this->roundUpMileageCounted($value->mileage, 5000, $make, $model, $min_price, $max_price, $body_style, $mileage, $min_engine_size, $max_engine_size, $fuel_type, $gearbox_type, $max_year, $min_year, $number_of_doors);
 
       if(is_array($data_mileage_array) && count($data_mileage_array) > 0){
         foreach($data_mileage_array as $key => $va){
@@ -541,45 +551,56 @@ class WebController extends Controller
       else {
         $data['mileages'][] = "";
       }
-      // $array_mi = array_count_values($data['mileages']);
+
       $array_mi = array_count_values(array_filter($data['mileages']));
       ksort($array_mi);
       $data['mileage'] = $array_mi;
+      // mileage end
 
+      // fuel type
       $data['fuel_types'][] = $value->fuel_type;
       $array_ft = array_count_values($data['fuel_types']);
       ksort($array_ft);
       $data['fuel_type'] = $array_ft;
+      // fuel type end
 
+      // gearbox type
       $data['gearbox_types'][] = $value->gearbox_type;
       $array_gt = array_count_values($data['gearbox_types']);
       ksort($array_gt);
       $data['gearbox_type'] = $array_gt;
+      // gearbox type end
 
+      // number of doors
       $data['number_of_doorss'][] = $value->number_of_doors;
       $array_nd = array_count_values($data['number_of_doorss']);
       ksort($array_nd);
       $data['number_of_doors'] = $array_nd;
+      // number of doors end
 
-      $data_min_engine_size_array = $this->engineSizeMinCounted($value->engine_size, $make, $value->category_name, $model, $value->model, $min_price, $max_price, $value->price, $body_style, $value->body_style, $mileage, $value->mileage, $min_engine_size, $max_engine_size, $value->engine_size, $fuel_type, $value->fuel_type, $gearbox_type, $value->gearbox_type, $max_year, $min_year, $value->model_year, $number_of_doors, $value->number_of_doors);
-
-      if ($counter == 0){
-        $min_array_engine[] = $data_min_engine_size_array[0];
-        foreach ($data_min_engine_size_array as $key => $val) {
-          $data['min_engine_sizes'][] = $val;
-        }
-      }else {
-        if (in_array($value->engine_size, $min_array_engine, TRUE)) {
-          $extra_array[] = "xyz";
-        }else {
+      // min engine size
+      $data_min_engine_size_array = $this->engineSizeMinCounted($value->engine_size, $make, $model, $min_price, $max_price, $body_style, $mileage, $min_engine_size, $max_engine_size, $fuel_type, $gearbox_type, $max_year, $min_year, $number_of_doors);
+      if(is_array($data_min_engine_size_array) && count($data_min_engine_size_array) > 0){
+        if ($counter == 0){
           $min_array_engine[] = $data_min_engine_size_array[0];
           foreach ($data_min_engine_size_array as $key => $val) {
             $data['min_engine_sizes'][] = $val;
           }
+        }else {
+          if (in_array($value->engine_size, $min_array_engine)) {
+            $extra_array[] = "xyz";
+          }else {
+            $min_array_engine[] = $data_min_engine_size_array[0];
+            foreach ($data_min_engine_size_array as $key => $val) {
+              $data['min_engine_sizes'][] = $val;
+            }
+          }
         }
+      }else {
+        $data['min_engine_sizes'][] = "";
       }
 
-      // if(is_array($data_min_engine_size_array) && count($data_min_engine_size_array) > 0){
+      // if(count($data_min_engine_size_array) > 0){
       //   foreach($data_min_engine_size_array as $key => $va){
       //     $data['min_engine_sizes'][] = $va;
       //   }
@@ -591,25 +612,31 @@ class WebController extends Controller
       $array_min_es = array_count_values(array_filter($data['min_engine_sizes']));
       ksort($array_min_es);
       $data['min_engine_size'] = $array_min_es;
+      // min engine size end
 
-      $data_max_engine_size_array = $this->engineSizeMaxCounted($value->engine_size, $make, $value->category_name, $model, $value->model, $min_price, $max_price, $value->price, $body_style, $value->body_style, $mileage, $value->mileage, $min_engine_size, $max_engine_size, $value->engine_size, $fuel_type, $value->fuel_type, $gearbox_type, $value->gearbox_type, $max_year, $min_year, $value->model_year, $number_of_doors, $value->number_of_doors);
-      if ($counter == 0){
-        $max_array_engine[] = $data_max_engine_size_array[0];
-        foreach ($data_max_engine_size_array as $key => $val) {
-          $data['max_engine_sizes'][] = $val;
-        }
-      }else {
-        if (in_array($value->engine_size, $max_array_engine, TRUE)) {
-          $extra_array[] = "xyz";
-        }else {
+      // max engine size
+      $data_max_engine_size_array = $this->engineSizeMaxCounted($value->engine_size, $make, $model, $min_price, $max_price, $body_style, $mileage, $min_engine_size, $max_engine_size, $fuel_type, $gearbox_type, $max_year, $min_year, $number_of_doors);
+      if(is_array($data_max_engine_size_array) && count($data_max_engine_size_array) > 0){
+        if ($counter == 0){
           $max_array_engine[] = $data_max_engine_size_array[0];
           foreach ($data_max_engine_size_array as $key => $val) {
             $data['max_engine_sizes'][] = $val;
           }
+        }else {
+          if (in_array($value->engine_size, $max_array_engine)) {
+            $extra_array[] = "xyz";
+          }else {
+            $max_array_engine[] = $data_max_engine_size_array[0];
+            foreach ($data_max_engine_size_array as $key => $val) {
+              $data['max_engine_sizes'][] = $val;
+            }
+          }
         }
+      }else {
+        $data['max_engine_sizes'][] = "";
       }
 
-      // if(is_array($data_max_engine_size_array) && count($data_max_engine_size_array) > 0){
+      // if(count($data_max_engine_size_array) > 0){
       //   foreach($data_max_engine_size_array as $key => $va){
       //     $data['max_engine_sizes'][] = $va;
       //   }
@@ -621,69 +648,81 @@ class WebController extends Controller
       $array_max_es = array_count_values(array_filter($data['max_engine_sizes']));
       ksort($array_max_es);
       $data['max_engine_size'] = $array_max_es;
+      // max engine size end
 
-      $data_min_years_array = $this->modelYearDownCounted($value->model_year, $make, $value->category_name, $model, $value->model, $min_price, $max_price, $value->price, $body_style, $value->body_style, $mileage, $value->mileage, $min_engine_size, $max_engine_size, $value->engine_size, $fuel_type, $value->fuel_type, $gearbox_type, $value->gearbox_type, $max_year, $min_year, $value->model_year, $number_of_doors, $value->number_of_doors);
-
-      // if ($counter == 0){
-      //   $min_array_year[] = $data_min_years_array[0];
-      //   foreach ($data_min_years_array as $key => $val) {
-      //     $data['min_years'][] = $val;
-      //   }
-      // }else {
-      //   if (in_array($value->model_year, $min_array_year, TRUE)) {
-      //     $extra_array[] = "xyz";
-      //   }else {
-      //     $min_array_year[] = $data_min_years_array[0];
-      //     foreach ($data_min_years_array as $key => $val) {
-      //       $data['min_years'][] = $val;
-      //     }
-      //   }
-      // }
+      // min year
+      $data_min_years_array = $this->modelYearDownCounted($value->model_year, $make, $model, $min_price, $max_price, $body_style, $mileage, $min_engine_size, $max_engine_size, $fuel_type, $gearbox_type, $max_year, $min_year, $number_of_doors);
 
       if(is_array($data_min_years_array) && count($data_min_years_array) > 0){
-        foreach($data_min_years_array as $key => $va){
-          $data['min_years'][] = $va;
+        if ($counter == 0){
+          $min_array_year[] = $data_min_years_array[0];
+          foreach ($data_min_years_array as $key => $val) {
+            $data['min_years'][] = $val;
+          }
+        }else {
+          if (in_array($value->model_year, $min_array_year)) {
+            $extra_array[] = "xyz";
+          }else {
+            $min_array_year[] = $data_min_years_array[0];
+            foreach ($data_min_years_array as $key => $val) {
+              $data['min_years'][] = $val;
+            }
+          }
         }
-      }
-      else {
+      }else {
         $data['min_years'][] = "";
       }
+
+
+      // if(count($data_min_years_array) > 0){
+      //   foreach($data_min_years_array as $key => $va){
+      //     $data['min_years'][] = $va;
+      //   }
+      // }
+      // else {
+      //   $data['min_years'][] = "";
+      // }
 
       $array_min_yr = array_count_values(array_filter($data['min_years']));
       krsort($array_min_yr);
       $data['min_year'] = $array_min_yr;
+      // min year end
 
-      $data_max_years_array = $this->modelYearUpCounted($value->model_year, $make, $value->category_name, $model, $value->model, $min_price, $max_price, $value->price, $body_style, $value->body_style, $mileage, $value->mileage, $min_engine_size, $max_engine_size, $value->engine_size, $fuel_type, $value->fuel_type, $gearbox_type, $value->gearbox_type, $max_year, $min_year, $value->model_year, $number_of_doors, $value->number_of_doors);
-
-      // if ($counter == 0){
-      //   $max_array_year[] = $data_max_years_array[0];
-      //   foreach ($data_max_years_array as $key => $val) {
-      //     $data['max_years'][] = $val;
-      //   }
-      // }else {
-      //   if (in_array($value->model_year, $max_array_year, TRUE)) {
-      //     $extra_array[] = "xyz";
-      //   }else {
-      //     $max_array_year[] = $data_max_years_array[0];
-      //     foreach ($data_max_years_array as $key => $val) {
-      //       $data['max_years'][] = $val;
-      //     }
-      //   }
-      // }
-
+      // max year
+      $data_max_years_array = $this->modelYearUpCounted($value->model_year, $make, $model, $min_price, $max_price, $body_style, $mileage, $min_engine_size, $max_engine_size, $fuel_type, $gearbox_type, $max_year, $min_year, $number_of_doors);
       if(is_array($data_max_years_array) && count($data_max_years_array) > 0){
-        foreach($data_max_years_array as $key => $va){
-          $data['max_years'][] = $va;
+        if ($counter == 0){
+          $max_array_year[] = $data_max_years_array[0];
+          foreach ($data_max_years_array as $key => $val) {
+            $data['max_years'][] = $val;
+          }
+        }else {
+          if (in_array($value->model_year, $max_array_year)) {
+            $extra_array[] = "xyz";
+          }else {
+            $max_array_year[] = $data_max_years_array[0];
+            foreach ($data_max_years_array as $key => $val) {
+              $data['max_years'][] = $val;
+            }
+          }
         }
-      }
-      else {
+      }else {
         $data['max_years'][] = "";
       }
+
+      // if(count($data_max_years_array) > 0){
+      //   foreach($data_max_years_array as $key => $va){
+      //     $data['max_years'][] = $va;
+      //   }
+      // }
+      // else {
+      //   $data['max_years'][] = "";
+      // }
 
       $array_max_yr = array_count_values(array_filter($data['max_years']));
       krsort($array_max_yr);
       $data['max_year'] = $array_max_yr;
-
+      // max year end
       $counter = $counter + 1;
     }
 
@@ -691,6 +730,8 @@ class WebController extends Controller
     foreach($removeKeys as $key) {
        unset($data[$key]);
     }
+
+    // dd($data);
 
     return json_encode($data);
   }
@@ -717,7 +758,7 @@ class WebController extends Controller
       ksort($array_mo);
       $data['model'] = $array_mo;
 
-      $data_min_prices_array = $this->roundDownCountedHome($value->price, 500, $make, $value->category_name, $model, $value->model, $min_price, $max_price, $value->price);
+      $data_min_prices_array = $this->roundDownCountedHome($value->price, 500, $make, $model, $min_price, $max_price);
       foreach ($data_min_prices_array as $key => $val) {
         $data['min_prices'][] = $val;
       }
@@ -725,7 +766,7 @@ class WebController extends Controller
       ksort($array_min_pr);
       $data['min_price'] = $array_min_pr;
 
-      $data_max_prices_array = $this->roundUpCountedHome($value->price, 500, $make, $value->category_name, $model, $value->model, $min_price, $max_price, $value->price);
+      $data_max_prices_array = $this->roundUpCountedHome($value->price, 500, $make, $model, $min_price, $max_price);
       foreach ($data_max_prices_array as $key => $va) {
         $data['max_prices'][] = $va;
       }
@@ -744,182 +785,180 @@ class WebController extends Controller
     return json_encode($data);
   }
 
-  public function roundUpCounted($num, $divisor, $make, $category_name, $model, $model_name, $min_price, $max_price, $price_name, $body_style, $body_style_name, $mileage, $mileage_name, $min_engine_size, $max_engine_size, $engine_size_name, $fuel_type, $fuel_type_name, $gearbox_type, $gearbox_type_name, $max_year, $min_year, $model_year_name, $number_of_doors, $number_of_doors_name) {
+  public function roundUpCounted($num, $divisor, $make, $model, $min_price, $max_price, $body_style, $mileage, $min_engine_size, $max_engine_size, $fuel_type, $gearbox_type, $max_year, $min_year, $number_of_doors) {
     $diff = $num % $divisor;
     if ($diff == 0)
       return $num;
     else
       $actual_unum = $num - $diff + $divisor;
-      $category = Category::where('category_name', '=', $category_name)->first();
+      $category = Category::where('category_name', '=', $make)->first();
       $cars = DB::table('cars');
       if($make != 'make')
         $cars->where('category_id', '=', $category->id);
       if($model != 'model')
-        $cars->where('model', '=', $model_name);
-      // if($min_price != "min-price")
-      //   $cars->where('price', '>', $price_name);
-      // if($max_price != "max-price")
-      //   $cars->where('price', '<', $price_name);
-      if($body_style != "body-type")
-        $cars->where('body_style', '=', $body_style_name);
-      if($mileage != "mileage")
-        $cars->where('mileage', '<=', $mileage_name);
-      if($min_engine_size != "min-engine-size")
-        $cars->where('engine_size', '>=', $engine_size_name);
-      if($max_engine_size != "max-engine-size")
-        $cars->where('engine_size', '<=', $engine_size_name);
-      if($fuel_type != "fuel-type")
-        $cars->where('fuel_type', '=', $fuel_type_name);
-      if($gearbox_type != "gearbox-type")
-        $cars->where('gearbox_type', '=', $gearbox_type_name);
-      if($min_year != "min-year")
-        $cars->where('model_year', '>=', $model_year_name);
-      if($max_year != "max-year")
-        $cars->where('model_year', '<=', $model_year_name);
-      if($number_of_doors != "number-of-doors")
-        $cars->where('number_of_doors', '=', $number_of_doors_name);
-
-      $cars = $cars->where('price', '<=', $actual_unum)
-      ->get()
-      ->toArray();
-      $arrayPrice = array();
-      for ($i=0; $i < count($cars); $i++) {
-        array_push($arrayPrice, $actual_unum);
-      }
-      return $arrayPrice;
-  }
-
-  public function roundUpCountedHome($num, $divisor, $make, $category_name, $model, $model_name, $min_price, $max_price, $price_name) {
-    $diff = $num % $divisor;
-    if ($diff == 0)
-      return $num;
-    else
-      $actual_unum = $num - $diff + $divisor;
-      $category = Category::where('category_name', '=', $category_name)->first();
-      $cars = DB::table('cars');
-      if($make != 'make')
-        $cars->where('category_id', '=', $category->id);
-      if($model != 'model')
-        $cars->where('model', '=', $model_name);
-      // if($min_price != "min-price")
-      //   $cars->where('price', '>', $price_name);
-      // if($max_price != "max-price")
-      //   $cars->where('price', '<', $price_name);
-
-      $cars = $cars->where('price', '<=', $actual_unum)
-      ->get()
-      ->toArray();
-      $arrayPrice = array();
-      for ($i=0; $i < count($cars); $i++) {
-        array_push($arrayPrice, $actual_unum);
-      }
-      return $arrayPrice;
-  }
-
-  public function roundDownCounted($num, $divisor, $make, $category_name, $model, $model_name, $min_price, $max_price, $price_name, $body_style, $body_style_name, $mileage, $mileage_name, $min_engine_size, $max_engine_size, $engine_size_name, $fuel_type, $fuel_type_name, $gearbox_type, $gearbox_type_name, $max_year, $min_year, $model_year_name, $number_of_doors, $number_of_doors_name) {
-    $diff = $num % $divisor;
-    $actual_num = $num - $diff;
-    $category = Category::where('category_name', '=', $category_name)->first();
-    $cars = DB::table('cars');
-    if($make != 'make')
-      $cars->where('category_id', '=', $category->id);
-    if($model != 'model')
-      $cars->where('model', '=', $model_name);
-    // if($min_price != "min-price")
-    //   $cars->where('price', '>', $price_name);
-    // if($max_price != "max-price")
-    //   $cars->where('price', '<', $price_name);
-    if($body_style != "body-type")
-      $cars->where('body_style', '=', $body_style_name);
-    if($mileage != "mileage")
-      $cars->where('mileage', '<=', $mileage_name);
-    if($min_engine_size != "min-engine-size")
-      $cars->where('engine_size', '>=', $engine_size_name);
-    if($max_engine_size != "max-engine-size")
-      $cars->where('engine_size', '<=', $engine_size_name);
-    if($fuel_type != "fuel-type")
-      $cars->where('fuel_type', '=', $fuel_type_name);
-    if($gearbox_type != "gearbox-type")
-      $cars->where('gearbox_type', '=', $gearbox_type_name);
-    if($min_year != "min-year")
-      $cars->where('model_year', '>=', $model_year_name);
-    if($max_year != "max-year")
-      $cars->where('model_year', '<=', $model_year_name);
-    if($number_of_doors != "number-of-doors")
-      $cars->where('number_of_doors', '=', $number_of_doors_name);
-
-    $cars = $cars->where('price', '>=', $actual_num)
-    ->get()
-    ->toArray();
-    $arrayPrice = array();
-    for ($i=0; $i < count($cars); $i++) {
-      array_push($arrayPrice, $actual_num);
-    }
-    return $arrayPrice;
-  }
-
-  public function roundDownCountedHome($num, $divisor, $make, $category_name, $model, $model_name, $min_price, $max_price, $price_name) {
-    $diff = $num % $divisor;
-    $actual_num = $num - $diff;
-    $category = Category::where('category_name', '=', $category_name)->first();
-    $cars = DB::table('cars');
-    if($make != 'make')
-      $cars->where('category_id', '=', $category->id);
-    if($model != 'model')
-      $cars->where('model', '=', $model_name);
-    // if($min_price != "min-price")
-    //   $cars->where('price', '>', $price_name);
-    // if($max_price != "max-price")
-    //   $cars->where('price', '<', $price_name);
-
-    $cars = $cars->where('price', '>=', $actual_num)
-    ->get()
-    ->toArray();
-    $arrayPrice = array();
-    for ($i=0; $i < count($cars); $i++) {
-      array_push($arrayPrice, $actual_num);
-    }
-    return $arrayPrice;
-  }
-
-  public function roundUpMileageCounted($num, $divisor, $make, $category_name, $model, $model_name, $min_price, $max_price, $price_name, $body_style, $body_style_name, $mileage, $mileage_name, $min_engine_size, $max_engine_size, $engine_size_name, $fuel_type, $fuel_type_name, $gearbox_type, $gearbox_type_name, $max_year, $min_year, $model_year_name, $number_of_doors, $number_of_doors_name) {
-    $diff = $num % $divisor;
-    if ($diff == 0)
-      return $num;
-    else
-      $actual_unum = $num - $diff + $divisor;
-      $category = Category::where('category_name', '=', $category_name)->first();
-      $cars = DB::table('cars');
-      if($make != 'make')
-        $cars->where('category_id', '=', $category->id);
-      if($model != 'model')
-        $cars->where('model', '=', $model_name);
+        $cars->where('model', '=', $model);
       if($min_price != "min-price")
-        $cars->where('price', '>', $price_name);
+        $cars->where('price', '>', $min_price);
       if($max_price != "max-price")
-        $cars->where('price', '<', $price_name);
+        $cars->where('price', '<', $max_price);
       if($body_style != "body-type")
-        $cars->where('body_style', '=', $body_style_name);
-      // if($mileage != "mileage")
-      //   $cars->where('mileage', '<=', $mileage_name);
+        $cars->where('body_style', '=', $body_style);
+      if($mileage != "mileage")
+        $cars->where('mileage', '<=', $mileage);
       if($min_engine_size != "min-engine-size")
-        $cars->where('engine_size', '>=', $engine_size_name);
+        $cars->where('engine_size', '>=', $min_engine_size);
       if($max_engine_size != "max-engine-size")
-        $cars->where('engine_size', '<=', $engine_size_name);
+        $cars->where('engine_size', '<=', $max_engine_size);
       if($fuel_type != "fuel-type")
-        $cars->where('fuel_type', '=', $fuel_type_name);
+        $cars->where('fuel_type', '=', $fuel_type);
       if($gearbox_type != "gearbox-type")
-        $cars->where('gearbox_type', '=', $gearbox_type_name);
+        $cars->where('gearbox_type', '=', $gearbox_type);
       if($min_year != "min-year")
-        $cars->where('model_year', '>=', $model_year_name);
+        $cars->where('model_year', '>=', $min_year);
       if($max_year != "max-year")
-        $cars->where('model_year', '<=', $model_year_name);
+        $cars->where('model_year', '<=', $max_year);
       if($number_of_doors != "number-of-doors")
-        $cars->where('number_of_doors', '=', $number_of_doors_name);
+        $cars->where('number_of_doors', '=', $number_of_doors);
 
-      $cars = $cars->where('mileage', '<=', $actual_unum)
+      $cars = $cars->where('price', '<', $actual_unum)
       ->get()
       ->toArray();
+      $arrayPrice = array();
+      for ($i=0; $i < count($cars); $i++) {
+        array_push($arrayPrice, $actual_unum);
+      }
+      return $arrayPrice;
+  }
+
+  public function roundUpCountedHome($num, $divisor, $make, $model, $min_price, $max_price) {
+    $diff = $num % $divisor;
+    if ($diff == 0)
+      return $num;
+    else
+      $actual_unum = $num - $diff + $divisor;
+      $category = Category::where('category_name', '=', $make)->first();
+      $cars = DB::table('cars');
+      if($make != 'make')
+        $cars->where('category_id', '=', $category->id);
+      if($model != 'model')
+        $cars->where('model', '=', $model);
+      if($min_price != "min-price")
+        $cars->where('price', '>', $min_price);
+      if($max_price != "max-price")
+        $cars->where('price', '<', $max_price);
+
+      $cars = $cars->where('price', '<', $actual_unum)
+      ->get()
+      ->toArray();
+      $arrayPrice = array();
+      for ($i=0; $i < count($cars); $i++) {
+        array_push($arrayPrice, $actual_unum);
+      }
+      return $arrayPrice;
+  }
+
+  public function roundDownCounted($num, $divisor, $make, $model, $min_price, $max_price, $body_style, $mileage, $min_engine_size, $max_engine_size, $fuel_type, $gearbox_type, $max_year, $min_year, $number_of_doors) {
+    $diff = $num % $divisor;
+    $actual_num = $num - $diff;
+    $category = Category::where('category_name', '=', $make)->first();
+    $cars = DB::table('cars');
+    if($make != 'make')
+      $cars->where('category_id', '=', $category->id);
+    if($model != 'model')
+      $cars->where('model', '=', $model);
+    if($min_price != "min-price")
+      $cars->where('price', '>', $min_price);
+    if($max_price != "max-price")
+      $cars->where('price', '<', $max_price);
+    if($body_style != "body-type")
+      $cars->where('body_style', '=', $body_style);
+    if($mileage != "mileage")
+      $cars->where('mileage', '<=', $mileage);
+    if($min_engine_size != "min-engine-size")
+      $cars->where('engine_size', '>=', $min_engine_size);
+    if($max_engine_size != "max-engine-size")
+      $cars->where('engine_size', '<=', $max_engine_size);
+    if($fuel_type != "fuel-type")
+      $cars->where('fuel_type', '=', $fuel_type);
+    if($gearbox_type != "gearbox-type")
+      $cars->where('gearbox_type', '=', $gearbox_type);
+    if($min_year != "min-year")
+      $cars->where('model_year', '>=', $min_year);
+    if($max_year != "max-year")
+      $cars->where('model_year', '<=', $max_year);
+    if($number_of_doors != "number-of-doors")
+      $cars->where('number_of_doors', '=', $number_of_doors);
+
+    $cars = $cars->where('price', '>', $actual_num)
+    ->get()
+    ->toArray();
+    $arrayPrice = array();
+    for ($i=0; $i < count($cars); $i++) {
+      array_push($arrayPrice, $actual_num);
+    }
+    return $arrayPrice;
+  }
+
+  public function roundDownCountedHome($num, $divisor, $make, $model, $min_price, $max_price) {
+    $diff = $num % $divisor;
+    $actual_num = $num - $diff;
+    $category = Category::where('category_name', '=', $make)->first();
+    $cars = DB::table('cars');
+    if($make != 'make')
+      $cars->where('category_id', '=', $category->id);
+    if($model != 'model')
+      $cars->where('model', '=', $model);
+    if($min_price != "min-price")
+      $cars->where('price', '>', $min_price);
+    if($max_price != "max-price")
+      $cars->where('price', '<', $max_price);
+
+    $cars = $cars->where('price', '>', $actual_num)
+    ->get()
+    ->toArray();
+    $arrayPrice = array();
+    for ($i=0; $i < count($cars); $i++) {
+      array_push($arrayPrice, $actual_num);
+    }
+    return $arrayPrice;
+  }
+
+  public function roundUpMileageCounted($num, $divisor, $make, $model, $min_price, $max_price, $body_style, $mileage, $min_engine_size, $max_engine_size, $fuel_type, $gearbox_type, $max_year, $min_year, $number_of_doors) {
+    $diff = $num % $divisor;
+    if ($diff == 0)
+      return $num;
+    else
+      $actual_unum = $num - $diff + $divisor;
+      $category = Category::where('category_name', '=', $make)->first();
+      $cars = DB::table('cars');
+      if($make != 'make')
+        $cars->where('category_id', '=', $category->id);
+      if($model != 'model')
+        $cars->where('model', '=', $model);
+      if($min_price != "min-price")
+        $cars->where('price', '>', $min_price);
+      if($max_price != "max-price")
+        $cars->where('price', '<', $max_price);
+      if($body_style != "body-type")
+        $cars->where('body_style', '=', $body_style);
+      if($mileage != "mileage")
+        $cars->where('mileage', '<=', $mileage);
+      if($min_engine_size != "min-engine-size")
+        $cars->where('engine_size', '>=', $min_engine_size);
+      if($max_engine_size != "max-engine-size")
+        $cars->where('engine_size', '<=', $max_engine_size);
+      if($fuel_type != "fuel-type")
+        $cars->where('fuel_type', '=', $fuel_type);
+      if($gearbox_type != "gearbox-type")
+        $cars->where('gearbox_type', '=', $gearbox_type);
+      if($min_year != "min-year")
+        $cars->where('model_year', '>=', $min_year);
+      if($max_year != "max-year")
+        $cars->where('model_year', '<=', $max_year);
+      if($number_of_doors != "number-of-doors")
+        $cars->where('number_of_doors', '=', $number_of_doors);
+
+      $cars = $cars->where('mileage', '<=', $actual_unum)->get()->toArray();
       $arrayMileage = array();
       for ($i=0; $i < count($cars); $i++) {
         array_push($arrayMileage, $actual_unum);
@@ -927,36 +966,36 @@ class WebController extends Controller
       return $arrayMileage;
   }
 
-  public function modelYearUpCounted($value, $make, $category_name, $model, $model_name, $min_price, $max_price, $price_name, $body_style, $body_style_name, $mileage, $mileage_name, $min_engine_size, $max_engine_size, $engine_size_name, $fuel_type, $fuel_type_name, $gearbox_type, $gearbox_type_name, $max_year, $min_year, $model_year_name, $number_of_doors, $number_of_doors_name)
+  public function modelYearUpCounted($value, $make, $model, $min_price, $max_price, $body_style, $mileage, $min_engine_size, $max_engine_size, $fuel_type, $gearbox_type, $max_year, $min_year, $number_of_doors)
   {
-    $category = Category::where('category_name', '=', $category_name)->first();
+    $category = Category::where('category_name', '=', $make)->first();
     $cars = DB::table('cars');
     if($make != 'make')
       $cars->where('category_id', '=', $category->id);
     if($model != 'model')
-      $cars->where('model', '=', $model_name);
+      $cars->where('model', '=', $model);
     if($min_price != "min-price")
-      $cars->where('price', '>', $price_name);
+      $cars->where('price', '>', $min_price);
     if($max_price != "max-price")
-      $cars->where('price', '<', $price_name);
+      $cars->where('price', '<', $max_price);
     if($body_style != "body-type")
-      $cars->where('body_style', '=', $body_style_name);
+      $cars->where('body_style', '=', $body_style);
     if($mileage != "mileage")
-      $cars->where('mileage', '<=', $mileage_name);
+      $cars->where('mileage', '<=', $mileage);
     if($min_engine_size != "min-engine-size")
-      $cars->where('engine_size', '>=', $engine_size_name);
+      $cars->where('engine_size', '>=', $min_engine_size);
     if($max_engine_size != "max-engine-size")
-      $cars->where('engine_size', '<=', $engine_size_name);
+      $cars->where('engine_size', '<=', $max_engine_size);
     if($fuel_type != "fuel-type")
-      $cars->where('fuel_type', '=', $fuel_type_name);
+      $cars->where('fuel_type', '=', $fuel_type);
     if($gearbox_type != "gearbox-type")
-      $cars->where('gearbox_type', '=', $gearbox_type_name);
-    // if($min_year != "min-year")
-    //   $cars->where('cars.model_year', '>=', $min_year);
-    // if($max_year != "max-year")
-    //   $cars->where('cars.model_year', '<=', $max_year);
+      $cars->where('gearbox_type', '=', $gearbox_type);
+    if($min_year != "min-year")
+      $cars->where('cars.model_year', '>=', $min_year);
+    if($max_year != "max-year")
+      $cars->where('cars.model_year', '<=', $max_year);
     if($number_of_doors != "number-of-doors")
-      $cars->where('number_of_doors', '=', $number_of_doors_name);
+      $cars->where('number_of_doors', '=', $number_of_doors);
 
     $cars = $cars->where('model_year', '<=', $value)
     ->get()
@@ -968,36 +1007,36 @@ class WebController extends Controller
     return $arrayYear;
   }
 
-  public function modelYearDownCounted($value, $make, $category_name, $model, $model_name, $min_price, $max_price, $price_name, $body_style, $body_style_name, $mileage, $mileage_name, $min_engine_size, $max_engine_size, $engine_size_name, $fuel_type, $fuel_type_name, $gearbox_type, $gearbox_type_name, $max_year, $min_year, $model_year_name, $number_of_doors, $number_of_doors_name)
+  public function modelYearDownCounted($value, $make, $model, $min_price, $max_price, $body_style, $mileage, $min_engine_size, $max_engine_size, $fuel_type, $gearbox_type, $max_year, $min_year, $number_of_doors)
   {
-    $category = Category::where('category_name', '=', $category_name)->first();
+    $category = Category::where('category_name', '=', $make)->first();
     $cars = DB::table('cars');
     if($make != 'make')
       $cars->where('category_id', '=', $category->id);
     if($model != 'model')
-      $cars->where('model', '=', $model_name);
+      $cars->where('model', '=', $model);
     if($min_price != "min-price")
-      $cars->where('price', '>', $price_name);
+      $cars->where('price', '>', $min_price);
     if($max_price != "max-price")
-      $cars->where('price', '<', $price_name);
+      $cars->where('price', '<', $max_price);
     if($body_style != "body-type")
-      $cars->where('body_style', '=', $body_style_name);
+      $cars->where('body_style', '=', $body_style);
     if($mileage != "mileage")
-      $cars->where('mileage', '<=', $mileage_name);
+      $cars->where('mileage', '<=', $mileage);
     if($min_engine_size != "min-engine-size")
-      $cars->where('engine_size', '>=', $engine_size_name);
+      $cars->where('engine_size', '>=', $min_engine_size);
     if($max_engine_size != "max-engine-size")
-      $cars->where('engine_size', '<=', $engine_size_name);
+      $cars->where('engine_size', '<=', $max_engine_size);
     if($fuel_type != "fuel-type")
-      $cars->where('fuel_type', '=', $fuel_type_name);
+      $cars->where('fuel_type', '=', $fuel_type);
     if($gearbox_type != "gearbox-type")
-      $cars->where('gearbox_type', '=', $gearbox_type_name);
-    // if($min_year != "min-year")
-    //   $cars->where('cars.model_year', '>=', $min_year);
-    // if($max_year != "max-year")
-    //   $cars->where('cars.model_year', '<=', $max_year);
+      $cars->where('gearbox_type', '=', $gearbox_type);
+    if($min_year != "min-year")
+      $cars->where('cars.model_year', '>=', $min_year);
+    if($max_year != "max-year")
+      $cars->where('cars.model_year', '<=', $max_year);
     if($number_of_doors != "number-of-doors")
-      $cars->where('number_of_doors', '=', $number_of_doors_name);
+      $cars->where('number_of_doors', '=', $number_of_doors);
 
     $cars = $cars->where('model_year', '>=', $value)
     ->get()
@@ -1009,35 +1048,35 @@ class WebController extends Controller
     return $arrayYear;
   }
 
-  public function engineSizeMinCounted($value, $make, $category_name, $model, $model_name, $min_price, $max_price, $price_name, $body_style, $body_style_name, $mileage, $mileage_name, $min_engine_size, $max_engine_size, $engine_size_name, $fuel_type, $fuel_type_name, $gearbox_type, $gearbox_type_name, $max_year, $min_year, $model_year_name, $number_of_doors, $number_of_doors_name) {
-    $category = Category::where('category_name', '=', $category_name)->first();
+  public function engineSizeMinCounted($value, $make, $model, $min_price, $max_price, $body_style, $mileage, $min_engine_size, $max_engine_size, $fuel_type, $gearbox_type, $max_year, $min_year, $number_of_doors) {
+    $category = Category::where('category_name', '=', $make)->first();
     $cars = DB::table('cars');
     if($make != 'make')
       $cars->where('category_id', '=', $category->id);
     if($model != 'model')
-      $cars->where('model', '=', $model_name);
+      $cars->where('model', '=', $model);
     if($min_price != "min-price")
-      $cars->where('price', '>', $price_name);
+      $cars->where('price', '>', $min_price);
     if($max_price != "max-price")
-      $cars->where('price', '<', $price_name);
+      $cars->where('price', '<', $max_price);
     if($body_style != "body-type")
-      $cars->where('body_style', '=', $body_style_name);
+      $cars->where('body_style', '=', $body_style);
     if($mileage != "mileage")
-      $cars->where('mileage', '<=', $mileage_name);
-    // if($min_engine_size != "min-engine-size")
-    //   $cars->where('cars.engine_size', '>=', $min_engine_size);
-    // if($max_engine_size != "max-engine-size")
-    //   $cars->where('cars.engine_size', '<=', $max_engine_size);
+      $cars->where('mileage', '<=', $mileage);
+    if($min_engine_size != "min-engine-size")
+      $cars->where('cars.engine_size', '>=', $min_engine_size);
+    if($max_engine_size != "max-engine-size")
+      $cars->where('cars.engine_size', '<=', $max_engine_size);
     if($fuel_type != "fuel-type")
-      $cars->where('fuel_type', '=', $fuel_type_name);
+      $cars->where('fuel_type', '=', $fuel_type);
     if($gearbox_type != "gearbox-type")
-      $cars->where('gearbox_type', '=', $gearbox_type_name);
+      $cars->where('gearbox_type', '=', $gearbox_type);
     if($min_year != "min-year")
-      $cars->where('model_year', '>=', $model_year_name);
+      $cars->where('model_year', '>=', $min_year);
     if($max_year != "max-year")
-      $cars->where('model_year', '<=', $model_year_name);
+      $cars->where('model_year', '<=', $max_year);
     if($number_of_doors != "number-of-doors")
-      $cars->where('number_of_doors', '=', $number_of_doors_name);
+      $cars->where('number_of_doors', '=', $number_of_doors);
 
     $cars = $cars->where('engine_size', '>=', $value)
     ->get()
@@ -1049,35 +1088,35 @@ class WebController extends Controller
     return $arrayEngineSize;
   }
 
-  public function engineSizeMaxCounted($value, $make, $category_name, $model, $model_name, $min_price, $max_price, $price_name, $body_style, $body_style_name, $mileage, $mileage_name, $min_engine_size, $max_engine_size, $engine_size_name, $fuel_type, $fuel_type_name, $gearbox_type, $gearbox_type_name, $max_year, $min_year, $model_year_name, $number_of_doors, $number_of_doors_name) {
-    $category = Category::where('category_name', '=', $category_name)->first();
+  public function engineSizeMaxCounted($value, $make, $model, $min_price, $max_price, $body_style, $mileage, $min_engine_size, $max_engine_size, $fuel_type, $gearbox_type, $max_year, $min_year, $number_of_doors) {
+    $category = Category::where('category_name', '=', $make)->first();
     $cars = DB::table('cars');
     if($make != 'make')
       $cars->where('category_id', '=', $category->id);
     if($model != 'model')
-      $cars->where('model', '=', $model_name);
+      $cars->where('model', '=', $model);
     if($min_price != "min-price")
-      $cars->where('price', '>', $price_name);
+      $cars->where('price', '>', $min_price);
     if($max_price != "max-price")
-      $cars->where('price', '<', $price_name);
+      $cars->where('price', '<', $max_price);
     if($body_style != "body-type")
-      $cars->where('body_style', '=', $body_style_name);
+      $cars->where('body_style', '=', $body_style);
     if($mileage != "mileage")
-      $cars->where('mileage', '<=', $mileage_name);
-    // if($min_engine_size != "min-engine-size")
-    //   $cars->where('cars.engine_size', '>=', $min_engine_size);
-    // if($max_engine_size != "max-engine-size")
-    //   $cars->where('cars.engine_size', '<=', $max_engine_size);
+      $cars->where('mileage', '<=', $mileage);
+    if($min_engine_size != "min-engine-size")
+      $cars->where('cars.engine_size', '>=', $min_engine_size);
+    if($max_engine_size != "max-engine-size")
+      $cars->where('cars.engine_size', '<=', $max_engine_size);
     if($fuel_type != "fuel-type")
-      $cars->where('fuel_type', '=', $fuel_type_name);
+      $cars->where('fuel_type', '=', $fuel_type);
     if($gearbox_type != "gearbox-type")
-      $cars->where('gearbox_type', '=', $gearbox_type_name);
+      $cars->where('gearbox_type', '=', $gearbox_type);
     if($min_year != "min-year")
-      $cars->where('model_year', '>=', $model_year_name);
+      $cars->where('model_year', '>=', $min_year);
     if($max_year != "max-year")
-      $cars->where('model_year', '<=', $model_year_name);
+      $cars->where('model_year', '<=', $max_year);
     if($number_of_doors != "number-of-doors")
-      $cars->where('number_of_doors', '=', $number_of_doors_name);
+      $cars->where('number_of_doors', '=', $number_of_doors);
 
     $cars = $cars->where('engine_size', '<=', $value)
     ->get()
@@ -1378,6 +1417,14 @@ class WebController extends Controller
     ->select('cars.*', 'categories.category_name')
     ->where('cars.id', '=', $car_id)
     ->first();
+    $preferred_cars = DB::table('cars')
+    ->leftJoin('categories', 'categories.id', '=', 'cars.category_id')
+    ->select('cars.*', 'categories.category_name')
+    ->where('cars.category_id', '=', $car_detail->category_id)
+    ->where('cars.id', '!=', $car_detail->id)
+    ->orderBy('cars.price', 'asc')
+    ->take(4)
+    ->get();
 
     $vehicle_summaries = DB::table('vehicle_summaries')->where('car_id', '=', $car_id)->first();
     if($vehicle_summaries != null){
@@ -1450,14 +1497,14 @@ class WebController extends Controller
     $car_detail->vehicle_summaries = $vehicle_summaries_array;
     $car_detail->car_images = $car_images_array;
 
-    return view('website.car_detail_page', ['car_detail' => $car_detail]);
+    return view('website.car_detail_page', ['car_detail' => $car_detail, 'preferred_cars' => $preferred_cars]);
   }
 
   public function send_test_email()
   {
-    $data = ['message' => 'triple apple', 'useremail' => 'hworkpk@gmail.com', 'username' => 'Jason Doe', 'subject' => 'Autohaven Contact'];
+    $data = ['message' => 'triple apple', 'useremail' => 'Sales@autohavenmotors.co.uk', 'username' => 'Jason Doe', 'subject' => 'Autohaven Contact'];
 
-    Mail::to('hworkpk@gmail.com')->queue(new TestEmail($data));
+    Mail::to('Sales@autohavenmotors.co.uk')->queue(new TestEmail($data));
     // Mail::send('emails.test', ['data' => $data], function ($message) use ($data) {
     //     $message->from($data['useremail'], $data['username']);
     //     $message->to('fayyaz@cospace.pk' , 'Autohaven Motors')->subject($data['subject']);
@@ -1504,7 +1551,7 @@ class WebController extends Controller
       );
       $sell_your_car = SellYourVehicle::create($form_data);
 
-      Mail::to('hworkpk@gmail.com')->queue(new SellYourVehicleEmail($form_data));
+      Mail::to('Sales@autohavenmotors.co.uk')->queue(new SellYourVehicleEmail($form_data));
 
       if( count(Mail::failures()) > 0 ) {
         $failures_array = array();
@@ -1549,7 +1596,7 @@ class WebController extends Controller
       );
       $sell_your_car = PartExchange::create($form_data);
 
-      Mail::to('hworkpk@gmail.com')->queue(new PartExchangeEmail($form_data));
+      Mail::to('Sales@autohavenmotors.co.uk')->queue(new PartExchangeEmail($form_data));
 
       if( count(Mail::failures()) > 0 ) {
         $failures_array = array();
@@ -1586,7 +1633,7 @@ class WebController extends Controller
       );
       $contact = Contact::create($form_data);
 
-      Mail::to('hworkpk@gmail.com')->queue(new ContactEmail($form_data));
+      Mail::to('Sales@autohavenmotors.co.uk')->queue(new ContactEmail($form_data));
 
       if( count(Mail::failures()) > 0 ) {
         $failures_array = array();
@@ -1623,7 +1670,7 @@ class WebController extends Controller
       );
       $finance = Finance::create($form_data);
 
-      Mail::to('hworkpk@gmail.com')->queue(new FinanceEmail($form_data));
+      Mail::to('Sales@autohavenmotors.co.uk')->queue(new FinanceEmail($form_data));
 
       if( count(Mail::failures()) > 0 ) {
         $failures_array = array();
@@ -1664,7 +1711,7 @@ class WebController extends Controller
       );
       $enquiry = CarEnquiry::create($form_data);
 
-      Mail::to('hworkpk@gmail.com')->queue(new EnquiryEmail($form_data));
+      Mail::to('Sales@autohavenmotors.co.uk')->queue(new EnquiryEmail($form_data));
 
       if( count(Mail::failures()) > 0 ) {
         $failures_array = array();
@@ -1710,7 +1757,7 @@ class WebController extends Controller
       );
       $enquiry = Review::create($form_data);
 
-      Mail::to('hworkpk@gmail.com')->queue(new ReviewEmail($form_data));
+      Mail::to('Sales@autohavenmotors.co.uk')->queue(new ReviewEmail($form_data));
 
       if( count(Mail::failures()) > 0 ) {
         $failures_array = array();

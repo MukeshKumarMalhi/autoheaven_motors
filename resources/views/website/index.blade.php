@@ -12,7 +12,7 @@
                     <h1>Premium Cars Dealers</h1>
                     <br/><br/>
                     <div class="text-center">
-                        <a href="#" class="btn btn-dark">View More</a>
+                        <a href="{{ url('/used-cars') }}" class="btn btn-dark">View More</a>
                     </div>
                 </div>
             </div>
@@ -74,7 +74,11 @@
   <?php
     if(count($latest_cars) == 2){
       foreach ($latest_cars as $key => $latest) {
-        ?>
+        $category_name = strtolower(str_replace(' ', '-', $latest->category_name));
+        $car_model = strtolower(str_replace(' ', '-', $latest->model));
+        $car_id = $latest->id;
+        $car_detail = $category_name."-".$car_model."_".$car_id;
+  ?>
     <div class="pt-r10 bg-center-url bg-gredient-white-l" style="background-image: url('<?php echo asset('storage/'.$latest->featured_image); ?>');">
         <div class="container py-80">
             <div class="row align-items-center" style="min-height: 400px;">
@@ -83,7 +87,7 @@
                     <h2>New Vehicle <span class="text-danger">Just Arrived...</span></h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit sed eiusmod tempor incididu et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ull laboris aliquip ex a commodo consequat.</p>
                     <br/>
-                    <a href="#" class="btn btn-danger mr-2 mb-2">View Details</a>   <a href="#">25 Photos</a>
+                    <a href="{{ url('/used-cars') }}/{{ $car_detail }}" class="btn btn-danger mr-2 mb-2">View Details</a>
                 </div>
             </div>
         </div>
