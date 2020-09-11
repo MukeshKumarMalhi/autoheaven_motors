@@ -11,7 +11,9 @@
     <title>Autohaven Motors | @yield('title')</title>
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="shortcut icon" href="{{ asset('admin_asset/images/fav-icon-32.ico') }}" type="image/x-icon" />
+    <link rel="shortcut icon" href="{{ asset('web_asset/images/favicon.png') }}" type="image/x-icon" />
+    <link rel="apple-touch-icon-precomposed" href="{{ asset('web_asset/images/favicon.png') }}">
+    <meta name="msapplication-TileImage" content="{{ asset('web_asset/images/favicon.png') }}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700|Montserrat:300,400,500,600,700,800&amp;subset=latin-ext" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/fontawesome.min.css">
@@ -23,7 +25,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('admin_asset/css/datepicker.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('admin_asset/css/daterangepicker.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('admin_asset/css/custom.css') }}">
+    <!-- <link rel="stylesheet" type="text/css" href="{{ asset('admin_asset/css/custom.css') }}"> -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin_asset/css/admin-custom.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('admin_asset/css/bootstrap-timepicker.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('admin_asset/css/image-uploader.min.css') }}" />
 

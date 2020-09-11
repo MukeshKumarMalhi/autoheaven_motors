@@ -117,11 +117,11 @@
             <div class="col-md-6 col-lg-3 mb-4">
               <div class="bg-white cars-boxs p-3">
                 <h3>{{ $featured->category_name }} {{ $featured->model }}</h3>
-                <p>{{ $featured->engine_size }} i 16v SE {{ $featured->number_of_doors }}dr (a/c)</p>
+                <p>{{ $featured->engine_size }} {{ $featured->name }} {{ $featured->number_of_doors }}dr (a/c)</p>
                 <div class="mb-4 product1-img bg-center-url" style="background-image:url('<?php echo asset('storage/'.$featured->featured_image); ?>')">
                 </div>
                 <div class="text-center">
-                  <p>{{ number_format($featured->mileage) }}km | {{ $featured->model_year }} | {{ ucwords($featured->gearbox_type) }}  | {{ ucwords($featured->fuel_type) }}</p>
+                  <p>{{ number_format($featured->mileage) }}km | {{ $featured->model_year }} | {{ $featured->gearbox_type }}  | {{ $featured->fuel_type }}</p>
 
                   <h3 class="text-danger">£{{ number_format($featured->price) }}</h3>
                   <h5><del>£{{ number_format($featured->price) }}</del></h5>
@@ -406,7 +406,7 @@ $(document).ready(function(){
       if(count_min_price == 1){
         $dropdown_min_price.hide();
         $dropdown_this_min_price.show();
-        $dropdown_this_min_price.val(key);
+        $dropdown_this_min_price.val("£"+key);
         $dropdown_this_min_price.prop('disabled', true);
         // $dropdown_this_min_price.css('background-color', '#fff');
       }
@@ -435,9 +435,8 @@ $(document).ready(function(){
       if(count_max_price == 1){
         $dropdown_max_price.hide();
         $dropdown_this_max_price.show();
-        $dropdown_this_max_price.val(key);
+        $dropdown_this_max_price.val("£"+key);
         $dropdown_this_max_price.prop('disabled', true);
-        // $dropdown_this_max_price.css('background-color', '#fff');
       }
       else if (count_max_price > 1 && hidden_max_price == undefined) {
         $dropdown_this_max_price.hide();
@@ -465,43 +464,6 @@ $(document).ready(function(){
     }else {
       $('#cars_search_form').submit();
     }
-
-    // var selected_make = $("#make").val();
-    // var selected_model = $("#model").val();
-    // var selected_min_price = $("#min_price").val();
-    // var selected_max_price = $("#max_price").val();
-    //
-    // var data = {
-    //   'make': selected_make,
-    //   'model': selected_model,
-    //   'min_price': selected_min_price,
-    //   'max_price': selected_max_price,
-    // };
-    // if(selected_make == ""){
-    //   var sel_cat = "make";
-    // }else {
-    //   var sel_cat = spaceByhyphen(selected_make);
-    // }
-    //
-    // if(selected_model == ""){
-    //   var sel_model = "model";
-    // }else {
-    //   var sel_model = spaceByhyphen(selected_model);
-    // }
-    //
-    // if(selected_min_price == ""){
-    //   var sel_min_price = "min-price";
-    // }else {
-    //   var sel_min_price = spaceByhyphen(selected_min_price);
-    // }
-    //
-    // if(selected_max_price == ""){
-    //   var sel_max_price = "max-price";
-    // }else {
-    //   var sel_max_price = spaceByhyphen(selected_max_price);
-    // }
-    //
-    // window.location.href="/search-results/"+sel_cat+"/"+sel_model+"/"+sel_min_price+"/"+sel_max_price+"/body-type/mileage/min-engine-size/max-engine-size/fuel-type/gearbox-type/min-year/max-year/number-of-doors";
   });
 
   $('#cars_search_form select').on('change', function(event){
@@ -543,8 +505,6 @@ $(document).ready(function(){
       'max_price': selected_max_price,
     };
 
-    console.log(data);
-
     $.ajax({
       url:"{{ url('get_cars_by_company_home') }}",
       type:"GET",
@@ -552,7 +512,6 @@ $(document).ready(function(){
       dataType:"JSON",
       success:function(response){
         var response_data = JSON.parse(response);
-        console.log(response_data);
         append_count_data_in_select_boxes(response_data);
       },
     });
@@ -606,8 +565,6 @@ $(document).ready(function(){
       'max_price': selected_max_price,
     };
 
-    console.log(data);
-
     $.ajax({
       url:"{{ url('get_cars_by_company_home') }}",
       type:"GET",
@@ -615,7 +572,6 @@ $(document).ready(function(){
       dataType:"JSON",
       success:function(response){
         var response_data = JSON.parse(response);
-        console.log(response_data);
         append_count_data_in_select_boxes(response_data);
       },
     });

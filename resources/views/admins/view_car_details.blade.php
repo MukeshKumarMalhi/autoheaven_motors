@@ -47,82 +47,88 @@
           <div class="row mb-2">
             <div class="col-md-6">
               <div class="form-group">
+                <label for="name" class="text-pink font-weight-bold">Version :</label>
+                <input type="text" name="name" id="name" class="form-control" placeholder="e.g. i-CTDi, TDI Sport Sportback, TFSI.." value="{{ $car_details->name }}" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
                 <label for="model_year" class="text-pink font-weight-bold">Model year :</label>
                 <input type="text" name="model_year" id="model_year" onkeypress="return isNumber(event)" maxlength="4" class="form-control" placeholder="e.g. 2016" value="{{ $car_details->model_year }}" required >
               </div>
             </div>
+          </div>
+          <div class="row mb-2">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="colour" class="text-pink font-weight-bold">Colour :</label>
                 <input type="text" name="colour" id="colour" class="form-control" placeholder="e.g. Blue" value="{{ $car_details->colour }}" required>
               </div>
             </div>
-          </div>
-          <div class="row mb-2">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="price" class="text-pink font-weight-bold">Price :</label>
                 <input type="text" name="price" id="price" onkeypress="return isNumber(event)" onkeyup="FormatCurrency(this)" class="form-control" placeholder="e.g. £2,290" value="{{ number_format($car_details->price) }}" required>
               </div>
             </div>
+          </div>
+          <div class="row mb-2">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="mileage" class="text-pink font-weight-bold">Mileage :</label>
                 <input type="text" name="mileage" id="mileage" onkeypress="return isNumber(event)" onkeyup="FormatCurrency(this)" class="form-control" placeholder="e.g. 48,000" value="{{ number_format($car_details->mileage) }}" required>
               </div>
             </div>
-          </div>
-          <div class="row mb-2">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="number_of_doors" class="text-pink font-weight-bold">No. of doors :</label>
                 <input type="text" name="number_of_doors" id="number_of_doors" onkeypress="return isNumber(event)" class="form-control" placeholder="e.g. 4" value="{{ $car_details->number_of_doors }}" required>
               </div>
             </div>
+          </div>
+          <div class="row mb-2">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="number_of_seats" class="text-pink font-weight-bold">No. of seats :</label>
                 <input type="text" name="number_of_seats" id="number_of_seats" onkeypress="return isNumber(event)" class="form-control" placeholder="e.g. 4" value="{{ $car_details->number_of_seats }}" required>
               </div>
             </div>
-          </div>
-          <div class="row mb-2">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="engine_size" class="text-pink font-weight-bold">Engine size :</label>
                 <input type="text" name="engine_size" id="engine_size" class="form-control" placeholder="e.g. 2.0" value="{{ $car_details->engine_size }}" required>
               </div>
             </div>
+          </div>
+          <div class="row mb-2">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="body_style" class="text-pink font-weight-bold">Body style :</label>
                 <input type="text" name="body_style" id="body_style" class="form-control" placeholder="e.g. Hatchback, Estate or Saloon" value="{{ $car_details->body_style }}" required>
               </div>
             </div>
-          </div>
-          <div class="row mb-2">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="fuel_type" class="text-pink font-weight-bold">Fuel type:</label>
                 <select class="form-control" id="fuel_type" name="fuel_type" required>
                   <option value="">Select fuel type</option>
-                  <option value="petrol" <?php if($car_details->fuel_type == "petrol") echo "selected"; ?>>Petrol</option>
-                  <option value="diesel" <?php if($car_details->fuel_type == "diesel") echo "selected"; ?>>Diesel</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="gearbox_type" class="text-pink font-weight-bold">Gearbox type:</label>
-                <select class="form-control" id="gearbox_type" name="gearbox_type" required>
-                  <option value="">Select gearbox type</option>
-                  <option value="automatic" <?php if($car_details->gearbox_type == "automatic") echo "selected"; ?>>Automatic</option>
-                  <option value="manual" <?php if($car_details->gearbox_type == "manual") echo "selected"; ?>>Manual</option>
+                  <option value="Petrol" <?php if($car_details->fuel_type == "Petrol") echo "selected"; ?>>Petrol</option>
+                  <option value="Diesel" <?php if($car_details->fuel_type == "Diesel") echo "selected"; ?>>Diesel</option>
                 </select>
               </div>
             </div>
           </div>
           <div class="row mb-2">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="gearbox_type" class="text-pink font-weight-bold">Gearbox type:</label>
+                <select class="form-control" id="gearbox_type" name="gearbox_type" required>
+                  <option value="">Select gearbox type</option>
+                  <option value="Automatic" <?php if($car_details->gearbox_type == "Automatic") echo "selected"; ?>>Automatic</option>
+                  <option value="Manual" <?php if($car_details->gearbox_type == "Manual") echo "selected"; ?>>Manual</option>
+                </select>
+              </div>
+            </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label for="car_type" class="text-pink font-weight-bold">Car type:</label>
@@ -133,6 +139,8 @@
                 </select>
               </div>
             </div>
+          </div>
+          <div class="row mb-2">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="sale_status" class="text-pink font-weight-bold">Sale status:</label>
@@ -143,8 +151,6 @@
                 </select>
               </div>
             </div>
-          </div>
-          <div class="row mb-2">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="status" class="text-pink font-weight-bold">Status:</label>
@@ -172,6 +178,14 @@
               <div class="form-group">
                 <label for="description" class="text-pink font-weight-bold">Description:</label>
                 <textarea name="description" id="description" class="form-control" placeholder="Enter car description" rows="4" cols="30">{{ $car_details->description }}</textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-md-10">
+              <div class="form-group">
+                <label for="car_history" class="text-pink font-weight-bold">Car History:</label>
+                <textarea name="car_history" id="car_history" class="form-control" placeholder="Enter car history" rows="4" cols="30">{{ $car_details->car_history }}</textarea>
               </div>
             </div>
           </div>
@@ -1080,7 +1094,7 @@
           <div class="card-header bg-blue text-light">
             <div class="row">
               <div class="col-sm-6">
-                <h4 class="mb-0">{{ $car_details->category_name }} {{ $car_details->model }} {{ $car_details->model_year }}</h4>
+                <h4 class="mb-0">{{ $car_details->category_name }} {{ $car_details->model }} {{ $car_details->name }} {{ $car_details->model_year }}</h4>
               </div>
               <div class="col-sm-6" style="text-align: right;">
                 <a class="btn btn-default btn-yellow" href="#" data-toggle="modal" data-target="#EditCarDetailsModal" data-whatever="@mdo"><i class="fa fa-pencil" aria-hidden="true"></i> Edit Car Details</a>
@@ -1104,8 +1118,22 @@
                     </tr>
                     <tr>
                       <th><span>Model</span></th>
-                      <td>{{ $car_details->model }} {{ $car_details->model_year }}</td>
+                      <td>{{ $car_details->model }}</td>
                     </tr>
+                    <tr>
+                      <th><span>Model Year</span></th>
+                      <td>{{ $car_details->model_year }}</td>
+                    </tr>
+                    <tr>
+                      <th><span>Version</span></th>
+                      <td>{{ $car_details->name }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-md-3">
+                <table class="table table-condensed">
+                  <tbody>
                     <tr>
                       <th><span>Price</span></th>
                       <td>£{{ number_format($car_details->price) }}</td>
@@ -1114,12 +1142,6 @@
                       <th><span>Mileage</span></th>
                       <td>{{ number_format($car_details->mileage) }} miles</td>
                     </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="col-md-3">
-                <table class="table table-condensed">
-                  <tbody>
                     <tr>
                       <th><span>N0 # doors</span></th>
                       <td>{{ $car_details->number_of_doors }} Doors</td>
@@ -1128,6 +1150,12 @@
                       <th><span>N0 # seats</span></th>
                       <td>{{ $car_details->number_of_seats }} Seats</td>
                     </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-md-3">
+                <table class="table table-condensed">
+                  <tbody>
                     <tr>
                       <th><span>Engine size</span></th>
                       <td>{{ $car_details->engine_size }}L</td>
@@ -1136,12 +1164,6 @@
                       <th><span>Body syle</span></th>
                       <td>{{ $car_details->body_style }}</td>
                     </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="col-md-3">
-                <table class="table table-condensed">
-                  <tbody>
                     <tr>
                       <th><span>Fuel type</span></th>
                       <td>{{ $car_details->fuel_type }}</td>
@@ -1150,6 +1172,12 @@
                       <th><span>Gearbox type</span></th>
                       <td>{{ $car_details->gearbox_type }}</td>
                     </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-md-3">
+                <table class="table table-condensed">
+                  <tbody>
                     <tr>
                       <th><span>Car type</span></th>
                       <td>{{ $car_details->car_type }}</td>
@@ -1158,12 +1186,6 @@
                       <th><span>Status</span></th>
                       <td>{{ $car_details->status }}</td>
                     </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="col-md-3">
-                <table class="table table-condensed">
-                  <tbody>
                     <tr>
                       <th><span>Sell Status</span></th>
                       <td>{{ $car_details->sale_status }}</td>
@@ -1187,6 +1209,18 @@
                     <tr>
                       <th><span>Description</span></th>
                       <td>{{ $car_details->description }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <table class="table table-condensed">
+                  <tbody>
+                    <tr>
+                      <th><span>Car History</span></th>
+                      <td>{{ $car_details->car_history }}</td>
                     </tr>
                   </tbody>
                 </table>

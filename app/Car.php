@@ -57,6 +57,6 @@ class Car extends Model
    * @var array
    */
   protected $fillable = [
-      'id', 'category_id', 'name', 'model', 'model_year', 'colour', 'price', 'mileage', 'number_of_doors', 'number_of_seats', 'engine_size', 'engine_size_cc', 'body_style', 'description', 'fuel_type', 'gearbox_type', 'car_type', 'status', 'sale_status', 'featured_image'
+      'id', 'category_id', 'name', 'model', 'model_year', 'colour', 'price', 'mileage', 'number_of_doors', 'number_of_seats', 'engine_size', 'engine_size_cc', 'body_style', 'description', 'car_history', 'fuel_type', 'gearbox_type', 'car_type', 'status', 'sale_status', 'featured_image'
   ];
 }

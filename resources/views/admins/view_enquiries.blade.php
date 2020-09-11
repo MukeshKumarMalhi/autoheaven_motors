@@ -4,18 +4,9 @@
 @section('content')
 
     <!-- Page Content -->
-
-    <div id="page-content-wrapper">
         <div class="container-fluid py-3" id="enquiries">
           <!-- table-->
           <div class="card">
-              <div class="card-header bg-blue text-light">
-                <div class="row">
-                  <div class="col-sm-6">
-                    <h4 class="mb-0">Enquiries</h4>
-                  </div>
-                </div>
-              </div>
               <div class="table-responsive small">
                   <table class="table table-condensed">
                       <thead>
@@ -34,7 +25,7 @@
                            <?php if(isset($enquiries) && count($enquiries) > 0){ ?>
                              @foreach($enquiries as $enquiry)
                                <tr class="Enquiry{{$enquiry->id}}">
-                                 <td>{{ $enquiry->category_name }} {{ $enquiry->model }} {{ $enquiry->model_year }}</td>
+                                 <td>{{ $enquiry->category_name }} {{ $enquiry->model }} {{ $enquiry->version }} {{ $enquiry->model_year }}</td>
                                  <td>{{ $enquiry->name }}</td>
                                  <td>{{ $enquiry->email }}</td>
                                  <td>{{ $enquiry->phone }}</td>
@@ -60,7 +51,6 @@
 		         </ul>
 		      </div>
         </div>
-    </div>
 
 <script type="text/javascript">
   $(document).ready(function(){

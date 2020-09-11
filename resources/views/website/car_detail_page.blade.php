@@ -42,7 +42,7 @@
                     </span>
                     <strong>(1,025)</strong>
                 </div> -->
-                <h3 class="font-weight-bold">{{ $car_detail->category_name }} {{ $car_detail->model }} {{ $car_detail->engine_size }} {{ $car_detail->number_of_doors }}dr</h3>
+                <h3 class="font-weight-bold">{{ $car_detail->category_name }} {{ $car_detail->model }} {{ $car_detail->name }} {{ $car_detail->engine_size }} {{ $car_detail->number_of_doors }}dr</h3>
                 <!-- <h5 class="font-weight-normal">FSH+12 MONTHS MOT</h5> -->
             </div>
         </div>
@@ -67,6 +67,23 @@
                         <span class="float-right"><i class="fal fa-star"></i></span>
                     </div>
                 </div>
+                <?php
+                  $category_name = strtolower(str_replace(' ', '-', $car_detail->category_name));
+                  $car_model = strtolower(str_replace(' ', '-', $car_detail->model));
+                  $car_id = $car_detail->id;
+                  $car_de = $category_name."-".$car_model."_".$car_id;
+                ?>
+                <div class="row align-items-end mb-4">
+                  <div class="col-md-4">
+                    <a href="{{ url('/used-cars') }}/finance/{{ $car_de }}" class="btn btn-outline-dark btn-block mt-2 mr-2">Apply for finance</a>
+                  </div>
+                  <div class="col-md-4">
+                    <a href="{{ url('/used-cars') }}/part-exchange/{{ $car_de }}" class="btn btn-danger btn-block mt-2 mr-2">Part excange enquiry</a>
+                  </div>
+                  <div class="col-md-4">
+                    <a class="btn btn-danger btn-block mt-2 mr-2 text-white">Get a insurance quote</a>
+                  </div>
+                </div>
 
 
                 <h3 class="text-danger">This car comes with</h3>
@@ -86,7 +103,7 @@
                     <div class="col-6 col-lg-3">
                         <div class="border p-3 mb-3">
                             <p>Fuel type:</p>
-                            <h3 class="text-danger">{{ ucwords($car_detail->fuel_type) }}</h3>
+                            <h3 class="text-danger">{{ $car_detail->fuel_type }}</h3>
                         </div>
                     </div>
                     <div class="col-6 col-lg-3">
@@ -98,7 +115,7 @@
                     <div class="col-6 col-lg-3">
                         <div class="border p-3 mb-3">
                             <p>Transmission:</p>
-                            <h3 class="text-danger">{{ ucwords($car_detail->gearbox_type) }}</h3>
+                            <h3 class="text-danger">{{ $car_detail->gearbox_type }}</h3>
                         </div>
                     </div>
                     <div class="col-6 col-lg-3">
@@ -115,7 +132,7 @@
                     </div>
                 </div>
 
-                <!-- <p>**NOW SOLD** A rare opportunity to own a low mileage MK5 Golf TDi**NOT TO BE MISSED** Owned by an elderly lady in his 80s for past 13 years and used sparingly hence the mileage**** FULL SERVICE HISTORY **GENUINE LOW MILEAGE**Comes with 12 months MOT, Just been serviced, New front Brakes, Air Con Srevice so nothing needs spending**Very hard to find a low mileage MK5 Golf in this condition** Desirable 1.9 TDi 5 Speed Manual**Lady Owned . 2 REMOTE KEYS. Timing Belt Replaced at 67K miles**You may find a cheaper MK5 Golf but you will be hard pressed to find one in this condition in terms of bodywork, engine and history. HPI Clear. No test pilots or canvassers /agencies. Car located in Coventry, West Midlands. First to see will definitely want to buy! PX Welcome (At trade price). VIEWING BY APPOINTMENT- AVAILABLE MON-SUN 8AM TILL LATE , 12 months MOT, Last serviced on 27/07/2020 at 78,000 miles, Full service history, Silver, 2 owners, £2,950 p/x considered</p> -->
+                <p>{{ $car_detail->car_history }}</p>
 
 
                 <!-- Vehicle summary -->
@@ -141,7 +158,7 @@
                                     </tr>
                                     <tr>
                                         <th>Fuel type</th>
-                                        <td itemprop="fuelType">{{ ucwords($car_detail->fuel_type) }}</td>
+                                        <td itemprop="fuelType">{{ $car_detail->fuel_type }}</td>
                                     </tr>
                                     <tr>
                                         <th>Number of doors</th>
@@ -153,7 +170,7 @@
                                     </tr>
                                     <tr>
                                         <th>Gearbox type</th>
-                                        <td itemprop="vehicleTransmission">{{ ucwords($car_detail->gearbox_type) }}</td>
+                                        <td itemprop="vehicleTransmission">{{ $car_detail->gearbox_type }}</td>
                                     </tr>
                                     <tr>
                                         <th>CO2 emissions</th>
@@ -445,7 +462,7 @@
                   </a>
                 </div>
                 <div class="text-left p-2">
-                  <h4 class="text-danger">{{ $preferred->category_name }} {{ $preferred->model }}</h4>
+                  <h4 class="text-danger">{{ $preferred->category_name }} {{ $preferred->model }} {{ $preferred->name }}</h4>
                   <h5>£{{ number_format($preferred->price) }}</h5>
                 </div>
               </div>

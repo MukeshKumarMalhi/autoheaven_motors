@@ -3,19 +3,9 @@
 @section('content')
 
     <!-- Page Content -->
-
-    <div id="page-content-wrapper">
-
         <div class="container-fluid py-3" id="sell_your_vehicles">
           <!-- table-->
           <div class="card">
-              <div class="card-header bg-blue text-light">
-                <div class="row">
-                  <div class="col-sm-6">
-                    <h4 class="mb-0">Sell Your Vehicles</h4>
-                  </div>
-                </div>
-              </div>
               <div class="table-responsive small">
                   <table class="table table-condensed">
                       <thead>
@@ -74,7 +64,6 @@
              </ul>
           </div>
         </div>
-    </div>
 
 <script type="text/javascript">
   $(document).ready(function(){

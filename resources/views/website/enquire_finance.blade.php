@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','Finance')
+@section('title','Enquire Finance')
 
 @section('content')
 <!-- section 1 - title -->
@@ -8,7 +8,7 @@
         <div class="row">
             <div class="offset-1 offset-sm-0 col-10 col-sm-8 col-md-6 col-lg-4 cm-bg-danger-x header-title-top py-80">
                 <div class="position-r">
-                    <h1>Finance</h1>
+                    <h1>Enquire Finance</h1>
                 </div>
             </div>
         </div>
@@ -39,10 +39,10 @@
 </div>
 <div class="py-4">
     <div class="container">
-        <h2><span class="text-danger">Contact</span> Details</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit sed eiusmod tempor incididu et dolore magna aliqua. Ut enim ad minim veniam, Lorem ipsum dolor sit amet, consectetur adipisicing elit sed eiusmod tempor incididu et dolore magna aliqua. Ut enim ad minim veniam,</p>
+        <h2><span class="text-danger">Car</span> Details</h2>
+        <p>To register your interest in financing this vehicle, please complete the below form and we'll be in touch as soon as possible.</p>
         <div class="mb-4 p-3 bg-danger text-light link-light">
-            <h4>{{ $car_detail->category_name }} {{ $car_detail->model }} {{ $car_detail->engine_size }} {{ $car_detail->number_of_doors }}dr</h4>
+            <h4>{{ $car_detail->category_name }} {{ $car_detail->model }} {{ $car_detail->name }} {{ $car_detail->model_year }} {{ $car_detail->engine_size }} {{ $car_detail->number_of_doors }}dr</h4>
             <h5 class="font-weight-normal">Mileage - {{ number_format($car_detail->mileage) }} miles</h5>
             <h5 class="font-weight-normal">Price - £{{ number_format($car_detail->price) }}</h5>
         </div>
@@ -54,6 +54,8 @@
                       <input type="hidden" name="car_id" value="{{ $car_detail->id }}">
                       <input type="hidden" name="category_name" value="{{ $car_detail->category_name }}">
                       <input type="hidden" name="model" value="{{ $car_detail->model }}">
+                      <input type="hidden" name="version" value="{{ $car_detail->version }}">
+                      <input type="hidden" name="model_year" value="{{ $car_detail->model_year }}">
                   </div>
                   <div class="form-group col-sm-6 col-md-4">
                       <input type="email" name="email" class="form-control" placeholder="Email address" required>

@@ -21,8 +21,8 @@
         <div class="row">
                 <div class="col-md-6">
                 <p class="mb-1">HELPS YOU TO FIND YOUR NEXT CAR EASILY</p>
-                <h2><span class="text-danger">Customer</span> reviews of Auto Haven</h2>
-                <p>At Earlsdon Motor Company Ltd we pride ourselves on the great service we provide to all of our customers. We understand that buying a car can be a daunting prospect, so we strive to make the buying process as simple and hassle-free as possible.<br/><br/> But don't just take our word for it, see what some of our customers have to say about us... </p>
+                <h2><span class="text-danger">Customer</span> reviews of Autohaven</h2>
+                <p>At Autohaven Motor Company Ltd we pride ourselves on the great service we provide to all of our customers. We understand that buying a car can be a daunting prospect, so we strive to make the buying process as simple and hassle-free as possible.<br/><br/> But don't just take our word for it, see what some of our customers have to say about us... </p>
                 <br/>
                 <button data-toggle="modal" data-target="#write-a-review" class="btn btn-danger mr-2 mb-2">WRITE A REVIEW</button>
             </div>
@@ -55,7 +55,7 @@
                                 ?>
                             </div>
                         </div>
-                        <p class="small">Based on {{ count($reviews) }} customer reviews</p>
+                        <p>Based on <strong class="text-danger">{{ count($reviews) }}</strong> customer reviews</p>
                     </div>
                 </div>
             </div>

@@ -47,7 +47,8 @@ Route::get('admin/view_part_exchanges', 'Admin\AdminController@view_cars_part_ex
 Route::get('admin/view_sell_your_vehicles', 'Admin\AdminController@view_cars_sell_your_vehicles');
 Route::get('admin/view_finances', 'Admin\AdminController@view_cars_finances');
 Route::get('admin/view_contacts', 'Admin\AdminController@view_cars_contacts');
-Route::get('admin/view_car_enquiries', 'Admin\AdminController@view_cars_enquiries');
+Route::get('admin/view_car_finance_enquiries', 'Admin\AdminController@view_cars_enquiries');
+Route::get('admin/view_car_part_exchange_enquiries', 'Admin\AdminController@view_cars_part_exchange_enquiries');
 
 //Categories
 
@@ -66,12 +67,14 @@ Route::get('/used-cars/search-results', 'WebController@search_car_results');
 Route::get('/used-cars', 'WebController@search_car_results');
 Route::get('/used-cars/{name}', 'WebController@car_details_page');
 Route::get('/used-cars/finance/{name}', 'WebController@car_enquire_finance');
+Route::get('/used-cars/part-exchange/{name}', 'WebController@car_enquire_part_exchange');
 Route::get('/sell-your-car', 'WebController@sell_your_car');
 Route::post('/store_sell_your_car', 'WebController@store_sell_your_car');
 Route::post('/store_part_exchange', 'WebController@store_part_exchange');
 Route::post('/store_contact_us_form', 'WebController@store_contact_us_form');
 Route::post('/store_finance_form', 'WebController@store_finance_form');
 Route::post('/store_enquiry_form', 'WebController@store_enquiry_form');
+Route::post('/store_enquiry_part_exchange', 'WebController@store_enquiry_part_exchange');
 Route::post('/store_review_form', 'WebController@store_review_form');
 Route::get('/part-exchange', 'WebController@part_exchange');
 Route::get('/contact-us', 'WebController@contact_us_page');

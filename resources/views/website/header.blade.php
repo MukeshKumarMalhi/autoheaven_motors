@@ -2,7 +2,7 @@
 <div class="bg-dark text-light clearfix cm-header-top">
     <div class="container">
         <div class="text-sm-right bg-danger cm-nav-top float-sm-right">
-            <p class="m-0 py-2 position-r">support@autohaven.com | Mon to Fri : 9:00am to 6:00pm | Fairview Ave, El Monte, CA 91732</p>
+            <p class="m-0 py-2 position-r">Sales@autohavenmotors.co.uk | Mon to Sun : Appointment only | 29 Salisbury Rd High Wycombe HP13 6UL</p>
         </div>
     </div>
 </div>
@@ -20,7 +20,7 @@
                         </div>
                         <div class="media-body">
                             <h6 class="font-weight-bold text-light">Call Us Today!</h6>
-                            <a class="font-weight-bold text-light" href="index.html">+1 755 302 8549</a>
+                            <a class="font-weight-bold text-light">07967 881489</a>
                         </div>
                     </li>
                 </ul>

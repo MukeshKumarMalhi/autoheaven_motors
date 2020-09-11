@@ -21,7 +21,8 @@
         <div class="col-md-6">
             <p class="mb-1">HELPS YOU TO FIND YOUR NEXT CAR EASILY</p>
             <h2><span class="text-danger">Lets</span>  We talk</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit sed eiusmod tempor incididu et dolore magna aliqua. Ut enim ad minim veniam, Lorem ipsum dolor sit amet, consectetur adipisicing elit sed eiusmod tempor incididu et dolore magna aliqua. Ut enim ad minim veniam,</p>
+            <p>At AUTOHAVEN MOTORS LIMITED, we stock a range of used cars at great prices.</p>
+            <p>If for any reason you can't find what you're looking for in stock, please contact us and we will be happy to help you find the right car.</p>
             <div class="mt-5 contact_container">
 
                  <form id="steps-form" novalidate class="contact_us_form" role="form" method="post">
@@ -50,8 +51,8 @@
                     <div class="fa-cm-circle border rounded-circle border-dark text-danger"><i class="fas fa-phone"></i></div>
                 </div>
                 <div class="media-body">
-                    <h6 class="font-weight-normal">Call Us Today!</h6>
-                    <a class="font-weight-bold" href="tel:+17553028549">+1 755 302 8549</a>
+                    <h6 class="font-weight-bold">Call Us Today!</h6>
+                    <a class="font-weight-bold">07967 881489</a>
                 </div>
             </div>
             <div class="media mb-4">
@@ -59,8 +60,8 @@
                     <div class="fa-cm-circle border rounded-circle border-dark text-danger"><i class="fas fa-envelope"></i></div>
                 </div>
                 <div class="media-body">
-                    <h6 class="font-weight-normal">Email Us!</h6>
-                    <a class="font-weight-bold" href="mailto:support@autohaven.com">support@autohaven.com</a>
+                    <h6 class="font-weight-bold">Email Us!</h6>
+                    <a class="font-weight-bold">Sales@autohavenmotors.co.uk</a>
                 </div>
             </div>
             <div class="media mb-4">
@@ -68,8 +69,8 @@
                     <div class="fa-cm-circle border rounded-circle border-dark text-danger"><i class="fas fa-map-marker-alt"></i></div>
                 </div>
                 <div class="media-body">
-                    <h6 class="font-weight-normal">Location</h6>
-                    <a class="font-weight-bold" href="https://www.google.com/maps?ll=34.093027,-118.016801&z=16&t=m&hl=en&gl=US&mapclient=embed&q=Fairview+St+El+Monte,+CA+91732+USA"> Fairview Ave, El Monte, CA 91732</a>
+                    <h6 class="font-weight-bold">Location</h6>
+                    <a class="font-weight-bold" href="https://www.google.com/maps/place/29+Salisbury+Rd,+High+Wycombe+HP13+6UL,+UK/@51.6391342,-0.7336998,17z/data=!3m1!4b1!4m5!3m4!1s0x4876604b4afb024b:0x33b77a10ec7eb3b0!8m2!3d51.6391342!4d-0.7315111"> 29 Salisbury Rd High Wycombe HP13 6UL UK</a>
                 </div>
             </div>
             <div class="media mb-4">
@@ -77,12 +78,12 @@
                     <div class="fa-cm-circle border rounded-circle border-dark text-danger"><i class="fas fa-clock"></i></div>
                 </div>
                 <div class="media-body">
-                    <h6 class="font-weight-normal">Opening Time</h6>
-                    <p class="font-weight-bold"> 9:00am to 6:00pm | Mon to Fri</p>
+                    <h6 class="font-weight-bold">Opening Time</h6>
+                    <p class="font-weight-bold">Monday to Sunday | Appointment Only</p>
                 </div>
             </div>
             <div class="mb-4">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3304.0825059376534!2d-118.01898938453874!3d34.093026780594855!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2d9f98036ef47%3A0x962605a9ff27fd75!2sFairview%20St%2C%20El%20Monte%2C%20CA%2091732%2C%20USA!5e0!3m2!1sen!2s!4v1599030195883!5m2!1sen!2s" width="100%" height="400" frameborder="0" style="border:0;width:100%;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2476.1303696207633!2d-0.7336997841182175!3d51.63913750888318!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4876604b4afb024b%3A0x33b77a10ec7eb3b0!2s29%20Salisbury%20Rd%2C%20High%20Wycombe%20HP13%206UL%2C%20UK!5e0!3m2!1sen!2sus!4v1599733093624!5m2!1sen!2sus" width="100%" height="400" frameborder="0" style="border:0;width:100%;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
             </div>
         </div>
     </div>

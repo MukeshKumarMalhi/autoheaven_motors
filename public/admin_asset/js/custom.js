@@ -157,4 +157,23 @@ $(document).ready(function(){
       }
     });
   });
+
+  $(document).on('click', '.pagination-for-car-part-exchanges-enquiries a',function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+    var url = $(this).attr('href');
+    $.ajax({
+      url: url,
+      type: 'get',
+      dataType: 'json',
+      success: function(result){
+        if(result.status == 'ok'){
+          $('#car_part_exchange_enquiries').html(result.listing);
+        }else {
+          alert("Error when get Pagination");
+        }
+      }
+    });
+  });
 });

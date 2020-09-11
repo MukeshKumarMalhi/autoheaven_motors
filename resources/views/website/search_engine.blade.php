@@ -19,35 +19,41 @@
   <!-- section 2-->
   <div class="py-4">
       <div class="container">
-          <div class="clearfix mb-4">
+          <div class="row clearfix mb-4">
+            <div class="col-md-3">
               <h2 class="font-weight-bold">Search A Car</h2>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group selectBox">
+                <select class="form-control sorting_data text-danger">
+                  <option value="asc" <?php if($sort === 'asc') echo "selected"; ?>>lowest price</option>
+                  <option value="desc" <?php if($sort === 'desc') echo "selected"; ?>>highest price</option>
+                  <option value="age" <?php if($sort === 'age') echo "selected"; ?>>age (year)</option>
+                  <option value="mileage" <?php if($sort === 'mileage') echo "selected"; ?>>mileage</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <p style="font-size:20px;">There are <strong class="text-danger">{{ count($list_cars) }}</strong> used cars available matching your search</p>
+            </div>
           </div>
           <div class="row no-gutters-10">
-              <div class="col-md-5 col-lg-3 mb-3">
-                  <div class="">
+            <div class="col-md-5 col-lg-3 mb-3">
+                <div class="">
+                    <div class="form-group">
+                        <h4>Filters by:</h4>
+                    </div>
+                    <form method="get" role="form" action="{{ url('/used-cars/search-results') }}" id="cars_search_form">
                       <div class="form-group">
-                          <h4>Filters by:</h4>
+                        <button type="submit" class="btn btn-danger btn-block qa-search-now search_button search_engine_button" style="border-radius: 5px;">Update search</button>
                       </div>
-                      <form method="get" role="form" action="{{ url('/used-cars/search-results') }}" id="cars_search_form">
-                        <div class="form-group">
-                          <button type="submit" class="btn btn-danger btn-block qa-search-now search_button search_engine_button" style="border-radius: 5px;">Update search</button>
+                      <div class="form-group selectBox">
+                        <select class="form-control make">
+                        </select>
+                        <div class="this_make" style="display: none;">
+                          <input type="text" class="form-control this_make" id="make"><span class="cross_btn"></span>
                         </div>
-
-                        <!-- <div class="form-group">
-                          <h4 class="font-weight-bold text-danger mb-2">Make</h4>
-                        </div> -->
-                        <div class="form-group selectBox">
-                          <select class="form-control make">
-                          </select>
-                          <div class="this_make" style="display: none;">
-                            <input type="text" class="form-control this_make" id="make"><span class="cross_btn"></span>
-                          </div>
-                        </div>
-
-                      <!-- <div class="form-group">
-                          <h4 class="font-weight-bold text-danger mb-2">Model</h4>
-                      </div> -->
-
+                      </div>
                       <div class="form-group selectBox">
                         <select class="form-control model" style="background-color: #fff; <?php if($make != 'make') echo '-webkit-appearance: menulist'; ?>" <?php if($make == 'make') echo "disabled"; ?>>
                         </select>
@@ -55,12 +61,6 @@
                           <input type="text" class="form-control this_model" id="model"><span class="cross_btn"></span>
                         </div>
                       </div>
-
-
-                      <!-- <div class="form-group">
-                          <h4 class="font-weight-bold text-danger mb-2">Price</h4>
-                      </div> -->
-
                       <div class="form-group selectBox">
                         <select class="form-control min_price">
                         </select>
@@ -68,7 +68,6 @@
                           <input type="text" class="form-control this_min_price" id="min_price"><span class="cross_btn"></span>
                         </div>
                       </div>
-
                       <div class="form-group selectBox">
                         <select class="form-control max_price">
                         </select>
@@ -76,12 +75,6 @@
                           <input type="text" class="form-control this_max_price" id="max_price"><span class="cross_btn"></span>
                         </div>
                       </div>
-
-
-                      <!-- <div class="form-group">
-                          <h4 class="font-weight-bold text-danger mb-2">Body type</h4>
-                      </div> -->
-
                       <div class="form-group selectBox">
                         <select class="form-control body_style">
                         </select>
@@ -89,12 +82,6 @@
                           <input type="text" class="form-control this_body_style" id="body_style"><span class="cross_btn"></span>
                         </div>
                       </div>
-
-
-                      <!-- <div class="form-group">
-                          <h4 class="font-weight-bold text-danger mb-2">Mileage</h4>
-                      </div> -->
-
                       <div class="form-group selectBox">
                         <select class="form-control mileage">
                         </select>
@@ -102,12 +89,6 @@
                           <input type="text" class="form-control this_mileage" id="mileage"><span class="cross_btn"></span>
                         </div>
                       </div>
-
-
-                      <!-- <div class="form-group">
-                          <h4 class="font-weight-bold text-danger mb-2">Engine size</h4>
-                      </div> -->
-
                       <div class="form-group selectBox">
                         <select class="form-control min_engine_size">
                         </select>
@@ -115,7 +96,6 @@
                           <input type="text" class="form-control this_min_engine_size" id="min_engine_size"><span class="cross_btn"></span>
                         </div>
                       </div>
-
                       <div class="form-group selectBox">
                         <select class="form-control max_engine_size">
                         </select>
@@ -123,12 +103,6 @@
                           <input type="text" class="form-control this_max_engine_size" id="max_engine_size"><span class="cross_btn"></span>
                         </div>
                       </div>
-
-
-                      <!-- <div class="form-group">
-                          <h4 class="font-weight-bold text-danger mb-2">Fuel type</h4>
-                      </div> -->
-
                       <div class="form-group selectBox">
                         <select class="form-control fuel_type">
                         </select>
@@ -136,12 +110,6 @@
                           <input type="text" class="form-control this_fuel_type" id="fuel_type"><span class="cross_btn"></span>
                         </div>
                       </div>
-
-
-                      <!-- <div class="form-group">
-                          <h4 class="font-weight-bold text-danger mb-2">Gearbox type</h4>
-                      </div> -->
-
                       <div class="form-group selectBox">
                         <select class="form-control gearbox_type">
                         </select>
@@ -149,12 +117,6 @@
                           <input type="text" class="form-control this_gearbox_type" id="gearbox_type"><span class="cross_btn"></span>
                         </div>
                       </div>
-
-
-                      <!-- <div class="form-group">
-                          <h4 class="font-weight-bold text-danger mb-2">Year</h4>
-                      </div> -->
-
                       <div class="form-group selectBox">
                         <select class="form-control min_year">
                         </select>
@@ -162,7 +124,6 @@
                           <input type="text" class="form-control this_min_year" id="min_year"><span class="cross_btn"></span>
                         </div>
                       </div>
-
                       <div class="form-group selectBox">
                         <select class="form-control max_year">
                         </select>
@@ -170,11 +131,6 @@
                           <input type="text" class="form-control this_max_year" id="max_year"><span class="cross_btn"></span>
                         </div>
                       </div>
-
-                      <!-- <div class="form-group">
-                          <h4 class="font-weight-bold text-danger mb-2">No. of doors</h4>
-                      </div> -->
-
                       <div class="form-group selectBox">
                         <select class="form-control number_of_doors">
                         </select>
@@ -182,13 +138,12 @@
                           <input type="text" class="form-control this_number_of_doors" id="number_of_doors"><span class="cross_btn"></span>
                         </div>
                       </div>
-
                       <div class="form-group">
                         <button type="submit" class="btn btn-danger btn-block qa-search-now search_button search_engine_button" style="border-radius: 5px;">Update search</button>
                       </div>
                     </form>
                   </div>
-              </div>
+                </div>
               <div class="col-md-7 col-lg-9 mb-3">
                   <!-- row box -->
                   <?php foreach ($list_cars as $key => $value) { ?>
@@ -209,11 +164,11 @@
                           <div class="col-lg-8">
                               <div class="row">
                                   <div class="col-md-8">
-                                      <h3 class="text-danger">{{ $value->category_name }} {{ $value->model }} {{ $value->engine_size }} {{ $value->number_of_doors }}dr</h3>
+                                      <h3 class="text-danger">{{ $value->category_name }} {{ $value->model }} {{ $value->name }} {{ $value->engine_size }} {{ $value->number_of_doors }}dr</h3>
                                       <p>
                                         <?php
-                                          $limit = 140;
-                                          $summary = $value->description;
+                                          $limit = 145;
+                                          $summary = $value->car_history;
                                           if (strlen($summary) > $limit)
                                           $summary = substr($summary, 0, strrpos(substr($summary, 0, $limit), ' ')) . '...';
                                           echo $summary;
@@ -233,10 +188,10 @@
                                               <p>Mileage: {{ number_format($value->mileage) }}km</p>
                                           </div>
                                           <div class="col-sm-6">
-                                              <p>Transmission: {{ ucwords($value->gearbox_type) }}</p>
+                                              <p>Transmission: {{ $value->gearbox_type }}</p>
                                           </div>
                                           <div class="col-sm-6">
-                                              <p>Fuel Type: {{ ucwords($value->fuel_type) }}</p>
+                                              <p>Fuel Type: {{ $value->fuel_type }}</p>
                                           </div>
                                           <div class="col-sm-6">
                                               <p>Body Color: {{ $value->colour }}</p>
@@ -267,6 +222,17 @@
                       'make' => app('request')->input('make'),
                       'sort' => app('request')->input('sort'),
                       'model' => app('request')->input('model'),
+                      'min_price' => app('request')->input('min_price'),
+                      'max_price' => app('request')->input('max_price'),
+                      'body_style' => app('request')->input('body_style'),
+                      'mileage' => app('request')->input('mileage'),
+                      'min_engine_size' => app('request')->input('min_engine_size'),
+                      'max_engine_size' => app('request')->input('max_engine_size'),
+                      'fuel_type' => app('request')->input('fuel_type'),
+                      'gearbox_type' => app('request')->input('gearbox_type'),
+                      'min_year' => app('request')->input('min_year'),
+                      'max_year' => app('request')->input('max_year'),
+                      'no_of_doors' => app('request')->input('no_of_doors'),
                       ])->links() }}
                </ul>
               </div>
@@ -289,12 +255,6 @@
       $('#cars_search_form').prepend("<input type='hidden' name='sort' value='"+sort+"'>");
       $('#cars_search_form').submit();
     });
-    // $('a.page-link').on('click', function () {
-    //   var page = $(this).text();
-    //   $('input:hidden[name="page"]').remove();
-    //   $('#cars_search_form').append("<input type='hidden' name='page' value='"+page+"'>");
-    //   $('#cars_search_form').submit();
-    // });
 
     function append_count_data_in_select_boxes(show_data) {
 
@@ -379,7 +339,7 @@
         if(count == 1 && min_price != 'min-price'){
           $dropdown_min_price.hide();
           $dropdown_this_min_price.show();
-          $dropdown_this_min_price.val(key);
+          $dropdown_this_min_price.val("£"+key);
           $dropdown_this_min_price.prop('disabled', true);
           $dropdown_this_min_price.css('background-color', '#fff');
           $('.this_min_price span').text('X');
@@ -388,14 +348,14 @@
         else if (count == 1) {
           $dropdown_min_price.hide();
           $dropdown_this_min_price.show();
-          $dropdown_this_min_price.val(key);
+          $dropdown_this_min_price.val("£"+key);
           $dropdown_this_min_price.prop('disabled', true);
           $dropdown_this_min_price.css('background-color', '#fff');
         }
         else if (count > 1 && min_price != 'min-price') {
           $dropdown_min_price.hide();
           $dropdown_this_min_price.show();
-          $dropdown_this_min_price.val(min_price);
+          $dropdown_this_min_price.val("£"+min_price);
           $dropdown_this_min_price.prop('disabled', true);
           $dropdown_this_min_price.css('background-color', '#fff');
         }
@@ -420,7 +380,7 @@
         if(count == 1 && max_price != 'max-price'){
           $dropdown_max_price.hide();
           $dropdown_this_max_price.show();
-          $dropdown_this_max_price.val(key);
+          $dropdown_this_max_price.val("£"+key);
           $dropdown_this_max_price.prop('disabled', true);
           $dropdown_this_max_price.css('background-color', '#fff');
           $('.this_max_price span').text('X');
@@ -429,14 +389,14 @@
         else if (count == 1) {
           $dropdown_max_price.hide();
           $dropdown_this_max_price.show();
-          $dropdown_this_max_price.val(key);
+          $dropdown_this_max_price.val("£"+key);
           $dropdown_this_max_price.prop('disabled', true);
           $dropdown_this_max_price.css('background-color', '#fff');
         }
         else if (count > 1 && max_price != 'max-price') {
           $dropdown_max_price.hide();
           $dropdown_this_max_price.show();
-          $dropdown_this_max_price.val(max_price);
+          $dropdown_this_max_price.val("£"+max_price);
           $dropdown_this_max_price.prop('disabled', true);
           $dropdown_this_max_price.css('background-color', '#fff');
         }
@@ -489,7 +449,7 @@
         if(count == 1 && mileage != 'mileage'){
           $dropdown_mileage.hide();
           $dropdown_this_mileage.show();
-          $dropdown_this_mileage.val(key);
+          $dropdown_this_mileage.val(key+" miles");
           $dropdown_this_mileage.prop('disabled', true);
           $dropdown_this_mileage.css('background-color', '#fff');
           $('.this_mileage span').text('X');
@@ -498,14 +458,14 @@
         else if (count == 1) {
           $dropdown_mileage.hide();
           $dropdown_this_mileage.show();
-          $dropdown_this_mileage.val(key);
+          $dropdown_this_mileage.val(key+" miles");
           $dropdown_this_mileage.prop('disabled', true);
           $dropdown_this_mileage.css('background-color', '#fff');
         }
         else if (count > 1 && mileage != 'mileage') {
           $dropdown_mileage.hide();
           $dropdown_this_mileage.show();
-          $dropdown_this_mileage.val(mileage);
+          $dropdown_this_mileage.val(mileage+" miles");
           $dropdown_this_mileage.prop('disabled', true);
           $dropdown_this_mileage.css('background-color', '#fff');
         }
@@ -529,7 +489,7 @@
         if(count == 1 && min_engine_size != 'min-engine-size'){
           $dropdown_min_engine_size.hide();
           $dropdown_this_min_engine_size.show();
-          $dropdown_this_min_engine_size.val(key);
+          $dropdown_this_min_engine_size.val(key+"L");
           $dropdown_this_min_engine_size.prop('disabled', true);
           $dropdown_this_min_engine_size.css('background-color', '#fff');
           $('.this_min_engine_size span').text('X');
@@ -538,19 +498,19 @@
         else if (count == 1) {
           $dropdown_min_engine_size.hide();
           $dropdown_this_min_engine_size.show();
-          $dropdown_this_min_engine_size.val(key);
+          $dropdown_this_min_engine_size.val(key+"L");
           $dropdown_this_min_engine_size.prop('disabled', true);
           $dropdown_this_min_engine_size.css('background-color', '#fff');
         }
         else if (count > 1 && min_engine_size != 'min-engine-size') {
           $dropdown_min_engine_size.hide();
           $dropdown_this_min_engine_size.show();
-          $dropdown_this_min_engine_size.val(min_engine_size);
+          $dropdown_this_min_engine_size.val(min_engine_size+"L");
           $dropdown_this_min_engine_size.prop('disabled', true);
           $dropdown_this_min_engine_size.css('background-color', '#fff');
         }
         else {
-          $dropdown_min_engine_size.append($("<option>").val(key).text(key+" "+"("+value+")"));
+          $dropdown_min_engine_size.append($("<option>").val(key).text(key+"L "+"("+value+")"));
         }
       });
       if(min_engine_size != 'min-engine-size'){
@@ -569,7 +529,7 @@
         if(count == 1 && max_engine_size != 'max-engine-size'){
           $dropdown_max_engine_size.hide();
           $dropdown_this_max_engine_size.show();
-          $dropdown_this_max_engine_size.val(key);
+          $dropdown_this_max_engine_size.val(key+"L");
           $dropdown_this_max_engine_size.prop('disabled', true);
           $dropdown_this_max_engine_size.css('background-color', '#fff');
           $('.this_max_engine_size span').text('X');
@@ -578,19 +538,19 @@
         else if (count == 1) {
           $dropdown_max_engine_size.hide();
           $dropdown_this_max_engine_size.show();
-          $dropdown_this_max_engine_size.val(key);
+          $dropdown_this_max_engine_size.val(key+"L");
           $dropdown_this_max_engine_size.prop('disabled', true);
           $dropdown_this_max_engine_size.css('background-color', '#fff');
         }
         else if (count > 1 && max_engine_size != 'max-engine-size') {
           $dropdown_max_engine_size.hide();
           $dropdown_this_max_engine_size.show();
-          $dropdown_this_max_engine_size.val(max_engine_size);
+          $dropdown_this_max_engine_size.val(max_engine_size+"L");
           $dropdown_this_max_engine_size.prop('disabled', true);
           $dropdown_this_max_engine_size.css('background-color', '#fff');
         }
         else {
-          $dropdown_max_engine_size.append($("<option>").val(key).text(key+" "+"("+value+")"));
+          $dropdown_max_engine_size.append($("<option>").val(key).text(key+"L "+"("+value+")"));
         }
       });
       if(max_engine_size != 'max-engine-size'){
@@ -747,7 +707,7 @@
         if(count == 1 && number_of_doors != 'number-of-doors'){
           $dropdown_number_of_doors.hide();
           $dropdown_this_number_of_doors.show();
-          $dropdown_this_number_of_doors.val(key);
+          $dropdown_this_number_of_doors.val(key+" doors");
           $dropdown_this_number_of_doors.prop('disabled', true);
           $dropdown_this_number_of_doors.css('background-color', '#fff');
           $('.this_number_of_doors span').text('X');
@@ -756,7 +716,7 @@
         else if (count == 1) {
           $dropdown_number_of_doors.hide();
           $dropdown_this_number_of_doors.show();
-          $dropdown_this_number_of_doors.val(key);
+          $dropdown_this_number_of_doors.val(key+" doors");
           $dropdown_this_number_of_doors.prop('disabled', true);
           $dropdown_this_number_of_doors.css('background-color', '#fff');
         }
@@ -837,7 +797,7 @@
         if(count_min_price == 1){
           $dropdown_min_price.hide();
           $dropdown_this_min_price.show();
-          $dropdown_this_min_price.val(key);
+          $dropdown_this_min_price.val("£"+key);
           $dropdown_this_min_price.prop('disabled', true);
           $dropdown_this_min_price.css('background-color', '#fff');
         }
@@ -866,7 +826,7 @@
         if(count_max_price == 1){
           $dropdown_max_price.hide();
           $dropdown_this_max_price.show();
-          $dropdown_this_max_price.val(key);
+          $dropdown_this_max_price.val("£"+key);
           $dropdown_this_max_price.prop('disabled', true);
           $dropdown_this_max_price.css('background-color', '#fff');
         }
@@ -922,7 +882,7 @@
         if(count_mileage == 1){
           $dropdown_mileage.hide();
           $dropdown_this_mileage.show();
-          $dropdown_this_mileage.val(key);
+          $dropdown_this_mileage.val(key+" miles");
           $dropdown_this_mileage.prop('disabled', true);
           $dropdown_this_mileage.css('background-color', '#fff');
         }
@@ -949,17 +909,17 @@
         if(count_min_engine_size == 1){
           $dropdown_min_engine_size.hide();
           $dropdown_this_min_engine_size.show();
-          $dropdown_this_min_engine_size.val(key);
+          $dropdown_this_min_engine_size.val(key+"L");
           $dropdown_this_min_engine_size.prop('disabled', true);
           $dropdown_this_min_engine_size.css('background-color', '#fff');
         }
         else if (count_min_engine_size > 1 && hidden_min_engine_size == undefined) {
           $dropdown_this_min_engine_size.hide();
           $dropdown_min_engine_size.show();
-          $dropdown_min_engine_size.append($("<option>").val(key).text(key+" "+"("+value+")"));
+          $dropdown_min_engine_size.append($("<option>").val(key).text(key+"L "+"("+value+")"));
         }
         else {
-          $dropdown_min_engine_size.append($("<option>").val(key).text(key+" "+"("+value+")"));
+          $dropdown_min_engine_size.append($("<option>").val(key).text(key+"L "+"("+value+")"));
         }
       });
       $dropdown_this_min_engine_size.addClass('input_field');
@@ -976,17 +936,17 @@
         if(count_max_engine_size == 1){
           $dropdown_max_engine_size.hide();
           $dropdown_this_max_engine_size.show();
-          $dropdown_this_max_engine_size.val(key);
+          $dropdown_this_max_engine_size.val(key+"L");
           $dropdown_this_max_engine_size.prop('disabled', true);
           $dropdown_this_max_engine_size.css('background-color', '#fff');
         }
         else if (count_max_engine_size > 1 && hidden_max_engine_size == undefined) {
           $dropdown_this_max_engine_size.hide();
           $dropdown_max_engine_size.show();
-          $dropdown_max_engine_size.append($("<option>").val(key).text(key+" "+"("+value+")"));
+          $dropdown_max_engine_size.append($("<option>").val(key).text(key+"L "+"("+value+")"));
         }
         else {
-          $dropdown_max_engine_size.append($("<option>").val(key).text(key+" "+"("+value+")"));
+          $dropdown_max_engine_size.append($("<option>").val(key).text(key+"L "+"("+value+")"));
         }
       });
 
@@ -1114,7 +1074,7 @@
         if(count_number_of_doors == 1){
           $dropdown_number_of_doors.hide();
           $dropdown_this_number_of_doors.show();
-          $dropdown_this_number_of_doors.val(key);
+          $dropdown_this_number_of_doors.val(key+" doors");
           $dropdown_this_number_of_doors.prop('disabled', true);
           $dropdown_this_number_of_doors.css('background-color', '#fff');
         }

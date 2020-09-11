@@ -38,7 +38,18 @@ class AdminController extends Controller
 
 public function admin_dashboard()
 {
-    return view('admins.dashboard');
+  $reviews = Review::orderBy('updated_at','desc')->latest()->take(2)->get();
+  $sell_your_vehicles = SellYourVehicle::orderBy('updated_at','desc')->latest()->take(2)->get();
+  $enquiries = DB::table('car_enquiries')
+              ->leftJoin('cars', 'cars.id', '=', 'car_enquiries.car_id')
+              ->leftJoin('categories', 'categories.id', '=', 'cars.category_id')
+              ->select('car_enquiries.*', 'categories.category_name', 'cars.model', 'cars.name as version', 'cars.mileage', 'cars.model_year')
+              ->orderBy('car_enquiries.updated_at', 'desc')
+              ->latest()->take(2)->get();
+  $contacts = Contact::orderBy('updated_at','desc')->latest()->take(2)->get();
+
+
+    return view('admins.dashboard', ['reviews' => $reviews, 'sell_your_vehicles' => $sell_your_vehicles, 'enquiries' => $enquiries, 'contacts' => $contacts]);
 }
 
 public function upload_car_images($id)
@@ -98,6 +109,7 @@ public function store_car_data(Request $request)
   $rules = array(
     'category_id' => 'required',
     'model' => 'required',
+    'name' => 'required',
     'model_year' => 'required',
     'colour' => 'required',
     'price' => 'required',
@@ -109,6 +121,7 @@ public function store_car_data(Request $request)
     'fuel_type' => 'required',
     'gearbox_type' => 'required',
     'description' => 'required',
+    'car_history' => 'required',
     'featured_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
   );
 
@@ -137,6 +150,7 @@ public function store_car_data(Request $request)
       'id' => $id,
       'category_id' => $request->category_id,
       'model' => $request->model,
+      'name' => $request->name,
       'model_year' => $request->model_year,
       'colour' => $request->colour,
       'price' => $price,
@@ -150,6 +164,7 @@ public function store_car_data(Request $request)
       'car_type' => $request->car_type,
       'sale_status' => $request->sale_status,
       'description' => $request->description,
+      'car_history' => $request->car_history,
       'featured_image' => $image_path
     );
     $car = Car::create($form_data);
@@ -162,6 +177,7 @@ public function update_car_details(Request $request)
   $rules = array(
     'category_id' => 'required',
     'model' => 'required',
+    'name' => 'required',
     'model_year' => 'required',
     'colour' => 'required',
     'price' => 'required',
@@ -172,7 +188,8 @@ public function update_car_details(Request $request)
     'body_style' => 'required',
     'fuel_type' => 'required',
     'gearbox_type' => 'required',
-    'description' => 'required'
+    'description' => 'required',
+    'car_history' => 'required'
   );
 
   $error = Validator::make($request->all(), $rules);
@@ -198,6 +215,7 @@ public function update_car_details(Request $request)
     $car = Car::find($request->edit_fid);
     $car->category_id = $request->category_id;
     $car->model = $request->model;
+    $car->name = $request->name;
     $car->model_year = $request->model_year;
     $car->colour = $request->colour;
     $car->price = $price;
@@ -209,6 +227,7 @@ public function update_car_details(Request $request)
     $car->fuel_type = $request->fuel_type;
     $car->gearbox_type = $request->gearbox_type;
     $car->description = $request->description;
+    $car->car_history = $request->car_history;
     $car->car_type = $request->car_type;
     $car->sale_status = $request->sale_status;
     $car->status = $request->status;
@@ -696,7 +715,7 @@ public function view_cars_enquiries()
   $enquiries = DB::table('car_enquiries')
               ->leftJoin('cars', 'cars.id', '=', 'car_enquiries.car_id')
               ->leftJoin('categories', 'categories.id', '=', 'cars.category_id')
-              ->select('car_enquiries.*', 'categories.category_name', 'cars.model', 'cars.mileage', 'cars.model_year')
+              ->select('car_enquiries.*', 'categories.category_name', 'cars.model', 'cars.name as version', 'cars.mileage', 'cars.model_year')
               ->orderBy('car_enquiries.updated_at', 'desc')
               ->paginate(10);
   if (request()->ajax()) {
@@ -704,6 +723,21 @@ public function view_cars_enquiries()
     return Response()->json(['status' => 'ok', 'listing' => $view->render()]);
   }
   return view('admins.view_enquiries', ['enquiries' => $enquiries]);
+}
+
+public function view_cars_part_exchange_enquiries()
+{
+  $part_exchange_enquiries = DB::table('car_part_exchanges')
+              ->leftJoin('cars', 'cars.id', '=', 'car_part_exchanges.car_id')
+              ->leftJoin('categories', 'categories.id', '=', 'cars.category_id')
+              ->select('car_part_exchanges.*', 'categories.category_name', 'cars.model', 'cars.name as version', 'cars.mileage', 'cars.model_year')
+              ->orderBy('car_part_exchanges.updated_at', 'desc')
+              ->paginate(10);
+  if (request()->ajax()) {
+    $view = view('admins.car_part_exchange_listing', ['part_exchange_enquiries' => $part_exchange_enquiries]);
+    return Response()->json(['status' => 'ok', 'listing' => $view->render()]);
+  }
+  return view('admins.view_car_part_exchanges', ['part_exchange_enquiries' => $part_exchange_enquiries]);
 }
 
 

@@ -42,92 +42,92 @@
                 <input type="text" name="model" id="model" class="form-control" placeholder="e.g. Civic" required>
               </div>
             </div>
-            <!-- <div class="col-md-6">
-              <div class="form-group">
-                <label class="text-pink font-weight-bold">Name :</label>
-                <input type="text" name="name" id="name" class="form-control" placeholder="e.g. Civic" required>
-              </div>
-            </div> -->
           </div>
           <div class="row mb-2">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="text-pink font-weight-bold">Version :</label>
+                <input type="text" name="name" id="name" class="form-control" placeholder="e.g. i-CTDi, TDI Sport Sportback, TFSI.." required>
+              </div>
+            </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label for="model_year" class="text-pink font-weight-bold">Model year :</label>
                 <input type="text" name="model_year" id="model_year" onkeypress="return isNumber(event)" maxlength="4" class="form-control" placeholder="e.g. 2016" required>
               </div>
             </div>
+          </div>
+          <div class="row mb-2">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="colour" class="text-pink font-weight-bold">Colour :</label>
                 <input type="text" name="colour" id="colour" class="form-control" placeholder="e.g. Blue" required>
               </div>
             </div>
-          </div>
-          <div class="row mb-2">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="price" class="text-pink font-weight-bold">Price :</label>
                 <input type="text" name="price" id="price" onkeypress="return isNumber(event)" onkeyup="FormatCurrency(this)" class="form-control" placeholder="e.g. £2,290" required>
               </div>
             </div>
+          </div>
+          <div class="row mb-2">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="mileage" class="text-pink font-weight-bold">Mileage :</label>
                 <input type="text" name="mileage" id="mileage" onkeypress="return isNumber(event)" onkeyup="FormatCurrency(this)" class="form-control" placeholder="e.g. 48,000" required>
               </div>
             </div>
-          </div>
-          <div class="row mb-2">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="number_of_doors" class="text-pink font-weight-bold">No. of doors :</label>
                 <input type="text" name="number_of_doors" id="number_of_doors" onkeypress="return isNumber(event)" class="form-control" placeholder="e.g. 4" required>
               </div>
             </div>
+          </div>
+          <div class="row mb-2">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="number_of_seats" class="text-pink font-weight-bold">No. of seats :</label>
                 <input type="text" name="number_of_seats" id="number_of_seats" onkeypress="return isNumber(event)" class="form-control" placeholder="e.g. 4" required>
               </div>
             </div>
-          </div>
-          <div class="row mb-2">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="engine_size" class="text-pink font-weight-bold">Engine size :</label>
                 <input type="text" name="engine_size" id="engine_size" class="form-control" placeholder="e.g. 2.0" required>
               </div>
             </div>
+          </div>
+          <div class="row mb-2">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="body_style" class="text-pink font-weight-bold">Body style :</label>
                 <input type="text" name="body_style" id="body_style" class="form-control" placeholder="e.g. Hatchback, Estate or Saloon" required>
               </div>
             </div>
-          </div>
-          <div class="row mb-2">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="fuel_type" class="text-pink font-weight-bold">Fuel type:</label>
                 <select class="form-control" id="fuel_type" name="fuel_type" required>
                   <option value="">Select fuel type</option>
-                  <option value="petrol">Petrol</option>
-                  <option value="diesel">Diesel</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="gearbox_type" class="text-pink font-weight-bold">Gearbox type:</label>
-                <select class="form-control" id="gearbox_type" name="gearbox_type" required>
-                  <option value="">Select gearbox type</option>
-                  <option value="automatic">Automatic</option>
-                  <option value="manual">Manual</option>
+                  <option value="Petrol">Petrol</option>
+                  <option value="Diesel">Diesel</option>
                 </select>
               </div>
             </div>
           </div>
           <div class="row mb-2">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="gearbox_type" class="text-pink font-weight-bold">Gearbox type:</label>
+                <select class="form-control" id="gearbox_type" name="gearbox_type" required>
+                  <option value="">Select gearbox type</option>
+                  <option value="Automatic">Automatic</option>
+                  <option value="Manual">Manual</option>
+                </select>
+              </div>
+            </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label for="car_type" class="text-pink font-weight-bold">Car type:</label>
@@ -138,6 +138,8 @@
                 </select>
               </div>
             </div>
+          </div>
+          <div class="row mb-2">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="sale_status" class="text-pink font-weight-bold">Sale status:</label>
@@ -165,6 +167,14 @@
               <div class="form-group">
                 <label for="description" class="text-pink font-weight-bold">Description:</label>
                 <textarea name="description" id="description" class="form-control" placeholder="Enter car description" rows="4" cols="30"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-md-10">
+              <div class="form-group">
+                <label for="car_history" class="text-pink font-weight-bold">History:</label>
+                <textarea name="car_history" id="car_history" class="form-control" placeholder="Enter car history" rows="4" cols="30"></textarea>
               </div>
             </div>
           </div>
@@ -200,77 +210,73 @@
   </div>
   <!-- edit location modal end -->
 
-<div id="page-content-wrapper">
-
-    <div class="container-fluid py-3" id="cars">
-      <!-- table-->
-      <div class="card">
-          <div class="card-header bg-blue text-light">
-            <div class="row">
-              <div class="col-sm-6">
-                <h4 class="mb-0">Cars</h4>
-              </div>
-              <div class="col-sm-6" style="text-align: right;">
-                <a class="btn btn-default btn-yellow" href="#" data-toggle="modal" data-target="#CarModal" data-whatever="@mdo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Car</a>
-              </div>
-              <!-- <div class="col-sm-6" style="text-align: right;">
-              </div> -->
-            </div>
+<div class="container-fluid py-3" id="cars">
+  <!-- table-->
+  <div class="card">
+      <div class="card-header bg-blue text-light">
+        <div class="row">
+          <div class="col-sm-6">
           </div>
-          <div class="table-responsive small">
-              <table class="table table-condensed" id="userTable">
-                  <thead>
-                      <tr>
-                          <th><span>ID</span></th>
-                          <th><span>Company</span></th>
-                          <th><span>Model</span></th>
-                          <th><span>Price</span></th>
-                          <th><span>Mileage</span></th>
-                          <th><span>Fuel type</span></th>
-                          <th><span>Gearbox type</span></th>
-                          <th><span>Created date</span></th>
-                          <th><span>Image</span></th>
-                          <th class="text-center" style="width:110px">Action</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      <tr>
-                        {{ csrf_field() }}
-                       <?php if(isset($cars) && count($cars) > 0){ ?>
-                         @foreach($cars as $car)
-                           <tr class="Car{{$car->id}}">
-                             <td>{{ $car->id }}</td>
-                             <td>{{ $car->category_name }}</td>
-                             <td>{{ $car->model }} {{ $car->model_year }}</td>
-                             <td>£{{ number_format($car->price) }}</td>
-                             <td>{{ number_format($car->mileage) }} miles</td>
-                             <td>{{ $car->fuel_type }}</td>
-                             <td>{{ $car->gearbox_type }}</td>
-                             <td><?php echo date('d M Y',strtotime($car->created_at)); ?></td>
-                             <td><img src="<?php echo asset('storage/'.$car->featured_image); ?>" width="50px" height="50px"/></td>
-                             <td class="px-2 text-nowrap">
-                               <a href="{{ url('admin/view_details') }}/{{ $car->category_name.'_'.$car->model }}/{{ $car->id }}" class="btn btn-sm btn-warning" ><i class="fa fa-eye" aria-hidden="true"></i> View Details</a>
-                             </td>
-                           </tr>
-                         @endforeach
-                      <?php }else { ?>
-                        <tr>
-                          <th id="yet">
-                            <h2>Cars are not added yet</h2>
-                          </th>
-                        </tr>
-                      <?php } ?>
-                      </tr>
-                  </tbody>
-              </table>
+          <div class="col-sm-6" style="text-align: right;">
+            <a class="btn bg-white" href="#" data-toggle="modal" data-target="#CarModal" data-whatever="@mdo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Car</a>
           </div>
+          <!-- <div class="col-sm-6" style="text-align: right;">
+          </div> -->
+        </div>
       </div>
-      <div style="margin-top: 10px;margin-left: 440px;">
-         <ul class="pagination-for-cars justify-content-center">
-           {{ $cars->links() }}
-         </ul>
+      <div class="table-responsive small">
+          <table class="table table-condensed" id="userTable">
+              <thead>
+                  <tr>
+                      <th><span>ID</span></th>
+                      <th><span>Company</span></th>
+                      <th><span>Model</span></th>
+                      <th><span>Price</span></th>
+                      <th><span>Mileage</span></th>
+                      <th><span>Fuel type</span></th>
+                      <th><span>Gearbox type</span></th>
+                      <th><span>Created date</span></th>
+                      <th><span>Image</span></th>
+                      <th class="text-center" style="width:110px">Action</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                    {{ csrf_field() }}
+                   <?php if(isset($cars) && count($cars) > 0){ ?>
+                     @foreach($cars as $car)
+                       <tr class="Car{{$car->id}}">
+                         <td>{{ $car->id }}</td>
+                         <td>{{ $car->category_name }}</td>
+                         <td>{{ $car->model }} {{ $car->name }} {{ $car->model_year }}</td>
+                         <td>£{{ number_format($car->price) }}</td>
+                         <td>{{ number_format($car->mileage) }} miles</td>
+                         <td>{{ $car->fuel_type }}</td>
+                         <td>{{ $car->gearbox_type }}</td>
+                         <td><?php echo date('d M Y',strtotime($car->created_at)); ?></td>
+                         <td><img src="<?php echo asset('storage/'.$car->featured_image); ?>" width="50px" height="50px"/></td>
+                         <td class="px-2 text-nowrap">
+                           <a href="{{ url('admin/view_details') }}/{{ $car->category_name.'_'.$car->model }}/{{ $car->id }}" class="btn btn-sm btn-warning" ><i class="fa fa-eye" aria-hidden="true"></i> View Details</a>
+                         </td>
+                       </tr>
+                     @endforeach
+                  <?php }else { ?>
+                    <tr>
+                      <th id="yet">
+                        <h2>Cars are not added yet</h2>
+                      </th>
+                    </tr>
+                  <?php } ?>
+                  </tr>
+              </tbody>
+          </table>
       </div>
-    </div>
+  </div>
+  <div style="margin-top: 10px;margin-left: 440px;">
+     <ul class="pagination-for-cars justify-content-center">
+       {{ $cars->links() }}
+     </ul>
+  </div>
 </div>
 
 <script type="text/javascript">
@@ -417,22 +423,6 @@ $.ajax({
         $('#append_errors ul').append("<li>" + data.errors[i] + "</li>");
       });
     }else {
-      // var date = moment(data.created_at).format("D MMM YYYY");
-      // $('tbody').prepend("<tr class='Location"+data.id+"'>"+
-      // "<td>" + data.id + "</td>"+
-      // "<td>" + data.location_name + "</td>"+
-      // "<td>" + data.location_open_time + "</td>"+
-      // "<td>" + data.location_close_time + "</td>"+
-      // "<td>" + data.location_address + "</td>"+
-      // "<td>" + data.location_city + "</td>"+
-      // "<td>" + data.location_country + "</td>"+
-      // "<td>" + date + "</td>"+
-      // "<td class='px-2 text-nowrap'><a href='#' class='edit_modal btn btn-sm btn-save' data-id='"+data.id+"' data-location_name='"+data.location_name+"' data-location_open_time='"+data.location_open_time+"' data-location_close_time='"+data.location_close_time+"' data-location_address='"+data.location_address+"' data-location_city='"+data.location_city+"' data-location_country='"+data.location_country+"' data-toggle='modal' data-target='#EditLocationModal' data-whatever='@mdo'>"+
-      // "<i class='fa fa-pencil'></i> Edit</a> "+
-      // "<a href='#' class='delete_modal btn btn-sm btn-danger' data-id='"+data.id+"' data-location_name='"+data.location_name+"' data-toggle='modal' data-target='#DeleteLocationModal' data-whatever='@mdo'>"+
-      // "<i class='fa fa-trash'></i> Delete</a>"+
-      // "</td>"+
-      // "</tr>");
       $('#yet').hide();
       $('#append_errors').hide();
       $('#append_success').show();
@@ -440,10 +430,6 @@ $.ajax({
       $('#CarModal').find('#cars_store_form')[0].reset();
       setTimeout(function(){ $('#append_success').hide(); },2000);
       location.reload();
-      // setTimeout(function(){ $('#LocationModal').modal('hide'); },3000);
-      // setTimeout(function(){ $('body').removeClass('modal-open'); },3000);
-      // setTimeout(function(){ $('.modal-backdrop').remove(); },3000);
-
     }
   },
 });
@@ -486,8 +472,6 @@ $(document).on('click', '.edit_modal', function(){
 $("#btnInit").click();
 $('#fid').val($(this).data('id'));
 $('#edit_fid').val($(this).data('id'));
-// $('#edit_location_name').val($(this).data('location_name'));
-// $('#edit_location_icon').val($(this).data('location_icon'));
 $('#edit_append_errors').hide();
 $('#edit_append_success').hide();
 });
@@ -512,31 +496,11 @@ $.ajax({
         $('#edit_append_errors ul').append("<li>" + data.errors[i] + "</li>");
       });
     }else {
-      // var date = moment(data.created_at).format("D MMM YYYY");
-      // $('.Location' + data.id).replaceWith(" "+
-      // "<tr class='Location"+data.id+"'>"+
-      // "<td>" + data.id + "</td>"+
-      // "<td>" + data.location_name + "</td>"+
-      // "<td>" + data.location_open_time + "</td>"+
-      // "<td>" + data.location_close_time + "</td>"+
-      // "<td>" + data.location_address + "</td>"+
-      // "<td>" + data.location_city + "</td>"+
-      // "<td>" + data.location_country + "</td>"+
-      // "<td>" + date + "</td>"+
-      // "<td class='px-2 text-nowrap'><a href='#' class='edit_modal btn btn-sm btn-save' data-id='"+data.id+"' data-location_name='"+data.location_name+"' data-location_open_time='"+data.location_open_time+"' data-location_close_time='"+data.location_close_time+"' data-location_address='"+data.location_address+"' data-location_city='"+data.location_city+"' data-location_country='"+data.location_country+"' data-toggle='modal' data-target='#EditLocationModal' data-whatever='@mdo'>"+
-      // "<i class='fa fa-pencil'></i> Edit</a> "+
-      // "<a href='#' class='delete_modal btn btn-sm btn-danger' data-id='"+data.id+"' data-location_name='"+data.location_name+"' data-toggle='modal' data-target='#DeleteLocationModal' data-whatever='@mdo'>"+
-      // "<i class='fa fa-trash'></i> Delete</a>"+
-      // "</td>"+
-      // "</tr>");
       $('#edit_append_errors').hide();
       $('#edit_append_success').show();
       $('#edit_append_success ul').append("<li>Location Updated Successfully.</li>");
       setTimeout(function(){ $('#edit_append_success').hide(); },3000);
       location.reload();
-      // setTimeout(function(){ $('#EditCountryModal').modal('hide'); },3000);
-      // setTimeout(function(){ $('body').removeClass('modal-open'); },3000);
-      // setTimeout(function(){ $('.modal-backdrop').remove(); },3000);
     }
   },
 });

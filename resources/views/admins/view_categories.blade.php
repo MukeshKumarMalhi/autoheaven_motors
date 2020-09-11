@@ -125,7 +125,7 @@
       </div>
       <!-- edit Category modal end -->
 
-    <div id="page-content-wrapper">
+    <!-- <div id="page-content-wrapper"> -->
 
         <div class="container-fluid py-3" id="categories">
           <!-- table-->
@@ -133,10 +133,9 @@
               <div class="card-header bg-blue text-light">
                 <div class="row">
                   <div class="col-sm-6">
-                    <h4 class="mb-0">Categories</h4>
                   </div>
                   <div class="col-sm-6" style="text-align: right;">
-                    <a class="btn btn-default btn-yellow" href="#" data-toggle="modal" data-target="#CategoryModal" data-whatever="@mdo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Category</a>
+                    <a class="btn bg-white" href="#" data-toggle="modal" data-target="#CategoryModal" data-whatever="@mdo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Category</a>
                   </div>
                 </div>
               </div>
@@ -185,7 +184,7 @@
 		         </ul>
 		      </div>
         </div>
-    </div>
+    <!-- </div> -->
 
 <script type="text/javascript">
   $(document).ready(function(){

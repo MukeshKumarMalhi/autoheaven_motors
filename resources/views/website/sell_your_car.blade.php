@@ -221,53 +221,35 @@
 </div>
 <div class="py-4">
     <div class="container">
-       <h3 class="text-danger mb-4">Preferred Supplier List</h3>
+      <?php  if(count($preferred_cars) > 0){ ?>
+        <h3 class="text-danger mb-4">Preferred Supplier List</h3>
         <div class="row">
-            <div class="col-md-3">
-                <div class="bg-white border">
-                    <div class="mb-1">
-                        <img src="{{ asset('web_asset/images/cars/product-car-01.jpg') }}" class="img-fluid">
-                    </div>
-                    <div class="text-left p-2">
-                        <h4 class="text-danger">VOLKSWAGEN Golf</h4>
-                        <h5>£5,495</h5>
-                    </div>
-                </div>
+        <?php foreach ($preferred_cars as $key => $preferred) {
+            $category_name = strtolower(str_replace(' ', '-', $preferred->category_name));
+            $car_model = strtolower(str_replace(' ', '-', $preferred->model));
+            $car_id = $preferred->id;
+            $car_detail = $category_name."-".$car_model."_".$car_id;
+        ?>
+          <div class="col-md-3">
+            <div class="bg-white border">
+              <div class="mb-1">
+                <a href="{{ url('/used-cars') }}/{{ $car_detail }}">
+                  <img src="<?php echo asset('storage/'.$preferred->featured_image); ?>" class="img-fluid">
+                </a>
+              </div>
+              <div class="text-left p-2">
+                <h4 class="text-danger">{{ $preferred->category_name }} {{ $preferred->model }} {{ $preferred->name }}</h4>
+                <h5>£{{ number_format($preferred->price) }}</h5>
+              </div>
             </div>
-            <div class="col-md-3">
-                <div class="bg-white border">
-                    <div class="mb-1">
-                        <img src="{{ asset('web_asset/images/cars/product-car-01.jpg') }}" class="img-fluid">
-                    </div>
-                    <div class="text-left p-2">
-                        <h4 class="text-danger">VOLKSWAGEN Golf</h4>
-                        <h5>£5,495</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="bg-white border">
-                    <div class="mb-1">
-                        <img src="{{ asset('web_asset/images/cars/product-car-01.jpg') }}" class="img-fluid">
-                    </div>
-                    <div class="text-left p-2">
-                        <h4 class="text-danger">VOLKSWAGEN Golf</h4>
-                        <h5>£5,495</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="bg-white border">
-                    <div class="mb-1">
-                        <img src="{{ asset('web_asset/images/cars/product-car-01.jpg') }}" class="img-fluid">
-                    </div>
-                    <div class="text-left p-2">
-                        <h4 class="text-danger">VOLKSWAGEN Golf</h4>
-                        <h5>£5,495</h5>
-                    </div>
-                </div>
-            </div>
+          </div>
+          <?php
+            }
+          ?>
         </div>
+      <?php
+      }
+      ?>
 
         <!-- <div class="row mt-5">
             <div class="col-md-7 offset-1">

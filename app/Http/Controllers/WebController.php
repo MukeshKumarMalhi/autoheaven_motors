@@ -14,6 +14,7 @@ use App\Review;
 use App\Contact;
 use App\Finance;
 use App\CarEnquiry;
+use App\CarPartExchange;
 use App\PartExchange;
 use App\SellYourVehicle;
 use App\Car;
@@ -27,6 +28,7 @@ use App\Safety;
 use App\Mail\TestEmail;
 use App\Mail\SellYourVehicleEmail;
 use App\Mail\PartExchangeEmail;
+use App\Mail\CarPartExchangeEmail;
 use App\Mail\ReviewEmail;
 use App\Mail\ContactEmail;
 use App\Mail\FinanceEmail;
@@ -50,7 +52,7 @@ class WebController extends Controller
             ->toArray();
     $cars = $this->car_attributes_count_home($list_cars);
 
-    $featured_cars = DB::select( DB::raw("SELECT DISTINCT a.id, a.model, a.model_year, a.price, a.fuel_type, a.gearbox_type, a.engine_size, a.mileage, a.number_of_doors, a.featured_image, c.category_name
+    $featured_cars = DB::select( DB::raw("SELECT DISTINCT a.id, a.model, a.name, a.model_year, a.price, a.fuel_type, a.gearbox_type, a.engine_size, a.mileage, a.number_of_doors, a.featured_image, c.category_name
                               FROM cars AS a LEFT JOIN categories c ON a.category_id = c.id
                               WHERE 4 >= (SELECT COUNT(DISTINCT price)
                                                   FROM cars AS b
@@ -1233,6 +1235,7 @@ class WebController extends Controller
 
   public function search_car_results(Request $request)
   {
+    $sorted = $request->sort;
     $sort_type = 'price';
     $sort = "asc";
     if($request->sort == ""){
@@ -1388,7 +1391,7 @@ class WebController extends Controller
     $paginatedItems= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
     $paginatedItems->setPath($request->url());
     return view('website.search_engine', [
-      'sort' => $sort,
+      'sort' => $sorted,
       'sort_type' => $sort_type,
       'make' => $make,
       'model' => $model,
@@ -1515,7 +1518,13 @@ class WebController extends Controller
 
   public function sell_your_car()
   {
-    return view('website.sell_your_car');
+    $preferred_cars = DB::table('cars')
+            ->leftJoin('categories', 'categories.id', '=', 'cars.category_id')
+            ->select('cars.*', 'categories.category_name')
+            ->latest()
+            ->take(4)
+            ->get();
+    return view('website.sell_your_car', ['preferred_cars' => $preferred_cars]);
   }
 
   public function store_sell_your_car(Request $request)
@@ -1704,6 +1713,8 @@ class WebController extends Controller
         'car_id' => $request->car_id,
         'category_name' => $request->category_name,
         'model' => $request->model,
+        'version' => $request->version,
+        'model_year' => $request->model_year,
         'name' => $request->name,
         'phone' => $request->phone,
         'email' => $request->email,
@@ -1712,6 +1723,57 @@ class WebController extends Controller
       $enquiry = CarEnquiry::create($form_data);
 
       Mail::to('Sales@autohavenmotors.co.uk')->queue(new EnquiryEmail($form_data));
+
+      if( count(Mail::failures()) > 0 ) {
+        $failures_array = array();
+        foreach(Mail::failures as $email_address) {
+          $failures_array[] = $email_address;
+          return response()->json(['failure' => $failures_array], 500);
+        }
+      } else {
+        return response()->json(['success' => 'Thank you for contacting us!'], 200);
+      }
+    }
+  }
+
+  public function store_enquiry_part_exchange(Request $request)
+  {
+    $rules = array(
+      'car_id' => 'required',
+      'vehicle_reg' => 'required',
+      'mileage' => 'required',
+      'full_name' => 'required',
+      'email_address' => 'required',
+      'phone_number' => 'required',
+    );
+
+    $error = Validator::make($request->all(), $rules);
+    if($error->fails()){
+      return response()->json(['errors' => $error->errors()->all()]);
+    }else{
+      $id = uniqid();
+
+      $form_data = array(
+        'id' => $id,
+        'car_id' => $request->car_id,
+        'category_name' => $request->category_name,
+        'vehicle_type' => $request->vehicle_type,
+        'car_model' => $request->car_model,
+        'name' => $request->name,
+        'company' => $request->company,
+        'model' => $request->model,
+        'model_year' => $request->model_year,
+        'vehicle_reg' => $request->vehicle_reg,
+        'mileage' => $request->mileage,
+        'condition' => $request->condition,
+        'full_name' => $request->full_name,
+        'phone_number' => $request->phone_number,
+        'email_address' => $request->email_address,
+        'best_time_to_call' => $request->best_time_to_call
+      );
+      $enquiry = CarPartExchange::create($form_data);
+
+      Mail::to('hworkpk@gmail.com')->queue(new CarPartExchangeEmail($form_data));
 
       if( count(Mail::failures()) > 0 ) {
         $failures_array = array();
@@ -1774,14 +1836,17 @@ class WebController extends Controller
   {
     return view('website.part_exchange');
   }
+
   public function contact_us_page()
   {
     return view('website.contact_us');
   }
+
   public function finance_page()
   {
     return view('website.finance');
   }
+
   public function reviews_page()
   {
     $reviews = DB::table('reviews')->select('reviews.*')->orderBy('reviews.updated_at', 'desc')->get()->toArray();
@@ -1789,6 +1854,7 @@ class WebController extends Controller
     $reviews_avg = round($reviewsAvg);
     return view('website.review', ['reviews' => $reviews, 'reviews_avg' => $reviews_avg]);
   }
+
   public function car_enquire_finance($name)
   {
     $arr = explode('_', $name);
@@ -1799,5 +1865,17 @@ class WebController extends Controller
     ->where('cars.id', '=', $car_id)
     ->first();
     return view('website.enquire_finance', ['car_detail' => $car_detail]);
+  }
+
+  public function car_enquire_part_exchange($name)
+  {
+    $arr = explode('_', $name);
+    $car_id = $arr[1];
+    $car_detail = DB::table('cars')
+    ->leftJoin('categories', 'categories.id', '=', 'cars.category_id')
+    ->select('cars.*', 'categories.category_name')
+    ->where('cars.id', '=', $car_id)
+    ->first();
+    return view('website.enquire_part_exchange', ['car_detail' => $car_detail]);
   }
 }

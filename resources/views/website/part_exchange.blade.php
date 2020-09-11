@@ -241,6 +241,9 @@ $(document).ready(function(){
 });
 </script>
 <style media="screen">
+#stepform-check li{width: 50% !important; padding-left:10px;}
+#stepform-check li:after{width: 100%;}
+
 .form-control{
   border-radius: 5px;
 }

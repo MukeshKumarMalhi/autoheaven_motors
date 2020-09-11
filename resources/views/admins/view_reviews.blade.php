@@ -4,19 +4,9 @@
 @section('content')
 
     <!-- Page Content -->
-
-    <div id="page-content-wrapper">
-
-        <div class="container-fluid py-3" id="reviews">
+          <div class="container-fluid py-3" id="reviews">
           <!-- table-->
           <div class="card">
-              <div class="card-header bg-blue text-light">
-                <div class="row">
-                  <div class="col-sm-6">
-                    <h4 class="mb-0">Reviews</h4>
-                  </div>
-                </div>
-              </div>
               <div class="table-responsive small">
                   <table class="table table-condensed">
                       <thead>
@@ -35,7 +25,23 @@
                            <?php if(isset($reviews) && count($reviews) > 0){ ?>
                              @foreach($reviews as $review)
                                <tr class="Review{{$review->id}}">
-                                 <td>{{ $review->rating_number }}</td>
+                                 <td>
+                                   <div class="star-rating text-danger" title="100%" style="display: inline-block;margin:0px;padding:0px">
+                                     <div class="back-stars">
+                                       <?php
+                                         $empty = 5 - $review->rating_number;
+                                         for ($i=0; $i < $review->rating_number; $i++) { ?>
+                                         <i class="fas fa-star" aria-hidden="true"></i>
+                                       <?php
+                                         }
+                                         for ($j=0; $j < $empty; $j++) { ?>
+                                         <i class="far fa-star" aria-hidden="true"></i>
+                                       <?php
+                                         }
+                                       ?>
+                                     </div>
+                                   </div>
+                                 </td>
                                  <td>{{ $review->rating_title }}</td>
                                  <td>{{ $review->rating_desc }}</td>
                                  <td>{{ $review->full_name }}</td>
@@ -61,7 +67,6 @@
 		         </ul>
 		      </div>
         </div>
-    </div>
 
 <script type="text/javascript">
   $(document).ready(function(){
