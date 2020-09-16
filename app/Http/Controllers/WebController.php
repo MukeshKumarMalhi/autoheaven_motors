@@ -1773,7 +1773,7 @@ class WebController extends Controller
       );
       $enquiry = CarPartExchange::create($form_data);
 
-      Mail::to('hworkpk@gmail.com')->queue(new CarPartExchangeEmail($form_data));
+      Mail::to('Sales@autohavenmotors.co.uk')->queue(new CarPartExchangeEmail($form_data));
 
       if( count(Mail::failures()) > 0 ) {
         $failures_array = array();

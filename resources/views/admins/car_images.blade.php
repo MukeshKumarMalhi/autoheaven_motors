@@ -1,7 +1,7 @@
 @extends('layouts.a_app')
+@section('title','Car Images')
 
 @section('content')
-<div id="page-content-wrapper">
   <div class="container-fluid py-3" id="businesses">
     <form method="POST" name="form-example-1" id="form-example-1" enctype="multipart/form-data">
       <input type="hidden" name="car_id" value="{{ $id }}">
@@ -9,7 +9,9 @@
         <label class="active">Upload Images</label>
         <div class="input-images-1" style="padding-top: .5rem;"></div>
       </div>
-      <button>Submit</button>
+      <div class="clearfix">
+        <button class="btn btn-dark btn-lg float-right mt-2">Submit</button>
+      </div>
     </form>
 
     <div class="modal" id="show-submit-data" style="visibility: hidden;">
@@ -43,9 +45,7 @@
         </div>
     </div> -->
   </div>
-</div>
-<br>
-<div id="page-content-wrapper">
+  <br>
   <div class="container-fluid py-3" id="businesses">
     <div class="row">
       <div class="col-sm-12">
@@ -66,7 +66,6 @@
       </div>
     </div>
   </div>
-</div>
 
 <!-- delete Image modal -->
 <!-- <div class="modal fade" id="DeleteImageModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

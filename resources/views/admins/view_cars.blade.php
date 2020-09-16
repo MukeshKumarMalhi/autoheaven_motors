@@ -179,7 +179,7 @@
             </div>
           </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-save" id="add">Save</button>
+          <button type="submit" class="btn btn-dark" id="add">Save</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </form>
@@ -210,34 +210,25 @@
   </div>
   <!-- edit location modal end -->
 
-<div class="container-fluid py-3" id="cars">
+<div class="container-fluid" id="cars">
+  <div class="text-right">
+    <a class="btn bg-dark text-light my-2" href="#" data-toggle="modal" data-target="#CarModal" data-whatever="@mdo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Car</a>
+  </div>
   <!-- table-->
-  <div class="card">
-      <div class="card-header bg-blue text-light">
-        <div class="row">
-          <div class="col-sm-6">
-          </div>
-          <div class="col-sm-6" style="text-align: right;">
-            <a class="btn bg-white" href="#" data-toggle="modal" data-target="#CarModal" data-whatever="@mdo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Car</a>
-          </div>
-          <!-- <div class="col-sm-6" style="text-align: right;">
-          </div> -->
-        </div>
-      </div>
-      <div class="table-responsive small">
-          <table class="table table-condensed" id="userTable">
+  <div class="table-responsive border-bottom rounded mb-3">
+          <table class="table bs-table" id="userTable">
               <thead>
                   <tr>
-                      <th><span>ID</span></th>
-                      <th><span>Company</span></th>
-                      <th><span>Model</span></th>
-                      <th><span>Price</span></th>
-                      <th><span>Mileage</span></th>
-                      <th><span>Fuel type</span></th>
-                      <th><span>Gearbox type</span></th>
-                      <th><span>Created date</span></th>
-                      <th><span>Image</span></th>
-                      <th class="text-center" style="width:110px">Action</th>
+                      <th>ID</th>
+                      <th>Company</th>
+                      <th>Model</th>
+                      <th>Price</th>
+                      <th>Mileage</th>
+                      <th>Fuel type</th>
+                      <th>Gearbox type</th>
+                      <th>Created date</th>
+                      <th>Image</th>
+                      <th class="text-center" style="width:120px">Action</th>
                   </tr>
               </thead>
               <tbody>
@@ -254,9 +245,11 @@
                          <td>{{ $car->fuel_type }}</td>
                          <td>{{ $car->gearbox_type }}</td>
                          <td><?php echo date('d M Y',strtotime($car->created_at)); ?></td>
-                         <td><img src="<?php echo asset('storage/'.$car->featured_image); ?>" width="50px" height="50px"/></td>
-                         <td class="px-2 text-nowrap">
-                           <a href="{{ url('admin/view_details') }}/{{ $car->category_name.'_'.$car->model }}/{{ $car->id }}" class="btn btn-sm btn-warning" ><i class="fa fa-eye" aria-hidden="true"></i> View Details</a>
+                         <td>
+                           <div class="bs-photo bg-center-url" style="background-image: url('<?php echo asset('storage/'.$car->featured_image); ?>');"></div>
+                         </td>
+                         <td>
+                           <a href="{{ url('admin/view_details') }}/{{ $car->category_name.'_'.$car->model }}/{{ $car->id }}" class="btn btn-outline-danger mb-2" ><i class="far fa-eye" aria-hidden="true"></i> View</a>
                          </td>
                        </tr>
                      @endforeach
@@ -271,7 +264,6 @@
               </tbody>
           </table>
       </div>
-  </div>
   <div style="margin-top: 10px;margin-left: 440px;">
      <ul class="pagination-for-cars justify-content-center">
        {{ $cars->links() }}
@@ -328,212 +320,59 @@ function readURL(input) {
   }
 }
 
-var businessHoursManager = $("#businessHoursContainer3").businessHours();
-    $("#btnSerialize").click(function() {
-        $("textarea#businessHoursOutput1").val(JSON.stringify(businessHoursManager.serialize()));
-    });
-var businessHoursManager_edit = $("#businessHoursContainerJson").businessHours();
-    $("#btnSerialize_edit").click(function() {
-        $("textarea#businessHoursOutput1").val(JSON.stringify(businessHoursManager_edit.serialize()));
-    });
-
-
-(function () {
-    // Rainbow.color();
-    $("#btnInit").click(function() {
-        try{
-            var businessHours = jQuery.parseJSON($("#businessHoursData").val());
-            $("#businessHoursContainerJson").businessHours({
-                operationTime: businessHours
-            });
-        }catch(e) {
-            alert("JSON non valid: " + e.message);
-        }
-    });
-
-    var b3 = $("#businessHoursContainer3");
-    var businessHoursManagerBootstrap = b3.businessHours({
-        postInit: function () {
-            b3.find('.operationTimeFrom, .operationTimeTill').bootstrapMaterialDatePicker({
-              format: 'HH:mm',
-              shortTime: true,
-              date: false,
-              time: true,
-              monthPicker: false,
-              year: false,
-              switchOnClick: true
-            });
-        },
-        dayTmpl: '<div class="dayContainer" style="width: 80px;">' +
-        '<div data-original-title="" class="colorBox"><input type="checkbox" class="invisible operationState"/></div>' +
-        '<div class="weekday"></div>' +
-        '<div class="operationDayTimeContainer" style="margin-bottom: 10px;">' +
-        '<div class="operationTime input-group">' +
-            '<span class="input-group-addon">' +
-                '<i class="fa fa-sun-o"></i>' +
-            '</span>' +
-        '<input type="text" name="startTime" class="mini-time form-control operationTimeFrom" value=""/></div>' +
-        '<div class="operationTime input-group">' +
-        '<span class="input-group-addon"><i class="fa fa-moon-o"></i></span><input type="text" name="endTime" class="mini-time form-control operationTimeTill" value=""/></div>' +
-        '</div></div>'
-    });
-})();
-
 $(document).ready(function(){
 
-$.ajaxSetup({
-  headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  }
-});
-
-$('#engine_size').keypress(function(event) {
-    if (((event.which != 46 || (event.which == 46 && $(this).val() == '')) ||
-            $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
-        event.preventDefault();
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
-}).on('paste', function(event) {
+  });
+
+  $('#engine_size').keypress(function(event) {
+      if (((event.which != 46 || (event.which == 46 && $(this).val() == '')) ||
+              $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+          event.preventDefault();
+      }
+  }).on('paste', function(event) {
+      event.preventDefault();
+  });
+
+  $('#CarModal').on('shown.bs.modal', function () {
+    $('#model').focus();
+  });
+
+  $('#cars_store_form').on('submit', function(event){
     event.preventDefault();
-});
 
-$('#CarModal').on('shown.bs.modal', function () {
-  $('#model').focus();
-});
-
-$('#cars_store_form').on('submit', function(event){
-event.preventDefault();
-// console.log(new FormData(this));
-// return false;
-
-$.ajax({
-  url:"{{ url('admin/store_car_data') }}",
-  method:"POST",
-  data:new FormData(this),
-  dataType:"JSON",
-  contentType:false,
-  cache:false,
-  processData:false,
-  success:function(data){
-    $('#append_errors ul').text('');
-    $('#append_success ul').text('');
-    if(data.errors)
-    {
-      $.each(data.errors, function(i, error){
-        $('#append_errors').show();
-        $('#append_errors ul').append("<li>" + data.errors[i] + "</li>");
-      });
-    }else {
-      $('#yet').hide();
-      $('#append_errors').hide();
-      $('#append_success').show();
-      $('#append_success ul').append("<li>Car data uploaded successfully.</li>");
-      $('#CarModal').find('#cars_store_form')[0].reset();
-      setTimeout(function(){ $('#append_success').hide(); },2000);
-      location.reload();
-    }
-  },
-});
-});
-
-$('#import_excel_form').on('submit', function(event){
-event.preventDefault();
-
-$.ajax({
-  url:"{{ url('store_excel_form') }}",
-  method:"POST",
-  data:new FormData(this),
-  dataType:"JSON",
-  contentType:false,
-  cache:false,
-  processData:false,
-  success:function(data){
-    $('#append_errors_excel ul').text('');
-    $('#append_success_excel ul').text('');
-    if(data.errors)
-    {
-      $.each(data.errors, function(i, error){
-        $('#append_errors_excel').show();
-        $('#append_errors_excel ul').append("<li>" + data.errors[i] + "</li>");
-      });
-    }else {
-      $('#yet').hide();
-      $('#append_errors_excel').hide();
-      $('#append_success_excel').show();
-      $('#append_success_excel ul').append("<li>"+data.success+"</li>");
-      $('#ExcelModal').find('#import_excel_form')[0].reset();
-      setTimeout(function(){ $('#append_success_excel').hide(); },2000);
-      location.reload();
-    }
-  },
-});
-});
-
-$(document).on('click', '.edit_modal', function(){
-$("#btnInit").click();
-$('#fid').val($(this).data('id'));
-$('#edit_fid').val($(this).data('id'));
-$('#edit_append_errors').hide();
-$('#edit_append_success').hide();
-});
-
-$('#edit_business_form').on('submit', function(event){
-event.preventDefault();
-$.ajax({
-  url:"{{ url('update_business') }}",
-  method:"POST",
-  data:new FormData(this),
-  dataType:"JSON",
-  contentType:false,
-  cache:false,
-  processData:false,
-  success:function(data){
-    $('#edit_append_errors ul').text('');
-    $('#edit_append_success ul').text('');
-    if(data.errors)
-    {
-      $.each(data.errors, function(i, error){
-        $('#edit_append_errors').show();
-        $('#edit_append_errors ul').append("<li>" + data.errors[i] + "</li>");
-      });
-    }else {
-      $('#edit_append_errors').hide();
-      $('#edit_append_success').show();
-      $('#edit_append_success ul').append("<li>Location Updated Successfully.</li>");
-      setTimeout(function(){ $('#edit_append_success').hide(); },3000);
-      location.reload();
-    }
-  },
-});
-});
-
-$(document).on('click', '.delete_modal', function(){
-$('.title').html($(this).data('name'));
-$('.id').text($(this).data('id'));
-});
-
-$('.delete').on('click',function(event){
-event.preventDefault();
-var data = {
-  '_token' : $('input[name=_token]').val(),
-  'id' : $('.id').text()
-};
-
-$.ajax({
-    type:'POST',
-    url:"{{ url('delete_business') }}",
-    data:data,
-    dataType:"json",
-    success:function(data){
-      $('#delete_append_success ul').text('');
-      $('#delete_append_success').show();
-      $('#delete_append_success ul').append("<li>"+data+"</li>");
-      $('.Business' + $('.id').text()).remove();
-      setTimeout(function(){ $('#DeleteBusinessModal').modal('hide'); },3000);
-      setTimeout(function(){ $('body').removeClass('modal-open'); },3000);
-      setTimeout(function(){ $('.modal-backdrop').remove(); },3000);
-    }
-});
-});
+    $.ajax({
+      url:"{{ url('admin/store_car_data') }}",
+      method:"POST",
+      data:new FormData(this),
+      dataType:"JSON",
+      contentType:false,
+      cache:false,
+      processData:false,
+      success:function(data){
+        $('#append_errors ul').text('');
+        $('#append_success ul').text('');
+        if(data.errors)
+        {
+          $.each(data.errors, function(i, error){
+            $('#append_errors').show();
+            $('#append_errors ul').append("<li>" + data.errors[i] + "</li>");
+          });
+        }else {
+          $('#yet').hide();
+          $('#append_errors').hide();
+          $('#append_success').show();
+          $('#append_success ul').append("<li>Car data uploaded successfully.</li>");
+          $('#CarModal').find('#cars_store_form')[0].reset();
+          setTimeout(function(){ $('#append_success').hide(); },2000);
+          location.reload();
+        }
+      },
+    });
+  });
 });
 </script>
 <style media="screen">

@@ -5,6 +5,11 @@ $(document).ready(function(){
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
   });
+  
+  $(".menu-press").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("opened");
+  });
 
   $(document).on('click', '.pagination-for-categories a',function(event){
     event.preventDefault();

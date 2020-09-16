@@ -190,7 +190,7 @@
             </div>
           </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-save" id="add">Update</button>
+          <button type="submit" class="btn btn-dark" id="add">Update</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </form>
@@ -262,7 +262,7 @@
             </div>
           </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-save" id="add">Save</button>
+          <button type="submit" class="btn btn-dark" id="add">Save</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </form>
@@ -337,7 +337,7 @@
             </div>
           </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-save" id="add">Update</button>
+          <button type="submit" class="btn btn-dark" id="add">Update</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </form>
@@ -433,7 +433,7 @@
             </div>
           </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-save" id="add">Save</button>
+          <button type="submit" class="btn btn-dark" id="add">Save</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </form>
@@ -530,7 +530,7 @@
             </div>
           </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-save" id="add">Update</button>
+          <button type="submit" class="btn btn-dark" id="add">Update</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </form>
@@ -618,7 +618,7 @@
             </div>
           </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-save" id="add">Save</button>
+          <button type="submit" class="btn btn-dark" id="add">Save</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </form>
@@ -669,7 +669,7 @@
             </div>
           </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-save" id="add">Save</button>
+          <button type="submit" class="btn btn-dark" id="add">Save</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </form>
@@ -709,7 +709,7 @@
             </div>
           </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-save" id="add">Update</button>
+          <button type="submit" class="btn btn-dark" id="add">Update</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </form>
@@ -760,7 +760,7 @@
             </div>
           </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-save" id="add">Save</button>
+          <button type="submit" class="btn btn-dark" id="add">Save</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </form>
@@ -800,7 +800,7 @@
             </div>
           </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-save" id="add">Update</button>
+          <button type="submit" class="btn btn-dark" id="add">Update</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </form>
@@ -851,7 +851,7 @@
             </div>
           </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-save" id="add">Save</button>
+          <button type="submit" class="btn btn-dark" id="add">Save</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </form>
@@ -891,7 +891,7 @@
             </div>
           </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-save" id="add">Update</button>
+          <button type="submit" class="btn btn-dark" id="add">Update</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </form>
@@ -980,7 +980,7 @@
             </div>
           </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-save" id="add">Update</button>
+          <button type="submit" class="btn btn-dark" id="add">Update</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </form>
@@ -1027,7 +1027,7 @@
             </div>
           </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-save">Submit</button>
+          <button type="submit" class="btn btn-dark">Submit</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </form>
@@ -1066,7 +1066,7 @@
             </div>
           </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-save">Submit</button>
+          <button type="submit" class="btn btn-dark">Submit</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </form>
@@ -1086,24 +1086,22 @@
 </div>
 <!-- view car video end -->
 
-<div id="page-content-wrapper">
-
     <div class="container-fluid py-3" id="businesses">
       <!-- table-->
       <div class="card mb-4">
-          <div class="card-header bg-blue text-light">
+          <div class="card-header bg-danger text-light">
             <div class="row">
               <div class="col-sm-6">
                 <h4 class="mb-0">{{ $car_details->category_name }} {{ $car_details->model }} {{ $car_details->name }} {{ $car_details->model_year }}</h4>
               </div>
               <div class="col-sm-6" style="text-align: right;">
-                <a class="btn btn-default btn-yellow" href="#" data-toggle="modal" data-target="#EditCarDetailsModal" data-whatever="@mdo"><i class="fa fa-pencil" aria-hidden="true"></i> Edit Car Details</a>
-                <a class="btn btn-default btn-yellow" href="{{ url('admin/upload_car_images') }}/{{ $car_details->id }}" ><i class="far fa-image" aria-hidden="true" style="font-size: 18px;"></i> Upload Car Images</a>
+                <a class="btn btn-dark mb-2" href="#" data-toggle="modal" data-target="#EditCarDetailsModal" data-whatever="@mdo"><i class="fa fa-pencil" aria-hidden="true"></i> Edit Car Details</a>
                 @if($car_video == null)
-                <a class="btn btn-default btn-yellow" href="#" data-toggle="modal" data-target="#AddCarVideoModal" data-whatever="@mdo"><i class="far fa-play-circle" aria-hidden="true" style="font-size: 18px;"></i> Upload Car Video</a>
+                <a class="btn btn-dark mb-2" href="#" data-toggle="modal" data-target="#AddCarVideoModal" data-whatever="@mdo"><i class="far fa-play-circle" aria-hidden="true" style="font-size: 18px;"></i> Upload Car Video</a>
                 @else
-                <a class="btn btn-default btn-yellow" href="#" data-toggle="modal" data-target="#ViewCarVideoModal" data-whatever="@mdo"><i class="far fa-play-circle" aria-hidden="true" style="font-size: 18px;"></i> View Car Video</a>
+                <a class="btn btn-dark mb-2" href="#" data-toggle="modal" data-target="#ViewCarVideoModal" data-whatever="@mdo"><i class="far fa-play-circle" aria-hidden="true" style="font-size: 18px;"></i> View Car Video</a>
                 @endif
+                <a class="btn btn-dark mb-2" href="{{ url('admin/upload_car_images') }}/{{ $car_details->id }}" ><i class="far fa-image" aria-hidden="true" style="font-size: 18px;"></i> Upload Car Images</a>
               </div>
             </div>
           </div>
@@ -1207,7 +1205,7 @@
                 <table class="table table-condensed">
                   <tbody>
                     <tr>
-                      <th><span>Description</span></th>
+                      <th  style="width: 113px;"><span>Description</span></th>
                       <td>{{ $car_details->description }}</td>
                     </tr>
                   </tbody>
@@ -1219,7 +1217,7 @@
                 <table class="table table-condensed">
                   <tbody>
                     <tr>
-                      <th><span>Car History</span></th>
+                      <th style="width: 113px;"><span>Car History</span></th>
                       <td>{{ $car_details->car_history }}</td>
                     </tr>
                   </tbody>
@@ -1234,15 +1232,15 @@
                 <div class="card-header bg-dark text-light">
                   <div class="row">
                     <div class="col-sm-6">
-                      <h5 class="mb-0">Vehicle summary</h5>
+                      <h5>Vehicle summary</h5>
                     </div>
                     @if($vehicle_summary != null)
                     <div class="col-sm-6" style="text-align: right;">
-                      <a class="btn btn-default btn-yellow" href="#" data-toggle="modal" data-target="#EditVehicleSummaryModal" data-whatever="@mdo"><i class="fa fa-pencil" aria-hidden="true"></i> Edit Vehicle Summary</a>
+                      <a class="btn btn-danger " href="#" data-toggle="modal" data-target="#EditVehicleSummaryModal" data-whatever="@mdo"><i class="fa fa-pencil" aria-hidden="true"></i> Edit Vehicle Summary</a>
                     </div>
                     @else
                     <div class="col-sm-6" style="text-align: right;">
-                      <a class="btn btn-default btn-yellow" href="#" data-toggle="modal" data-target="#AddVehicleSummaryModal" data-whatever="@mdo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Vehicle Summary</a>
+                      <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#AddVehicleSummaryModal" data-whatever="@mdo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Vehicle Summary</a>
                     </div>
                     @endif
                   </div>
@@ -1287,15 +1285,15 @@
                 <div class="card-header bg-dark text-light">
                   <div class="row">
                     <div class="col-sm-6">
-                      <h5 class="mb-0">Performance & economy</h5>
+                      <h5>Performance & economy</h5>
                     </div>
                     @if($performance_economy != null)
                     <div class="col-sm-6" style="text-align: right;">
-                      <a class="btn btn-default btn-yellow" href="#" data-toggle="modal" data-target="#EditPerformanceEconomyModal" data-whatever="@mdo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Edit Performance Economy</a>
+                      <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#EditPerformanceEconomyModal" data-whatever="@mdo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Edit Performance Economy</a>
                     </div>
                     @else
                     <div class="col-sm-6" style="text-align: right;">
-                      <a class="btn btn-default btn-yellow" href="#" data-toggle="modal" data-target="#AddPerformanceEconomyModal" data-whatever="@mdo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Performance Economy</a>
+                      <a class="btn  btn-danger" href="#" data-toggle="modal" data-target="#AddPerformanceEconomyModal" data-whatever="@mdo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Performance Economy</a>
                     </div>
                     @endif
                   </div>
@@ -1352,15 +1350,15 @@
                 <div class="card-header bg-dark text-light">
                   <div class="row">
                     <div class="col-sm-6">
-                      <h5 class="mb-0">Dimensions</h5>
+                      <h5>Dimensions</h5>
                     </div>
                     @if($dimension != null)
                     <div class="col-sm-6" style="text-align: right;">
-                      <a class="btn btn-default btn-yellow" href="#" data-toggle="modal" data-target="#EditDimensionModal" data-whatever="@mdo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Edit Dimensions</a>
+                      <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#EditDimensionModal" data-whatever="@mdo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Edit Dimensions</a>
                     </div>
                     @else
                     <div class="col-sm-6" style="text-align: right;">
-                      <a class="btn btn-default btn-yellow" href="#" data-toggle="modal" data-target="#AddDimensionModal" data-whatever="@mdo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Dimensions</a>
+                      <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#AddDimensionModal" data-whatever="@mdo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Dimensions</a>
                     </div>
                     @endif
                   </div>
@@ -1414,10 +1412,10 @@
                 <div class="card-header bg-dark text-light">
                   <div class="row">
                     <div class="col-sm-6">
-                      <h5 class="mb-0">Interior Features</h5>
+                      <h5>Interior Features</h5>
                     </div>
                     <div class="col-sm-6" style="text-align: right;">
-                      <a class="btn btn-default btn-yellow" href="#" data-toggle="modal" data-target="#AddInteriorFeatureModal" data-whatever="@mdo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Interior Features</a>
+                      <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#AddInteriorFeatureModal" data-whatever="@mdo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Interior Features</a>
                     </div>
                   </div>
                 </div>
@@ -1445,10 +1443,10 @@
                 <div class="card-header bg-dark text-light">
                   <div class="row">
                     <div class="col-sm-6">
-                      <h5 class="mb-0">Safety List: </h5>
+                      <h5>Safety List: </h5>
                     </div>
                     <div class="col-sm-6" style="text-align: right;">
-                      <a class="btn btn-default btn-yellow" href="#" data-toggle="modal" data-target="#AddSafetyModal" data-whatever="@mdo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Safety Features</a>
+                      <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#AddSafetyModal" data-whatever="@mdo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Safety Features</a>
                     </div>
                   </div>
                 </div>
@@ -1476,10 +1474,10 @@
                 <div class="card-header bg-dark text-light">
                   <div class="row">
                     <div class="col-sm-6">
-                      <h5 class="mb-0">Exterior Features</h5>
+                      <h5>Exterior Features</h5>
                     </div>
                     <div class="col-sm-6" style="text-align: right;">
-                      <a class="btn btn-default btn-yellow" href="#" data-toggle="modal" data-target="#AddExteriorFeatureModal" data-whatever="@mdo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Exterior Features</a>
+                      <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#AddExteriorFeatureModal" data-whatever="@mdo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Exterior Features</a>
                     </div>
                   </div>
                 </div>
@@ -1504,7 +1502,6 @@
           </div>
       </div>
     </div>
-</div>
 
 <script type="text/javascript">
 function numberWithCommas(x) {

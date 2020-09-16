@@ -39,7 +39,7 @@
                 </div>
               </div>
             <div class="modal-footer">
-              <button type="submit" class="btn btn-save" id="add">Save</button>
+              <button type="submit" class="btn btn-dark" id="add">Save</button>
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
           </form>
@@ -95,7 +95,7 @@
                 </div>
       				</div>
       				<div class="modal-footer">
-      					<button type="submit" class="edit btn btn-save">Update</button>
+      					<button type="submit" class="edit btn btn-dark">Update</button>
       					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       				</div>
       			</form>
@@ -117,7 +117,7 @@
       				</div>
       			</div>
       			<div class="modal-footer">
-      				<button type="button" class="delete btn btn-danger">Delete</button>
+      				<button type="button" class="delete btn btn-dark">Delete</button>
       				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       			</div>
       		</div>
@@ -125,58 +125,51 @@
       </div>
       <!-- edit Category modal end -->
 
-    <!-- <div id="page-content-wrapper"> -->
-
-        <div class="container-fluid py-3" id="categories">
+        <div class="container-fluid" id="categories">
+          <div class="text-right">
+            <a class="btn bg-dark text-light my-2" data-toggle="modal" data-target="#CategoryModal" data-whatever="@mdo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Category</a>
+          </div>
           <!-- table-->
-          <div class="card">
-              <div class="card-header bg-blue text-light">
-                <div class="row">
-                  <div class="col-sm-6">
-                  </div>
-                  <div class="col-sm-6" style="text-align: right;">
-                    <a class="btn bg-white" href="#" data-toggle="modal" data-target="#CategoryModal" data-whatever="@mdo"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Category</a>
-                  </div>
-                </div>
-              </div>
-              <div class="table-responsive small">
-                  <table class="table table-condensed" id="userTable">
-                      <thead>
-                          <tr>
-                              <th><span>ID</span></th>
-                              <th><span>Category Name</span></th>
-                              <th><span>Category Icon</span></th>
-                              <th><span>Created at</span></th>
-                              <th class="text-center" style="width:110px">Action</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          <tr>
-                            {{ csrf_field() }}
-                           <?php if(isset($categories) && count($categories) > 0){ ?>
-                             @foreach($categories as $category)
-                               <tr class="Category{{$category->id}}">
-                                 <td>{{ $category->id }}</td>
-                                 <td>{{ $category->category_name }}</td>
-                                 <td><img src="<?php echo asset('storage/'.$category->category_icon); ?>" width="50px" height="50px"/></td>
-                                 <td><?php echo date('d M Y',strtotime($category->created_at)); ?></td>
-                                 <td class="px-2 text-nowrap">
-                                   <a href="#" class="edit_modal btn btn-sm btn-save" data-id="{{ $category->id }}" data-category_name="{{ $category->category_name }}" data-category_icon="{{ $category->category_icon }}" data-parent_category_id="{{ $category->parent_category_id }}" data-toggle="modal" data-target="#EditCategoryModal" data-whatever="@mdo"><i class='fa fa-pencil'></i> Edit</a>
-                                   <a href="#" class="delete_modal btn btn-sm btn-danger" data-id="{{ $category->id }}" data-category_name="{{ $category->category_name }}" data-category_icon="{{ $category->category_icon }}" data-toggle="modal" data-target="#DeleteCategoryModal" data-whatever="@mdo"><i class='fa fa-trash'></i> Delete</a>
-                                 </td>
-                               </tr>
-                             @endforeach
-                          <?php }else { ?>
-                            <tr>
-                              <th id="yet">
-                                <h2>Categories are not added yet</h2>
-                              </th>
-                            </tr>
-                          <?php } ?>
-                          </tr>
-                      </tbody>
-                  </table>
-              </div>
+          <div class="table-responsive border-bottom rounded mb-3">
+              <table class="table bs-table" id="userTable">
+                  <thead>
+                      <tr>
+                          <th>ID</th>
+                          <th>Category Name</th>
+                          <th>Category Icon</th>
+                          <th>Created at</th>
+                          <th class="text-center" style="width:120px">Action</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                        {{ csrf_field() }}
+                       <?php if(isset($categories) && count($categories) > 0){ ?>
+                         @foreach($categories as $category)
+                           <tr class="Category{{$category->id}}">
+                             <td>{{ $category->id }}</td>
+                             <td>{{ $category->category_name }}</td>
+                             <td>
+                               <div class="bs-photo bg-center-url" style="background-image: url('<?php echo asset('storage/'.$category->category_icon); ?>');">
+                                 <img src="<?php echo asset('storage/'.$category->category_icon); ?>" width="50px" height="50px"/></td>
+                               </div>
+                             <td><?php echo date('d M Y',strtotime($category->created_at)); ?></td>
+                             <td>
+                               <a href="#" class="edit_modal btn btn-outline-danger mb-2" data-id="{{ $category->id }}" data-category_name="{{ $category->category_name }}" data-category_icon="{{ $category->category_icon }}" data-parent_category_id="{{ $category->parent_category_id }}" data-toggle="modal" data-target="#EditCategoryModal" data-whatever="@mdo"><i class="fas fa-edit"></i></a>
+                               <a href="#" class="delete_modal btn btn-outline-danger mb-2" data-id="{{ $category->id }}" data-category_name="{{ $category->category_name }}" data-category_icon="{{ $category->category_icon }}" data-toggle="modal" data-target="#DeleteCategoryModal" data-whatever="@mdo"><i class='fas fa-trash'></i></a>
+                             </td>
+                           </tr>
+                         @endforeach
+                      <?php }else { ?>
+                        <tr>
+                          <th id="yet">
+                            <h2>Categories are not added yet</h2>
+                          </th>
+                        </tr>
+                      <?php } ?>
+                      </tr>
+                  </tbody>
+              </table>
           </div>
           <div style="margin-top: 10px;margin-left: 440px;">
 		         <ul class="pagination-for-categories justify-content-center">
@@ -184,7 +177,6 @@
 		         </ul>
 		      </div>
         </div>
-    <!-- </div> -->
 
 <script type="text/javascript">
   $(document).ready(function(){
@@ -194,6 +186,8 @@
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
     });
+
+
 
     $('#CategoryModal').on('shown.bs.modal', function () {
       $('#category_name').focus();
@@ -226,10 +220,10 @@
 					"<td>" + data.category_name + "</td>"+
 					"<td>" + '<img src={{ asset("/storage") }}/'+data.category_icon+' width="50px" height="50px">'+ "</td>"+
 					"<td>" + date + "</td>"+
-					"<td class='px-2 text-nowrap'><a href='#' class='edit_modal btn btn-sm btn-save' data-id='"+data.id+"' data-category_name='"+data.category_name+"' data-category_icon='"+data.category_icon+"' data-toggle='modal' data-target='#EditCategoryModal' data-whatever='@mdo'>"+
-					"<i class='fa fa-pencil'></i> Edit</a> "+
-					"<a href='#' class='delete_modal btn btn-sm btn-danger' data-id='"+data.id+"' data-category_name='"+data.category_name+"' data-category_icon='"+data.category_icon+"' data-toggle='modal' data-target='#DeleteCategoryModal' data-whatever='@mdo'>"+
-					"<i class='fa fa-trash'></i> Delete</a>"+
+					"<td><a href='#' class='edit_modal btn btn-outline-danger mb-2' data-id='"+data.id+"' data-category_name='"+data.category_name+"' data-category_icon='"+data.category_icon+"' data-toggle='modal' data-target='#EditCategoryModal' data-whatever='@mdo'>"+
+					"<i class='fas fa-edit'></i></a> "+
+					"<a href='#' class='delete_modal btn btn-outline-danger mb-2' data-id='"+data.id+"' data-category_name='"+data.category_name+"' data-category_icon='"+data.category_icon+"' data-toggle='modal' data-target='#DeleteCategoryModal' data-whatever='@mdo'>"+
+					"<i class='fas fa-trash'></i></a>"+
 					"</td>"+
 					"</tr>");
 					$('#yet').hide();
@@ -284,10 +278,10 @@
 					"<td>" + data.category_name + "</td>"+
 					"<td>" + '<img src={{ asset("/storage") }}/'+data.category_icon+' width="50px" height="50px">'+ "</td>"+
 					"<td>" + date + "</td>"+
-					"<td class='px-2 text-nowrap'><a href='#' class='edit_modal btn btn-sm btn-save' data-id='"+data.id+"' data-category_name='"+data.category_name+"' data-category_icon='"+data.category_icon+"' data-toggle='modal' data-target='#EditCategoryModal' data-whatever='@mdo'>"+
-					"<i class='fa fa-pencil'></i> Edit</a> "+
-					"<a href='#' class='delete_modal btn btn-sm btn-danger' data-id='"+data.id+"' data-category_name='"+data.category_name+"' data-category_icon='"+data.category_icon+"' data-toggle='modal' data-target='#DeleteCategoryModal' data-whatever='@mdo'>"+
-					"<i class='fa fa-trash'></i> Delete</a>"+
+					"<td><a href='#' class='edit_modal btn btn-outline-danger  mb-2' data-id='"+data.id+"' data-category_name='"+data.category_name+"' data-category_icon='"+data.category_icon+"' data-toggle='modal' data-target='#EditCategoryModal' data-whatever='@mdo'>"+
+					"<i class='fas fa-edit'></i></a> "+
+					"<a href='#' class='delete_modal btn btn-outline-danger  mb-2' data-id='"+data.id+"' data-category_name='"+data.category_name+"' data-category_icon='"+data.category_icon+"' data-toggle='modal' data-target='#DeleteCategoryModal' data-whatever='@mdo'>"+
+					"<i class='fas fa-trash'></i></a>"+
 					"</td>"+
 					"</tr>");
 					$('#edit_append_errors').hide();

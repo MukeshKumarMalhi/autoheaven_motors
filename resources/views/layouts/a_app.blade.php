@@ -1,7 +1,7 @@
 @include('admins.a_library')
   <body class="bg-dark-blue">
     <div>
-      <div id="wrapper" class="userid dashboard-page opened vh-100">
+      <div id="wrapper" class="userid dashboard-page closed">
         @include('admins.sidebar')
         <div id="page-content-wrapper">
           @include('admins.header')

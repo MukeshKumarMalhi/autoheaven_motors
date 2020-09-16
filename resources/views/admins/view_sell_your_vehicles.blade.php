@@ -5,24 +5,23 @@
     <!-- Page Content -->
         <div class="container-fluid py-3" id="sell_your_vehicles">
           <!-- table-->
-          <div class="card">
-              <div class="table-responsive small">
-                  <table class="table table-condensed">
+              <div class="table-responsive border-bottom rounded mb-3">
+                  <table class="table bs-table">
                       <thead>
                           <tr>
-                              <th><span>Vehicle Type</span></th>
-                              <th><span>Company</span></th>
-                              <th><span>Model</span></th>
-                              <th><span>Vehicle Reg</span></th>
-                              <th><span>Mileage</span></th>
-                              <th><span>Service History</span></th>
-                              <th><span>Vehicle desc</span></th>
-                              <th><span>Condition</span></th>
-                              <th><span>Condition desc</span></th>
-                              <th><span>Name</span></th>
-                              <th><span>Phone #</span></th>
-                              <th><span>Email</span></th>
-                              <th><span>Date</span></th>
+                              <th>Vehicle Type</th>
+                              <th>Company</th>
+                              <th>Model</th>
+                              <th>Vehicle Reg</th>
+                              <th>Mileage</th>
+                              <th>Service History</th>
+                              <th>Vehicle desc</th>
+                              <th>Condition</th>
+                              <th>Condition desc</th>
+                              <th>Name</th>
+                              <th>Phone #</th>
+                              <th>Email</th>
+                              <th>Date</th>
                           </tr>
                       </thead>
                       <tbody>
@@ -57,7 +56,6 @@
                       </tbody>
                   </table>
               </div>
-          </div>
           <div style="margin-top: 10px;margin-left: 440px;">
              <ul class="pagination-for-sell-your-vehicles justify-content-center">
                {{ $sell_your_vehicles->links() }}
